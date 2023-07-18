@@ -11,6 +11,13 @@ insert into Organization([ordID],[orgName], [orgType], [orgAddress], [orgCapacit
 values(@ordID,@orgName,@orgType,@orgAddress, @orgCapacity)
 end
 
+create proc Sp_DeleteOrg
+@ordID varchar(50)
+as begin
+delete from [dbo].[Organization]
+where ordID=@ordID
+end
+
 select * from Organization
 
 truncate table Organization

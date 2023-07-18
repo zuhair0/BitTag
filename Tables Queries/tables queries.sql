@@ -65,11 +65,14 @@ create table Organization_FocalPerson_Login(
 fp_CNIC bigint,
 fp_Password nvarchar(50)
 );
- 
-create table Organization_FocalPerson(
+
+create table Organization_Employee(
 orgID_FK nvarchar(50),
-fp_firstName nvarchar(50),
-fp_lastName nvarchar(50),
-fp_CNIC bigint,
-fp_Password nvarchar(50)
+Emp_ID nvarchar(50),
+Emp_firstName nvarchar(50),
+Emp_lastName nvarchar(50),
+Emp_CNIC bigint,
+Pin int,
+Designation nvarchar(50),
+PhoneNum bigint
 );
