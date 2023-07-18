@@ -1,0 +1,74 @@
+﻿@page "/organization"
+@using BitTagWebAPP.Services;
+@inject IOrganizations Orgs
+@using BitTagDAL
+@using BitTagModels
+
+<h3>Organizations</h3>
+
+<EditForm Model="OrgModel" OnSubmit="SaveOrganization">
+    <label class="col-1">OrgID</label>
+    <input class="col-2" type="text" @bind-value="OrgModel.orgID" /><br />
+    <label class="col-1">OrgName</label>
+    <input class="col-2" type="text" @bind-value="OrgModel.orgName" /><br />
+    <label class="col-1">OrgType</label>
+    <input class="col-1" type="text" @bind-value="OrgModel.orgType" /><br />
+    <label>OrgAddress</label>
+    <input type="text" @bind-value="OrgModel.orgAddress" /><br />
+    <label>Capacity</label>
+    <input type="text" @bind-value="OrgModel.orgCapacity" /><br />
+    <button type="submit">Save</button>
+</EditForm>
+
+<table class="tble table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Capacity</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    @foreach (var item in organizationList)
+    {
+        <tr>
+            <td>@item.orgName</td>
+            <td>@item.orgType</td>
+            <td>@item.orgCapacity</td>
+            <td>
+                <button @onclick="(()=>DeleteOrganization(item.orgID))">Delete</button>
+            </td>
+            @*<td>
+                <a href="companymemberreg/@item.Company_ID">Add company member</a>
+            </td>
+            <td>
+                <a href="tourcompanyservice/@item.Company_ID">Service</a>
+            </td>
+            <td>
+                <a href="companyportfolio/@item.Company_ID">Company portfolio</a>
+            </td>
+            <td>
+                <a href="tourpackage/@item.Company_ID">Tour Package</a>
+        </td>*@
+        </tr>
+    }
+</table>
+
+@code {
+    OrganizationModel OrgModel = new OrganizationModel();
+    List<OrganizationModel> organizationList = new List<OrganizationModel>();
+    private void SaveOrganization()
+    {
+
+    }
+
+    protected override async void OnInitialized()
+    {
+        organizationList = await Orgs.GetOrganizations();
+    }
+
+    private void DeleteOrganization(Guid id)
+    {
+        
+    }
+}

@@ -1,4 +1,5 @@
 using BitTagWebAPP.Data;
+using BitTagWebAPP.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
@@ -8,7 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
-
+builder.Services.AddHttpClient<IOrganizations, Organizations>(
+    c =>{c.BaseAddress = new Uri("https://localhost:7195");}
+    );
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

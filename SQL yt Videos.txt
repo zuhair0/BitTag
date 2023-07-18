@@ -1,6 +1,8 @@
 https://youtu.be/n59n9M1vLm8
 https://youtu.be/6joGkZMVX4o
 
+
+------------DAL----------------
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -107,5 +109,135 @@ namespace ClassLibraryDAL
             con.Close();
             return i;
         }
+    }
+}
+
+
+
+-----------RAZOR----------------------
+@page "/tourcompanyreg/{TG_id}"
+@using ClassLibraryModel
+@using ClassLibraryDAL
+<link rel="stylesheet" href="/css/style.css" />
+<PageTitle>TourCompanyRegistration</PageTitle>
+<div class="lngfrm">
+    <EditForm Model="tourCompanyReg" OnSubmit="SaveTourCompanyReg">
+        <div class="row">
+            <label class="col-1">Name</label>
+            <input class="col-2" type="text" @bind-value="tourCompanyReg.Company_name" /><br />
+            <label class="col-1">Sector</label>
+            <input class="col-2" type="text" @bind-value="tourCompanyReg.Company_sector" /><br />
+            <label class="col-1">City</label>
+            <select class="col-1" @onchange="selectedcity">
+
+                @foreach (var item in cityList)
+                {
+                    <option value="@item.City_code">@item.City_name</option>
+                }
+            </select><br />
+            <label class="col-1">Longitude Latitude</label>
+            <input class="col-1" type="text" @bind-value="tourCompanyReg.Company_longitude_latitude" /><br />
+        </div>
+        
+        <label>website</label>
+        <input type="text" @bind-value="tourCompanyReg.Company_website" /><br />
+        <label>facebook</label>
+        <input type="text" @bind-value="tourCompanyReg.Company_Facebook" /><br />
+        <label>instagram</label>
+        <input type="text" @bind-value="tourCompanyReg.Company_Instagram" /><br />
+        <label>contact1</label>
+        <input type="text" @bind-value="tourCompanyReg.Company_contact1" /><br />
+        <label>contact2</label>
+        <input type="text" @bind-value="tourCompanyReg.Company_contact2" /><br />
+        <label>Whatsapp</label>
+        <input type="text" @bind-value="tourCompanyReg.Company_Whatsapp" /><br />
+        <label>Landline</label>
+        <input type="text" @bind-value="tourCompanyReg.Company_Landline" /><br />
+        <label>Reg date/time</label>
+        <input type="text" @bind-value="tourCompanyReg.Tour_Company_Registration_date_time" /><br />
+        <button type="submit">Save</button>
+    </EditForm>
+</div>
+
+<p>@msg</p>
+<table class="tble table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Contact</th>
+            <th>Sector</th>
+        </tr>
+    </thead>
+    @foreach (var item in tourCompanyRegsList)
+    {
+        <tr>
+            <td>@item.Company_name</td>
+            <td>@item.Company_contact1</td>
+            <td>@item.Company_sector</td>
+            <td>
+                <button @onclick="(()=>DeleteTourCompany(item.Company_ID))">Delete</button>
+            </td>
+            <td>
+                <a href="companymemberreg/@item.Company_ID">Add company member</a>
+            </td>
+            <td>
+                <a href="tourcompanyservice/@item.Company_ID">Service</a>
+            </td>
+            <td>
+                <a href="companyportfolio/@item.Company_ID">Company portfolio</a>
+            </td>
+            <td>
+                <a href="tourpackage/@item.Company_ID">Tour Package</a>
+            </td>
+        </tr>
+    }
+</table>
+@code {
+    [Parameter]
+    public string? TG_id { get; set; }
+    private string? msg { get; set; }
+    private int citycode { get; set; }
+    private TourCompanyRegModel tourCompanyReg=new TourCompanyRegModel();
+    private List<TourCompanyRegModel> tourCompanyRegsList = new List<TourCompanyRegModel>();
+    private List<TourismModel> cityList = new List<TourismModel>();
+    private void SaveTourCompanyReg(){
+        tourCompanyReg.City_id = citycode;
+        tourCompanyReg.Tour_guide_id = int.Parse(TG_id);
+        int i = TourCompanyRegDAL.SaveTourCompanyReg(tourCompanyReg);
+        if(i==1){
+            msg = "Saved succesfully";
+            GetTourCompanyReg();
+        }
+        else{
+            msg = "Error while saving";
+        }
+    }
+    protected override void OnInitialized()
+    {
+        GetTourCompanyReg();
+        Loadcity();
+    }
+    private void GetTourCompanyReg()
+    {
+        tourCompanyRegsList = TourCompanyRegDAL.GetTourCompanyRegistration(int.Parse(TG_id));
+
+    }
+    private void DeleteTourCompany(int id){
+        int i = TourCompanyRegDAL.DeleteTourGuide(id);
+        if (i == 1)
+        {
+            msg = "deleted succesfully";
+            GetTourCompanyReg();
+        }
+        else
+        {
+            msg = "Error while deleting";
+        }
+    }
+    private void Loadcity(){
+        cityList = TourismDAL.GetCities();
+    }
+    private void selectedcity(ChangeEventArgs e ){
+        citycode = int.Parse(e.Value.ToString());
     }
 }

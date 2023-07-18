@@ -34,3 +34,10 @@ create proc Sp_GetOrgEmployees
 as begin
 select * from [dbo].[Organization_Employee]
 end
+
+create proc Sp_DeleteEmployee
+@Emp_ID nvarchar(50)
+as begin
+delete from [dbo].[Organization_Employee]
+where Emp_ID=@Emp_ID
+end
