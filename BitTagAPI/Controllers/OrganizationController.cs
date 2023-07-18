@@ -2,6 +2,7 @@
 using BitTagDAL;
 using BitTagModels;
 using System.Data.SqlClient;
+using System.Reflection.Metadata;
 
 namespace BitTagAPI.Controllers
 {
@@ -11,25 +12,46 @@ namespace BitTagAPI.Controllers
     {
         [HttpPost]
         [Route("AddOrganization")]
-        public int CreateOrg(OrganizationModel om)
+        public async void AddOrganization(OrganizationModel om)
         {
-            SqlConnection con = DBhelper.GetConnection();
-            con.Open();
-            SqlCommand cmd = new SqlCommand("Sp_AddOrg", con);
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@ordID", om.orgID);
-            cmd.Parameters.AddWithValue("@orgName", om.orgName);
-            cmd.Parameters.AddWithValue("@orgType", om.orgType);
-            cmd.Parameters.AddWithValue("@orgAddress", om.orgAddress);
-            cmd.Parameters.AddWithValue("@orgCapacity", om.orgCapacity);
-            int i = cmd.ExecuteNonQuery();
-            con.Close();
-            return i;
+            SqlParameter[] parameters =
+            {
+            new SqlParameter ("@ordID", om.orgID),
+            new SqlParameter("@orgName", om.orgName),
+            new SqlParameter("@orgType", om.orgType),
+            new SqlParameter("@orgAddress", om.orgAddress),
+            new SqlParameter("@orgCapacity", om.orgCapacity)
+            };
+            await DalCrud.CRUD("Sp_AddOrg", parameters);
+            //Organization.CreateOrg(organization);
         }
-        //public void AddOrganization()
-        //{
-        //    OrganizationModel organization = new OrganizationModel();
-        //    Organization.CreateOrg(organization);
-        //}
+
+        [HttpGet]
+        [Route("GetOrganization")]
+        public async Task<JsonResult> GetOrganizations()
+        {
+
+            List<OrganizationModel> organizations = new List<OrganizationModel>();
+            organizations = await Organization.GetOrganizations();
+            if (organizations.Count > 0)
+            {
+                return new JsonResult(organizations);
+            }
+            else
+            {
+                return new JsonResult("Not Found");
+            }
+        }
+        [HttpDelete]
+        [Route("DeleteOrganization")]
+        public async void DeleteOrganization(string id)
+        {
+            SqlParameter[] parameters =
+            {
+            new SqlParameter ("@ordID", id)
+            };
+            await DalCrud.CRUD("Sp_DeleteOrg", parameters);
+            //Organization.CreateOrg(organization);
+        }
     }
 }
