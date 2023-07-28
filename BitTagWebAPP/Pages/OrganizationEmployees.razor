@@ -1,0 +1,71 @@
+﻿@page "/orgEmployees/{orgID_FK}"
+@using BitTagWebAPP.Services;
+@inject IOrgEmployees orgEmp
+@using BitTagDAL
+@using BitTagModels
+<h3>OrganizationEmployees</h3>
+
+<EditForm Model="orgEmpModel" OnSubmit="SaveOrgEmp">
+    <label class="col-1">Emp_firstName</label>
+    <input class="col-2" type="text" @bind-value="orgEmpModel.Emp_firstName" /><br />
+    <label class="col-1">Emp_lastName</label>
+    <input class="col-1" type="text" @bind-value="orgEmpModel.Emp_lastName" /><br />
+    <label>Emp_CNIC</label>
+    <input type="text" @bind-value="orgEmpModel.Emp_CNIC" /><br />
+    <label>Pin</label>
+    <input type="text" @bind-value="orgEmpModel.Pin" /><br />
+    <label>Designation</label>
+    <input type="text" @bind-value="orgEmpModel.Designation" /><br />
+    <label>PhoneNum</label>
+    <input type="text" @bind-value="orgEmpModel.PhoneNum" /><br />
+    <button type="submit">Save</button>
+</EditForm>
+
+<table class="tble table">
+    <thead>
+        <tr>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>PhoneNum</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    @foreach (var item in orgEmpList)
+    {
+        <tr>
+            <td>@item.Emp_firstName</td>
+            <td>@item.Emp_lastName</td>
+            <td>@item.PhoneNum</td>
+            <td>
+                <button @onclick="(()=>DeleteOrgEmployee(item.Emp_ID))">Delete</button>
+            </td>
+        </tr>
+    }
+</table>
+
+@code {
+    [Parameter]
+    public Guid orgID_FK { get; set; }
+    private Orgnization_EmployeeModel orgEmpModel = new Orgnization_EmployeeModel();
+    List<Orgnization_EmployeeModel> orgEmpList = new List<Orgnization_EmployeeModel>();
+    private async void SaveOrgEmp()
+    {
+        Guid id = Guid.NewGuid();
+        orgEmpModel.Emp_ID = id;
+        orgEmpModel.orgID_FK = orgID_FK;
+        await orgEmp.SaveOrgEmployees(orgEmpModel);
+        await LoadData();
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadData();
+    }
+    private async Task LoadData()
+    {
+        orgEmpList = await orgEmp.GetOrgEmployees();
+    }
+    private async void DeleteOrgEmployee(Guid id)
+    {
+        await orgEmp.DeleteOrgEmployees(id);
+    }
+}

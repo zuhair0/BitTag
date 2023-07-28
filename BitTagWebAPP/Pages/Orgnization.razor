@@ -38,18 +38,9 @@
             <td>
                 <button @onclick="(()=>DeleteOrganization(item.orgID))">Delete</button>
             </td>
-            @*<td>
-                <a href="companymemberreg/@item.Company_ID">Add company member</a>
-            </td>
             <td>
-                <a href="tourcompanyservice/@item.Company_ID">Service</a>
+                <button><a href="orgEmployees/@item.orgID">Add Employee</a></button>
             </td>
-            <td>
-                <a href="companyportfolio/@item.Company_ID">Company portfolio</a>
-            </td>
-            <td>
-                <a href="tourpackage/@item.Company_ID">Tour Package</a>
-        </td>*@
         </tr>
     }
 </table>
