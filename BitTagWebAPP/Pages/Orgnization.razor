@@ -7,8 +7,8 @@
 <h3>Organizations</h3>
 
 <EditForm Model="OrgModel" OnSubmit="SaveOrganization">
-    <label class="col-1">OrgID</label>
-    <input class="col-2" type="text" @bind-value="OrgModel.orgID" /><br />
+    @*<label class="col-1">OrgID</label>
+    <input class="col-2" type="text" @bind-value="OrgModel.orgID" /><br />*@
     <label class="col-1">OrgName</label>
     <input class="col-2" type="text" @bind-value="OrgModel.orgName" /><br />
     <label class="col-1">OrgType</label>
@@ -57,18 +57,26 @@
 @code {
     OrganizationModel OrgModel = new OrganizationModel();
     List<OrganizationModel> organizationList = new List<OrganizationModel>();
-    private void SaveOrganization()
+    private async void SaveOrganization()
     {
+        Guid id = Guid.NewGuid();
+        OrgModel.orgID = id;
+        await Orgs.SaveOrganizations(OrgModel);
+        await LoadData();
 
     }
 
-    protected override async void OnInitialized()
+    protected override async Task OnInitializedAsync()
+    {
+       await LoadData();
+    }
+    private async void DeleteOrganization(Guid id)
+    {
+        await Orgs.DeleteOrganizations(id);
+    }
+
+    private async Task LoadData()
     {
         organizationList = await Orgs.GetOrganizations();
-    }
-
-    private void DeleteOrganization(Guid id)
-    {
-        
     }
 }

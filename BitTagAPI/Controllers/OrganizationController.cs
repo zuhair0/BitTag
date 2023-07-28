@@ -43,8 +43,8 @@ namespace BitTagAPI.Controllers
             }
         }
         [HttpDelete]
-        [Route("DeleteOrganization")]
-        public async void DeleteOrganization(string id)
+        [Route("DeleteOrganization/{id}")]
+        public async void DeleteOrganization(Guid id)
         {
             SqlParameter[] parameters =
             {
