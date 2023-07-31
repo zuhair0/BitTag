@@ -39,7 +39,7 @@
                 <button @onclick="(()=>DeleteOrganization(item.orgID))">Delete</button>
             </td>
             <td>
-                <button><a href="orgEmployees/@item.orgID">Add Employee</a></button>
+                <button><a href="orgEmployees/@item.orgID.ToString()">Add Employee</a></button>
             </td>
         </tr>
     }

@@ -45,14 +45,14 @@
 
 @code {
     [Parameter]
-    public Guid orgID_FK { get; set; }
+    public string? orgID_FK { get; set; }
     private Orgnization_EmployeeModel orgEmpModel = new Orgnization_EmployeeModel();
     List<Orgnization_EmployeeModel> orgEmpList = new List<Orgnization_EmployeeModel>();
     private async void SaveOrgEmp()
     {
         Guid id = Guid.NewGuid();
         orgEmpModel.Emp_ID = id;
-        orgEmpModel.orgID_FK = orgID_FK;
+        orgEmpModel.orgID_FK = Guid.Parse(orgID_FK);
         await orgEmp.SaveOrgEmployees(orgEmpModel);
         await LoadData();
     }
