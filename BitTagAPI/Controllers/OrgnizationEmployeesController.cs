@@ -28,10 +28,25 @@ namespace BitTagAPI.Controllers
         }
         [HttpGet]
         [Route("GetOrgEmployees")]
-        public async Task<JsonResult> GetOrgEmployees()
+        public async Task<JsonResult> GetOrgEmployees(Guid id)
         {
             List<Orgnization_EmployeeModel> employees = new List<Orgnization_EmployeeModel>();
             employees = await OrganiztionEmployees.GetOrgEmployees();
+            if (employees.Count > 0)
+            {
+                return new JsonResult(employees);
+            }
+            else
+            {
+                return new JsonResult("Not Found");
+            }
+        }
+        [HttpGet]
+        [Route("GetOrgEmployees/{id}")]
+        public async Task<JsonResult> GetOrgEmployeesByID(Guid id)
+        {
+            List<Orgnization_EmployeeModel> employees = new List<Orgnization_EmployeeModel>();
+            employees = await OrganiztionEmployees.GetOrgEmployeesByID(id);
             if(employees.Count > 0)
             {
                 return new JsonResult(employees);

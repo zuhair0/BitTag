@@ -20,7 +20,7 @@
     <input type="text" @bind-value="orgEmpModel.PhoneNum" /><br />
     <button type="submit">Save</button>
 </EditForm>
-
+@msg
 <table class="tble table">
     <thead>
         <tr>
@@ -46,6 +46,7 @@
 @code {
     [Parameter]
     public string? orgID_FK { get; set; }
+    private string msg { get; set; }
     private Orgnization_EmployeeModel orgEmpModel = new Orgnization_EmployeeModel();
     List<Orgnization_EmployeeModel> orgEmpList = new List<Orgnization_EmployeeModel>();
     private async void SaveOrgEmp()
@@ -62,7 +63,7 @@
     }
     private async Task LoadData()
     {
-        orgEmpList = await orgEmp.GetOrgEmployees();
+        orgEmpList = await orgEmp.GetOrgEmployeesByID(Guid.Parse(orgID_FK));
     }
     private async void DeleteOrgEmployee(Guid id)
     {
