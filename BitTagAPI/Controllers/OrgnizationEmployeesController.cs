@@ -47,20 +47,14 @@ namespace BitTagAPI.Controllers
         {
             List<Orgnization_EmployeeModel> employees = new List<Orgnization_EmployeeModel>();
             employees = await OrganiztionEmployees.GetOrgEmployeesByID(id);
-            if(employees.Count > 0)
-            {
-                return new JsonResult(employees);
-            }
-            else
-            {
-                return new JsonResult("Not Found");
-            }
+            return new JsonResult(employees);
+           
         }
         [HttpDelete]
         [Route("DeleteOrgEmployee/{id}")]
         public async void DeleteOrgEmployee(Guid id)
         {
-            SqlParameter[] parameters=
+            SqlParameter[] parameters =
             {
                 new SqlParameter("@Emp_ID",id)
             };

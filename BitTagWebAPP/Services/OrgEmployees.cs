@@ -15,7 +15,16 @@ namespace BitTagWebAPP.Services
         }
         public async Task<List<Orgnization_EmployeeModel>> GetOrgEmployeesByID(Guid id)
         {
-            return await _httpClient.GetFromJsonAsync<List<Orgnization_EmployeeModel>>("api/controller/GetOrgEmployees/"+id);
+            List<Orgnization_EmployeeModel> em = new List<Orgnization_EmployeeModel>();
+            em= await _httpClient.GetFromJsonAsync<List<Orgnization_EmployeeModel>>("api/controller/GetOrgEmployees/"+id);
+            if (em != null)
+            {
+                return em;
+            }
+            else
+            {
+                return new List<Orgnization_EmployeeModel>();
+            }
         }
         public async Task SaveOrgEmployees(Orgnization_EmployeeModel oem)
         {

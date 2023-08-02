@@ -30,16 +30,20 @@
             <th>Action</th>
         </tr>
     </thead>
-    @foreach (var item in orgEmpList)
+    @if (orgEmpList != null)
     {
-        <tr>
-            <td>@item.Emp_firstName</td>
-            <td>@item.Emp_lastName</td>
-            <td>@item.PhoneNum</td>
-            <td>
-                <button @onclick="(()=>DeleteOrgEmployee(item.Emp_ID))">Delete</button>
-            </td>
-        </tr>
+        @foreach (var item in orgEmpList)
+        {
+            <tr>
+                <td>@item.Emp_firstName</td>
+                <td>@item.Emp_lastName</td>
+                <td>@item.PhoneNum</td>
+                <td>
+                    <button @onclick="(()=>DeleteOrgEmployee(item.Emp_ID))">Delete</button>
+                </td>
+            </tr>
+        }
+
     }
 </table>
 
