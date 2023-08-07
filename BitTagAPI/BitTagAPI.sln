@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BitTagDAL", "..\BitTagDAL\B
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BitTagModels", "..\BitTagModels\BitTagModels.csproj", "{4BD6A4C9-B91B-4674-846F-95BE771264A6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitTagUser", "..\BitTagUser\BitTagUser.csproj", "{F385D6A4-8714-45C4-B6DD-8313F4BD3D0C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{4BD6A4C9-B91B-4674-846F-95BE771264A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4BD6A4C9-B91B-4674-846F-95BE771264A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4BD6A4C9-B91B-4674-846F-95BE771264A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F385D6A4-8714-45C4-B6DD-8313F4BD3D0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F385D6A4-8714-45C4-B6DD-8313F4BD3D0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F385D6A4-8714-45C4-B6DD-8313F4BD3D0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F385D6A4-8714-45C4-B6DD-8313F4BD3D0C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
