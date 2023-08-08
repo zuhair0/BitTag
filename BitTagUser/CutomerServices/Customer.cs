@@ -2,10 +2,10 @@
 
 namespace BitTagWebAPP.CutomerServices
 {
-    public class Customers:ICustomer
+    public class Customer:ICustomer
     {
         private readonly HttpClient _httpClient;
-        public Customers(HttpClient httpClient)
+        public Customer(HttpClient httpClient)
         {
             this._httpClient = httpClient;
         }
