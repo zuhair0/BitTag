@@ -10,8 +10,8 @@ create table Customer(
 custID nvarchar(50),
 firstName nvarchar(50),
 lastName nvarchar(50),
-custCNIC bigint,
-contact bigint,
+custCNIC nvarchar(50),
+contact nvarchar(50),
 DOB datetime,
 custEmail nvarchar(50),
 custPIN int

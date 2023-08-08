@@ -2,10 +2,11 @@
 using BitTagModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Data.SqlClient;
+using System.Reflection.Metadata;
 
 namespace BitTagAPI.Controllers
 {
-    [Route("api/controleer")]
+    [Route("api/controller")]
     [ApiController]
     public class CustomerController : Controller
     {
@@ -30,7 +31,16 @@ namespace BitTagAPI.Controllers
         [Route("GetCustomer")]
         public async Task<JsonResult> GetCustomer()
         {
-
+            List<CustomersModel> customersModels = new List<CustomersModel>();
+            customersModels = await Customers.GetCustomers();
+            if (customersModels.Count > 0)
+            {
+                return new JsonResult(customersModels);
+            }
+            else
+            {
+                return new JsonResult("Not Found");
+            }
         }
     }
 }
