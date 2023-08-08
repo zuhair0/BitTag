@@ -42,5 +42,15 @@ namespace BitTagAPI.Controllers
                 return new JsonResult("Not Found");
             }
         }
+        [HttpDelete]
+        [Route("DeleteCustomer/{id}")]
+        public async void DeleteCustomer(Guid id)
+        {
+            SqlParameter[] parameters =
+            {
+                new SqlParameter("custID",id)
+            };
+            await DalCrud.CRUD("Sp_DeleteCustomer", parameters);
+        }
     }
 }
