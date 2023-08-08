@@ -1,5 +1,64 @@
-﻿<h3>Customer</h3>
+﻿@page "/customer"
+@using BitTagModels
+@using BitTagDAL
+@using BitTagWebAPP.CutomerServices;
+@inject ICustomer cust
+
+<h3>Customer</h3>
+<EditForm Model="customers" OnSubmit="SaveCustomer">
+    <label >FirstName</label>
+    <input type="text" @bind-value="customers.firstName" /><br />
+    <label>LastName</label>
+    <input type="text" @bind-value="customers.lastName" /><br />
+    <label>CNIC</label>
+    <input type="text" @bind-value="customers.custCNIC" /><br />
+    <label>Email</label>
+    <input type="text" @bind-value="customers.custEmail" /><br />
+    <label>Contact</label>
+    <input type="text" @bind-value="customers.contact" /><br />
+    <label>Date of Birth</label>
+    <input type="text" @bind-value="customers.DOB" /><br />
+    <label>Pin</label>
+    <input type="text" @bind-value="customers.custPIN" /><br />
+</EditForm>
+
+<table class="tble table">
+    <thead>
+        <tr>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>Contact</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    @foreach (var item in customersList)
+    {
+        <tr>
+            <td>@item.firstName</td>
+            <td>@item.lastName</td>
+            <td>@item.contact</td>
+            <td>
+                <button @onclick="(()=>DeleteCustomer(item.custID))">Delete</button>
+            </td>
+            @*<td>
+                <button><a href="orgEmployees/@item.orgID.ToString()">Add Employee</a></button>
+            </td>*@
+        </tr>
+    }
+</table>
+
 
 @code {
-
+    CustomersModel customers =new CustomersModel();
+    List<CustomersModel> customersList = new List<CustomersModel>();
+    private async void SaveCustomer()
+    {
+        Guid id = Guid.NewGuid();
+        customers.custID = id;
+        await cust.SaveCustomers(customers);
+    }
+    private async void DeleteCustomer(Guid id)
+    {
+        await cust.DeleteCustomer(id);
+    }
 }
