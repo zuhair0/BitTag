@@ -20,6 +20,7 @@
     <input type="text" @bind-value="customers.DOB" /><br />
     <label>Pin</label>
     <input type="text" @bind-value="customers.custPIN" /><br />
+    <button type="submit">Save</button>
 </EditForm>
 
 <table class="tble table">
@@ -56,9 +57,18 @@
         Guid id = Guid.NewGuid();
         customers.custID = id;
         await cust.SaveCustomers(customers);
+        await LoadData();
     }
     private async void DeleteCustomer(Guid id)
     {
         await cust.DeleteCustomer(id);
+    }
+    private async Task LoadData()
+    {
+        customersList = await cust.GetCustomers();
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadData();
     }
 }
