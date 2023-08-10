@@ -41,9 +41,9 @@
             <td>
                 <button @onclick="(()=>DeleteCustomer(item.custID))">Delete</button>
             </td>
-            @*<td>
-                <button><a href="orgEmployees/@item.orgID.ToString()">Add Employee</a></button>
-            </td>*@
+            <td>
+                <button><a href="vehicle/@item.custID.ToString()">Add Vehicle</a></button>
+            </td>
         </tr>
     }
 </table>
