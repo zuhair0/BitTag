@@ -31,14 +31,8 @@ namespace BitTagAPI.Controllers
         {
             List<VehicleModel> vehiclesList = new List<VehicleModel>();
             vehiclesList =await VehiclesDAL.GetVehicles();
-            if (vehiclesList.Count > 0)
-            {
-                return new JsonResult(vehiclesList);
-            }
-            else
-            {
-                return new JsonResult("Not Found");
-            }
+            return new JsonResult(vehiclesList);
+            
         }
         [HttpDelete]
         [Route("DeleteVehicle/{id}")]

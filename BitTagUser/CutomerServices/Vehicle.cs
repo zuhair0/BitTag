@@ -11,7 +11,16 @@ namespace BitTagUser.CutomerServices
         }
         public async Task<List<VehicleModel>> GetVehicleModels()
         {
-            return await _httpclient.GetFromJsonAsync<List<VehicleModel>>("api/controller/GetVehicle");
+            List<VehicleModel> models = new List<VehicleModel>();
+            models= await _httpclient.GetFromJsonAsync<List<VehicleModel>>("api/controller/GetVehicle");
+            if(models!=null)
+            {
+                return models;
+            }
+            else
+            {
+                return new List<VehicleModel>();
+            }
         }
         public async Task SaveVehicle(VehicleModel vm)
         {
@@ -19,7 +28,7 @@ namespace BitTagUser.CutomerServices
         }
         public async Task DeleteVehicle(string id)
         {
-            await _httpclient.DeleteAsync("api/controller/DeleteVehicle"+id);
+            await _httpclient.DeleteAsync("api/controller/DeleteVehicle/" + id);
         }
     }
 }
