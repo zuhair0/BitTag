@@ -1,8 +1,71 @@
-﻿@page "/vehicle"
-
-
+﻿@page "/vehicle/{custID_FK}"
+@using BitTagDAL
+@using BitTagModels
+@using BitTagUser.CutomerServices;
+@inject IVehicle veh
 <h3>CutomerVehicle</h3>
 
+<EditForm Model="vehicle" OnSubmit="SaveVehicle">
+    <label >Make</label>
+    <input type="text" @bind-value="vehicle.vehicleMake" /><br />
+    <label>Model</label>
+    <input type="text" @bind-value="vehicle.vehicleModel" /><br />
+    <label>Plate</label>
+    <input type="text" @bind-value="vehicle.vehiclePlate" /><br />
+    <label>type</label>
+    <input type="text" @bind-value="vehicle.vehicleType" /><br />
+    <label>color</label>
+    <input type="text" @bind-value="vehicle.vehicleColor" /><br />
+    <button type="submit">Save</button>
+</EditForm>
+
+<table class="tble table">
+    <thead>
+        <tr>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Plate</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    @foreach (var item in vehicleList)
+    {
+        <tr>
+            <td>@item.vehicleMake</td>
+            <td>@item.vehicleModel</td>
+            <td>@item.vehiclePlate</td>
+            <td>
+                <button @onclick="(()=>DeleteVehicle(item.vehiclePlate))">Delete</button>
+            </td>
+            @*<td>
+                <button><a href="vehicle/@item.custID.ToString()">Add Vehicle</a></button>
+            </td>*@
+        </tr>
+    }
+</table>
 @code {
+    [Parameter]
+    public string custID_FK { get; set; }
+    VehicleModel vehicle = new VehicleModel();
+    List<VehicleModel> vehicleList = new List<VehicleModel>();
+    private async void SaveVehicle()
+    {
+        Guid id = Guid.NewGuid();
+        vehicle.tagID = id;
+        vehicle.custID_FK = Guid.Parse(custID_FK);
+        await veh.SaveVehicle(vehicle);
+    }
+    private async Task DeleteVehicle(string id)
+    {
+        await veh.DeleteVehicle(id);
+    }
+    private async Task LoadData()
+    {
+        vehicleList = await veh.GetVehicleModels();
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadData();
+    }
 
 }
