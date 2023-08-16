@@ -1,4 +1,6 @@
-﻿namespace BitTagUser.CutomerServices
+﻿using BitTagModels;
+
+namespace BitTagUser.CutomerServices
 {
     public class CustomerWorkInfo:ICustomerWorkInfo
     {
@@ -7,11 +9,11 @@
         {
             this._httpClient = httpClient;
         }
-        public async Task<List<CustomerWorkInfo>> GetCustomerWorkInfo()
+        public async Task<List<CustomerWorkInfoModel>> GetCustomerWorkInfo()
         {
-            return await _httpClient.GetFromJsonAsync<List<CustomerWorkInfo>>("api/controller/GetCustWorkInfo");
+            return await _httpClient.GetFromJsonAsync<List<CustomerWorkInfoModel>>("api/controller/GetCustWorkInfo");
         }
-        public async Task SaveCustomerWorkInfo(CustomerWorkInfo cwi)
+        public async Task SaveCustomerWorkInfo(CustomerWorkInfoModel cwi)
         {
             await _httpClient.PostAsJsonAsync("api/controller/AddWorkInfo", cwi);
         }

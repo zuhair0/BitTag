@@ -4,8 +4,8 @@ namespace BitTagUser.CutomerServices
 {
     public interface ICustomerWorkInfo
     {
-        Task<List<CustomerWorkInfo>> GetCustomerWorkInfo();
-        Task SaveCustomerWorkInfo(CustomerWorkInfo cwi);
+        Task<List<CustomerWorkInfoModel>> GetCustomerWorkInfo();
+        Task SaveCustomerWorkInfo(CustomerWorkInfoModel cwi);
         Task DeleteCustomerWorkInfo(Guid id);
     }
 }
