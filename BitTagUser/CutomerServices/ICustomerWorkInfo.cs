@@ -6,6 +6,6 @@ namespace BitTagUser.CutomerServices
     {
         Task<List<CustomerWorkInfo>> GetCustomerWorkInfo();
         Task SaveCustomerWorkInfo(CustomerWorkInfo cwi);
-        //Task DeleteCustomerWorkInfo(Guid id);
+        Task DeleteCustomerWorkInfo(Guid id);
     }
 }

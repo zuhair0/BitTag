@@ -15,5 +15,10 @@
         {
             await _httpClient.PostAsJsonAsync("api/controller/AddWorkInfo", cwi);
         }
+        public async Task DeleteCustomerWorkInfo(Guid id)
+        {
+            await _httpClient.DeleteAsync("api/controller/DeleteWorkInfo/" + id);
+        }
+
     }
 }

@@ -31,5 +31,15 @@ namespace BitTagAPI.Controllers
             workInfos = await CustomerWorkInfoDAL.GetCustomerWorkInfos();
             return new JsonResult(workInfos);
         }
+        [HttpDelete]
+        [Route("DeleteWorkInfo/{id}")]
+        public async void DeleteCustWorkInfo(Guid id)
+        {
+            SqlParameter[] parameters =
+            {
+                new SqlParameter("@userID_FK",id)
+            };
+            await DalCrud.CRUD("Sp_DeleteCustWorkInfo", parameters);
+        }
     }
 }
