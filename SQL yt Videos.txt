@@ -241,3 +241,17 @@ namespace ClassLibraryDAL
         citycode = int.Parse(e.Value.ToString());
     }
 }
+
+
+==========DROPDROWN CODE======
+<label>Category</label>
+    <select @onchange="SelectedCategoryID">
+        @foreach (var item in serviceCategoriesList)
+        {
+            <option value="@item.Cat_ID">@item.Cat_Title</option>
+        }
+    </select>@servicecategory<br />
+
+private void SelectedCategoryID(ChangeEventArgs e){
+        servicecategory = int.Parse(e.Value.ToString());
+    }
