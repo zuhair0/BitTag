@@ -11,7 +11,7 @@ namespace BitTagAPI.Controllers
     {
         [HttpPost]
         [Route("AddWorkInfo")]
-        public async void AddWorkInfo(CustomerWorkInfo cwi)
+        public async void AddWorkInfo(CustomerWorkInfoModel cwi)
         {
             SqlParameter[] parameters =
             {
@@ -27,7 +27,7 @@ namespace BitTagAPI.Controllers
         [Route("GetCustWorkInfo")]
         public async Task<JsonResult> GetCustWorkInfo()
         {
-            List<CustomerWorkInfo> workInfos = new List<CustomerWorkInfo>();
+            List<CustomerWorkInfoModel> workInfos = new List<CustomerWorkInfoModel>();
             workInfos = await CustomerWorkInfoDAL.GetCustomerWorkInfos();
             return new JsonResult(workInfos);
         }

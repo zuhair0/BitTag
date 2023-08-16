@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BitTagModels
 {
-    public class CustomerWorkInfo
+    public class CustomerWorkInfoModel
     {
         public Guid org_FK { get; set; }
         public Guid userID_FK { get; set; }
