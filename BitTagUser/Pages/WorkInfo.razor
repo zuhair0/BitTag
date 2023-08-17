@@ -1,20 +1,19 @@
-﻿@page "/custinfo"
+﻿@page "/winfo"
+
 @using BitTagModels;
 @using BitTagUser.CutomerServices
-@inject IOrgs org
+@*@inject IOrgs org*@
 @inject ICustomerWorkInfo custWorkinfo
-<h3>CustomerWorkInfo</h3>
-
-
+<h3>WorkInfo</h3>
 <EditForm Model="customerWorkInfo" OnSubmit="SaveCustWorkInfo">
-    <label >Organization</label>
-    @*<input type="text" @bind-value="vehicle.vehicleMake" /><br />*@
+    @*<label>Organization</label>
+    @*<input type="text" @bind-value="vehicle.vehicleMake" /><br />
     <select onchange="SeletedOrgID">
-        @foreach(var item in organizations)
+        @foreach (var item in organizations)
         {
             <option value="@item.orgID">@item.orgName</option>
         }
-    </select>
+    </select>*@
     <label>Work Type</label>
     <input type="text" @bind-value="customerWorkInfo.WorkType" />
     <label>Designtion</label>
@@ -23,9 +22,8 @@
     <input type="text" @bind-value="customerWorkInfo.worktime" />
     <button type="submit">Save</button>
 </EditForm>
-
 @code {
-    CustomerWorkInfoModel customerWorkInfo = new CustomerWorkInfoModel();
+    private CustomerWorkInfoModel customerWorkInfo{ get; set; } = new CustomerWorkInfoModel();
     List<CustomerWorkInfoModel> workinfos = new List<CustomerWorkInfoModel>();
 
     List<OrganizationModel> organizations = new List<OrganizationModel>();
@@ -40,7 +38,7 @@
     }
     private async Task LoadData()
     {
-        organizations = await org.Getorgs();
+        //organizations = await org.Getorgs();
     }
     private void SeletedOrgID(ChangeEventArgs e)
     {
