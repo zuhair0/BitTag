@@ -1,4 +1,5 @@
-create proc Sp_AddVehicle 
+alter proc Sp_AddVehicle 
+@vehicleID nvarchar(50),
 @custID_FK nvarchar(50),
 @tagID nvarchar(50),
 @vehiclePlate nvarchar(50),
@@ -7,9 +8,9 @@ create proc Sp_AddVehicle
 @vehicleType nvarchar(50),
 @vehicleColor nvarchar(50)
 as begin
-insert into Vehicle([custID_FK],[tagID],[vehiclePlate],[vehicleMake],[vehicleModel],
+insert into Vehicle([vehicleID],[custID_FK],[tagID],[vehiclePlate],[vehicleMake],[vehicleModel],
 [vehicleType],[vehicleColor])
-values(@custID_FK,@tagID,@vehiclePlate,@vehicleMake,@vehicleModel,@vehicleType,
+values(@vehicleID,@custID_FK,@tagID,@vehiclePlate,@vehicleMake,@vehicleModel,@vehicleType,
 @vehicleColor)
 end
 
@@ -18,10 +19,10 @@ as begin
 select * from Vehicle
 end
 
-create proc Sp_DeleteVehicle
-@vehiclePlate nvarchar(50)
+alter proc Sp_DeleteVehicle
+@vehicleID nvarchar(50)
 as begin
-delete from Vehicle where vehiclePlate=@vehiclePlate
+delete from Vehicle where vehicleID=@vehicleID
 end
 
 

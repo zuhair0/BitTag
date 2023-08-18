@@ -22,6 +22,7 @@ namespace BitTagDAL
             {
                 VehicleModel vehicle = new VehicleModel();
                 vehicle.custID_FK = Guid.Parse(reader["custID_FK"].ToString());
+                vehicle.vehicleID = Guid.Parse(reader["vehicleID"].ToString());
                 vehicle.tagID = Guid.Parse(reader["tagID"].ToString());
                 vehicle.vehiclePlate = reader["vehiclePlate"].ToString();
                 vehicle.vehicleMake = reader["vehicleMake"].ToString();

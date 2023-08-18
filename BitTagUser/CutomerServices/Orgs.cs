@@ -5,13 +5,22 @@ namespace BitTagUser.CutomerServices
     public class Orgs:IOrgs
     {
         private readonly HttpClient _httpClient;
-        Orgs(HttpClient httpClient)
+        public Orgs(HttpClient httpClient)
         {
             this._httpClient = httpClient;
         }
         public async Task<List<OrganizationModel>> Getorgs()
         {
-            return await _httpClient.GetFromJsonAsync<List<OrganizationModel>>("api/controller/GetOrganization");
+            List<OrganizationModel> organizations = new List<OrganizationModel>();
+            organizations= await _httpClient.GetFromJsonAsync<List<OrganizationModel>>("api/controller/GetOrganization");
+            if (organizations != null)
+            {
+                return organizations;
+            }
+            else
+            {
+                return new List<OrganizationModel>();
+            }
         }
     }
 }

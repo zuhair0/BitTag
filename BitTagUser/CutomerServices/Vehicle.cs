@@ -26,7 +26,7 @@ namespace BitTagUser.CutomerServices
         {
             await _httpclient.PostAsJsonAsync("api/controller/AddVehicle", vm);
         }
-        public async Task DeleteVehicle(string id)
+        public async Task DeleteVehicle(Guid id)
         {
             await _httpclient.DeleteAsync("api/controller/DeleteVehicle/" + id);
         }

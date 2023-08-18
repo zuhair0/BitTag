@@ -33,14 +33,7 @@ namespace BitTagAPI.Controllers
 
             List<OrganizationModel> organizations = new List<OrganizationModel>();
             organizations = await Organization.GetOrganizations();
-            if (organizations.Count > 0)
-            {
-                return new JsonResult(organizations);
-            }
-            else
-            {
-                return new JsonResult("Not Found");
-            }
+            return new JsonResult(organizations);
         }
         [HttpDelete]
         [Route("DeleteOrganization/{id}")]

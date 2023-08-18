@@ -44,4 +44,8 @@
     {
         orgId = Guid.Parse(e.Value.ToString());
     }
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadData();
+    }
 }

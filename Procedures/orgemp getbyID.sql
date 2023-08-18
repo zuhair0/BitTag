@@ -1,4 +1,4 @@
-alter proc Sp_GetEmpByID
+create proc Sp_GetEmpByID
 @orgID_FK varchar(100)
 as begin
 select * from [dbo].[Organization_Employee] 

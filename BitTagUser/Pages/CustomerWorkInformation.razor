@@ -1,16 +1,16 @@
-﻿@page "/custinfo"
-@using BitTagModels;
-@using BitTagUser.CutomerServices
-@inject IOrgs org
+﻿@page "/custWorkInfo"
+@using BitTagDAL
+@using BitTagModels
+@using BitTagUser.CutomerServices;
 @inject ICustomerWorkInfo custWorkinfo
+@inject IOrgs org
 <h3>CustomerWorkInfo</h3>
 
-
 <EditForm Model="customerWorkInfo" OnSubmit="SaveCustWorkInfo">
-    <label >Organization</label>
+    <label>Organization</label>
     @*<input type="text" @bind-value="vehicle.vehicleMake" /><br />*@
     <select onchange="SeletedOrgID">
-        @foreach(var item in organizations)
+        @foreach (var item in organizations)
         {
             <option value="@item.orgID">@item.orgName</option>
         }
@@ -38,12 +38,17 @@
         customerWorkInfo.org_FK = orgId;
         await custWorkinfo.SaveCustomerWorkInfo(customerWorkInfo);
     }
-    private async Task LoadData()
-    {
-        organizations = await org.Getorgs();
-    }
+    //private async Task LoadData()
+    //{
+    //    organizations = await org.Getorgs();
+    //}
     private void SeletedOrgID(ChangeEventArgs e)
     {
         orgId = Guid.Parse(e.Value.ToString());
+    }
+    protected override async Task OnInitializedAsync()
+    {
+
+        organizations = await org.Getorgs();
     }
 }

@@ -33,14 +33,8 @@ namespace BitTagAPI.Controllers
         {
             List<CustomersModel> customersModels = new List<CustomersModel>();
             customersModels = await Customers.GetCustomers();
-            if (customersModels.Count > 0)
-            {
-                return new JsonResult(customersModels);
-            }
-            else
-            {
-                return new JsonResult("Not Found");
-            }
+            return new JsonResult(customersModels);
+            
         }
         [HttpDelete]
         [Route("DeleteCustomer/{id}")]

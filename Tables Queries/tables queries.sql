@@ -44,6 +44,7 @@ orgId nvarchar(50)
 );
 
 create table Vehicle(
+vehicleID nvarchar(50),
 custID_FK nvarchar(50),
 tagID nvarchar(50),
 vehiclePlate nvarchar(50),

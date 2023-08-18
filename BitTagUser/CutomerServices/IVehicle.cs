@@ -6,6 +6,6 @@ namespace BitTagUser.CutomerServices
     {
         Task<List<VehicleModel>> GetVehicleModels();
         Task SaveVehicle(VehicleModel vm);
-        Task DeleteVehicle(string id);
+        Task DeleteVehicle(Guid id);
     }
 }

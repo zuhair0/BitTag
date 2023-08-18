@@ -1,4 +1,5 @@
 ﻿using BitTagModels;
+using System.Reflection;
 
 namespace BitTagWebAPP.CutomerServices
 {
@@ -11,7 +12,16 @@ namespace BitTagWebAPP.CutomerServices
         }
         public async Task<List<CustomersModel>> GetCustomers()
         {
-            return await _httpClient.GetFromJsonAsync<List<CustomersModel>>("api/controller/GetCustomer");
+            List<CustomersModel> customers = new List<CustomersModel>();
+            customers= await _httpClient.GetFromJsonAsync<List<CustomersModel>>("api/controller/GetCustomer");
+            if (customers != null)
+            {
+                return customers;
+            }
+            else
+            {
+                return new List<CustomersModel>();
+            }
         }
         public async Task SaveCustomers(CustomersModel cm)
         {

@@ -7,24 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Pages\CustomerWorkInfo.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\BitTagDAL\BitTagDAL.csproj" />
     <ProjectReference Include="..\BitTagModels\BitTagModels.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Pages\CustomerWorkInfo.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="Pages\CustomerWorkInfo.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Pages\CustomerWorkInfo.razor" />
   </ItemGroup>
 
 </Project>

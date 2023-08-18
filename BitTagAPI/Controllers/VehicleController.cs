@@ -16,6 +16,7 @@ namespace BitTagAPI.Controllers
             SqlParameter[] parameters =
             {
                 new SqlParameter("@custID_FK",vm.custID_FK),
+                new SqlParameter("@vehicleID",vm.vehicleID),
                 new SqlParameter("@tagID",vm.tagID),
                 new SqlParameter("@vehiclePlate",vm.vehiclePlate),
                 new SqlParameter("@vehicleMake",vm.vehicleMake),
@@ -36,11 +37,11 @@ namespace BitTagAPI.Controllers
         }
         [HttpDelete]
         [Route("DeleteVehicle/{id}")]
-        public async void DeleteVehicle(string id)
+        public async void DeleteVehicle(Guid id)
         {
             SqlParameter[] parameters =
             {
-                new SqlParameter("@vehiclePlate",id)
+                new SqlParameter("@vehicleID",id)
             };
             await DalCrud.CRUD("Sp_DeleteVehicle", parameters);
         }

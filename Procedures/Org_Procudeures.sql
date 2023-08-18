@@ -1,5 +1,4 @@
-use BitTaag
-alter proc Sp_AddOrg
+create proc Sp_AddOrg
 @ordID varchar(50),
 @orgName varchar(50),
 @orgType varchar(50),
@@ -18,6 +17,9 @@ delete from [dbo].[Organization]
 where ordID=@ordID
 end
 
+create proc Sp_GetOrganization
+as begin
 select * from Organization
+end
 
 truncate table Organization

@@ -8,7 +8,7 @@
 <EditForm Model="vehicle" OnSubmit="SaveVehicle">
     <label >Make</label>
     @*<input type="text" @bind-value="vehicle.vehicleMake" /><br />*@
-    <select onchange="@selected">
+    <select @bind="@selected">
         @foreach(var item in make)
         {
             <option value="@item">@item</option>
@@ -42,7 +42,7 @@
             <td>@item.vehicleModel</td>
             <td>@item.vehiclePlate</td>
             <td>
-                <button @onclick="(()=>DeleteVehicle(item.vehiclePlate))">Delete</button>
+                <button @onclick="(()=>DeleteVehicle(item.vehicleID))">Delete</button>
             </td>
             @*<td>
                 <button><a href="vehicle/@item.custID.ToString()">Add Vehicle</a></button>
@@ -69,10 +69,11 @@
         Guid id = Guid.NewGuid();
         vehicle.tagID = id;
         vehicle.custID_FK = Guid.Parse(userid);
+        vehicle.vehicleID = Guid.NewGuid();
         vehicle.vehicleMake = selected;
         await veh.SaveVehicle(vehicle);
     }
-    private async Task DeleteVehicle(string id)
+    private async Task DeleteVehicle(Guid id)
     {
         await veh.DeleteVehicle(id);
     }

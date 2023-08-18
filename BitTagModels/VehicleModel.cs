@@ -10,6 +10,7 @@ namespace BitTagModels
     {
         public Guid custID_FK { get; set; }
         public Guid tagID { get; set; }
+        public Guid vehicleID { get; set; }
         public string vehiclePlate { get; set; }
         public string vehicleMake { get; set; }
         public int vehicleModel { get; set; }
