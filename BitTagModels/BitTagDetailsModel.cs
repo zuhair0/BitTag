@@ -9,7 +9,7 @@ namespace BitTagModels
     public class BitTagDetailsModel
     {
         public Guid tagID { get; set; }
-        public int tagSerial { get; set; }
+        public string tagSerial { get; set; }
         public Guid custID_FK { get; set; }
         public Guid orgId { get; set; }
     }
