@@ -10,7 +10,7 @@ namespace BitTagModels
     {
         public Guid tagID { get; set; }
         public string tagSerial { get; set; }
-        public Guid custID_FK { get; set; }
+        public string QRcode { get; set; }
         public Guid orgId { get; set; }
     }
 }
