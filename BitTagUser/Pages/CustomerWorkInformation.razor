@@ -9,7 +9,7 @@
 <EditForm Model="customerWorkInfo" OnSubmit="SaveCustWorkInfo">
     <label>Organization</label>
     @*<input type="text" @bind-value="vehicle.vehicleMake" /><br />*@
-    <select onchange="SeletedOrgID">
+    <select @onchange="SeletedOrgID">
         @foreach (var item in organizations)
         {
             <option value="@item.orgID">@item.orgName</option>

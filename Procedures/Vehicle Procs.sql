@@ -1,4 +1,4 @@
-alter proc Sp_AddVehicle 
+create proc Sp_AddVehicle 
 @vehicleID nvarchar(50),
 @custID_FK nvarchar(50),
 @tagID nvarchar(50),
@@ -19,7 +19,7 @@ as begin
 select * from Vehicle
 end
 
-alter proc Sp_DeleteVehicle
+create proc Sp_DeleteVehicle
 @vehicleID nvarchar(50)
 as begin
 delete from Vehicle where vehicleID=@vehicleID
