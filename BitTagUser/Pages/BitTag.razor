@@ -10,20 +10,24 @@
 	<input type="text" @bind-value="bitTagDetails.QRcode"/>  *@
 	<button type="submit">generate</button>
 </EditForm>
-@* @if (bitTagDetails.QRcode != null && bitTagDetails.QRcode.Trim()!="")
+@if (bitTagDetails.QRcode != null && bitTagDetails.QRcode.Trim()!="")
 {
-	<SfQRCodeGenerator Width="200px" Height="150px" Value="@bitTagDetails.QRcode"></SfQRCodeGenerator>
-} *@
+	<SfQRCodeGenerator Width="500px" Height="500px" Value="@bitTagDetails.QRcode"></SfQRCodeGenerator>
+}
+<script src="_content/Syncfusion.Blazor/scripts/syncfusion-blazor.min.js" type="text/javascript"></script>
 @code {
 	BitTagDetailsModel bitTagDetails=new BitTagDetailsModel();
 	Random rnd = new Random();
+	int serialCounter = 0;
 	string userid = "3fa85f64-5717-4562-b3fc-2c963f66afad";
 	private async void Save()
 	{
+		serialCounter++;
 		bitTagDetails.orgId = Guid.Parse(userid);
 		bitTagDetails.QRcode = rnd.Next(10000000,99999999).ToString();
+		//bitTagDetails.QRcode = "https://ironsoftware.com/csharp/barcode/tutorials/csharp-qr-code-generator/";
 		bitTagDetails.tagID = Guid.NewGuid();
-		bitTagDetails.tagSerial = "12345";
+		bitTagDetails.tagSerial = serialCounter.ToString();
 		await bittag.SaveBitTags(bitTagDetails);
 	}
 	protected void GenerateClick()
