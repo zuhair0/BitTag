@@ -13,6 +13,8 @@ as begin
 select * from BitTag
 end
 
+truncate table BitTag
+
 create proc Sp_DeleteBitTag
 @tagID nvarchar(50)
 as begin
