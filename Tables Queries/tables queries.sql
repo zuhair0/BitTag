@@ -38,10 +38,11 @@ tagID_FK nvarchar(50)
 
 create table BitTag(
 tagID nvarchar(50),
-tagSerial bigint,
-custID_FK nvarchar(50),
+tagSerial nvarchar(50),
+QRcode nvarchar(50),
 orgId nvarchar(50)
-);
+); 
+drop table BitTag
 
 create table Vehicle(
 vehicleID nvarchar(50),

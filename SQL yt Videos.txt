@@ -1,6 +1,6 @@
 https://youtu.be/n59n9M1vLm8
 https://youtu.be/6joGkZMVX4o
-
+https://www.youtube.com/watch?v=MTOHFCsgjls //qrcode
 
 ------------DAL----------------
 using System;

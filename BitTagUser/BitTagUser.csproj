@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -7,24 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Pages\BitTagDetails.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\BitTagDAL\BitTagDAL.csproj" />
     <ProjectReference Include="..\BitTagModels\BitTagModels.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <UpToDateCheckInput Remove="Pages\BitTagDetails.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="Pages\BitTagDetails.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Pages\BitTagDetails.razor" />
+    <PackageReference Include="BarCode" Version="2023.8.4" />
+    <PackageReference Include="Syncfusion.Blazor" Version="22.2.10" />
   </ItemGroup>
 
 </Project>

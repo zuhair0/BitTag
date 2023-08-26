@@ -1,11 +1,11 @@
-create proc Sp_BitTagDetils
+alter proc Sp_BitTagDetils
 @tagID nvarchar(50),
-@tagSerial bigint,
-@custID_FK nvarchar(50),
+@tagSerial nvarchar(50),
+@QRcode nvarchar(50),
 @orgId nvarchar(50)
 as begin
-insert into BitTag([tagID], [tagSerial], [custID_FK], [orgId])
-values(@tagID,@tagSerial,@custID_FK,@orgId)
+insert into BitTag([tagID], [tagSerial], [QRcode], [orgId])
+values(@tagID,@tagSerial,@QRcode,@orgId)
 end
 
 create proc Sp_GetBitTagDetails
