@@ -38,7 +38,7 @@ tagID_FK nvarchar(50)
 
 create table BitTag(
 tagID nvarchar(50),
-tagSerial nvarchar(50),
+tagSerial int,
 QRcode nvarchar(50),
 orgId nvarchar(50)
 ); 

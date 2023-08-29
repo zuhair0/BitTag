@@ -16,7 +16,7 @@ namespace BitTagAPI.Controllers
             SqlParameter[] parameters =
             {
                 new SqlParameter("@tagID",btd.tagID),
-                new SqlParameter("@tagSerial",btd.tagSerial),
+                //new SqlParameter("@tagSerial",btd.tagSerial),
                 new SqlParameter("@QRcode",btd.QRcode),
                 new SqlParameter("@orgId",btd.orgId)
             };

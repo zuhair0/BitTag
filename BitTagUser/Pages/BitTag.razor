@@ -27,7 +27,7 @@
 		bitTagDetails.QRcode = rnd.Next(10000000,99999999).ToString();
 		//bitTagDetails.QRcode = "https://ironsoftware.com/csharp/barcode/tutorials/csharp-qr-code-generator/";
 		bitTagDetails.tagID = Guid.NewGuid();
-		bitTagDetails.tagSerial = serialCounter.ToString();
+		//bitTagDetails.tagSerial = serialCounter.ToString();
 		await bittag.SaveBitTags(bitTagDetails);
 	}
 	protected void GenerateClick()
