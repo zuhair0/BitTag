@@ -78,3 +78,10 @@ Pin int,
 Designation nvarchar(50),
 PhoneNum bigint
 );
+
+
+create table BitTagUser(
+userid_fk nvarchar(50),
+vehid_fk nvarchar(50),
+bittagcode nvarchar(50)
+);

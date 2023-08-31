@@ -5,7 +5,8 @@
 @using BitTagModels
 <h3>OrganizationEmployees</h3>
 
-<EditForm Model="orgEmpModel" OnSubmit="SaveOrgEmp">
+
+@* <EditForm Model="orgEmpModel" OnSubmit="SaveOrgEmp">
     <label class="col-1">Emp_firstName</label>
     <input class="col-2" type="text" @bind-value="orgEmpModel.Emp_firstName" /><br />
     <label class="col-1">Emp_lastName</label>
@@ -19,6 +20,21 @@
     <label>PhoneNum</label>
     <input type="text" @bind-value="orgEmpModel.PhoneNum" /><br />
     <button type="submit">Save</button>
+</EditForm> *@
+<EditForm Model="orgEmpModel" OnValidSubmit="SaveOrgEmp">
+    <div class="container-fluid">
+        <div class="row">
+            <InputText class="col-4" @bind-Value="orgEmpModel.Emp_firstName" placeholder="First Name" required/>
+            <InputText class="col-4" @bind-Value="orgEmpModel.Emp_lastName" placeholder="Last Name" required />
+            <InputText class="col-4" @bind-Value="orgEmpModel.Emp_CNIC" placeholder="C-NIC" required/>
+        </div>
+        <div class="row">
+            <InputNumber class="col-2" @bind-Value="orgEmpModel.Pin" placeholder="4-digit PIN" max="5" required />
+            <InputText class="col-4" @bind-Value="orgEmpModel.Designation" placeholder="Designation" required />
+            <InputText class="col-3" @bind-Value="orgEmpModel.PhoneNum" placeholder="Phone" required />
+            <button class="col-2 btn btn-primary" type="submit">Save</button>
+        </div>
+    </div>
 </EditForm>
 @msg
 <table class="tble table">

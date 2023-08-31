@@ -1,7 +1,9 @@
+using BitTagUser.CutomerServices;
 using BitTagWebAPP.Data;
 using BitTagWebAPP.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using Syncfusion.Blazor;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,10 +11,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
+builder.Services.AddSyncfusionBlazor();
 builder.Services.AddHttpClient<IOrganizations, Organizations>(
     c =>{c.BaseAddress = new Uri("https://localhost:7195");}
     );
 builder.Services.AddHttpClient<IOrgEmployees, OrgEmployees>(
+    c => { c.BaseAddress = new Uri("https://localhost:7195"); }
+    );
+builder.Services.AddHttpClient<IBitTag, BitTags>(
     c => { c.BaseAddress = new Uri("https://localhost:7195"); }
     );
 var app = builder.Build();
