@@ -9,26 +9,11 @@ namespace BitTagUser.CutomerServices
         {
             _httpClient = httpClient;
         }
-        public async Task<List<BitTagDetailsModel>> GetBitT()
+        
+        public async Task SaveBitTagUser(BitTagUserModel bum)
         {
-            List<BitTagDetailsModel> bitTagDetails = new List<BitTagDetailsModel>();
-            bitTagDetails = await _httpClient.GetFromJsonAsync<List<BitTagDetailsModel>>("api/controller/GetBitTagDetails");
-            if(bitTagDetails!= null)
-            {
-                return bitTagDetails;
-            }
-            else
-            {
-                return new List<BitTagDetailsModel>();
-            }
+            await _httpClient.PostAsJsonAsync("api/controller/SaveBitTagUser", bum);
         }
-        public async Task SaveBitTags(BitTagDetailsModel btdm)
-        {
-            await _httpClient.PostAsJsonAsync("api/controller/AddBitTagDetails", btdm);
-        }
-        public async Task DeleteBitTag(Guid id)
-        {
-            await _httpClient.DeleteAsync("api/controller/DeleteBitTagDetails/" + id);
-        }
+
     }
 }

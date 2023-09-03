@@ -1,0 +1,20 @@
+﻿@page "/bittaguser"
+@using BitTagDAL
+@using BitTagModels
+@inject IBitTag bittag
+<h3>BitTagUser</h3>
+<EditForm Model="bitTagUser" OnSubmit="saveBitTagUser">
+	<button type="submit">Save</button>
+</EditForm>
+
+@code {
+	private BitTagUserModel bitTagUser=new BitTagUserModel();
+	string userid = "3fa85f64-5717-4562-b3fc-2c963f66afad";
+	string vehid="9F2E2662-4924-4C2B-A7B3-EA0EE31E3374"
+	private void saveBitTagUser()
+	{
+		bitTagUser.userid_fk = Guid.Parse(userid);
+		bitTagUser.vehid_fk = Guid.Parse(vehid);
+		bitTagUser.bittagcode = "123456";
+	}
+}
