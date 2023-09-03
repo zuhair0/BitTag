@@ -1,7 +1,6 @@
 using BitTagDAL;
 using BitTagUser.CutomerServices;
 using BitTagUser.Data;
-using BitTagWebAPP.CutomerServices;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Syncfusion.Blazor;
@@ -25,9 +24,12 @@ builder.Services.AddHttpClient<ICustomerWorkInfo, CustomerWorkInfo>(
 builder.Services.AddHttpClient<IOrgs, Orgs>(
     c => { c.BaseAddress = new Uri("https://localhost:7195"); }
     );
-builder.Services.AddHttpClient<IBitTag, BitTags>(
+builder.Services.AddHttpClient<IBitTagUsers, BitTaaguser>(
     c => { c.BaseAddress = new Uri("https://localhost:7195"); }
     );
+//builder.Services.AddHttpClient<IBitTagUser, BitTagsUser>(
+//    c => { c.BaseAddress = new Uri("https://localhost:7195"); }
+//    );
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

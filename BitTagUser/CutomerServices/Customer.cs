@@ -1,7 +1,7 @@
 ﻿using BitTagModels;
 using System.Reflection;
 
-namespace BitTagWebAPP.CutomerServices
+namespace BitTagUser.CutomerServices
 {
     public class Customer:ICustomer
     {
