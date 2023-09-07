@@ -42,6 +42,12 @@ tagSerial int,
 QRcode nvarchar(50),
 orgId nvarchar(50)
 ); 
+
+create table BitTagUser(
+userid_fk nvarchar(50),
+vehid_fk nvarchar(50),
+bittagcode nvarchar(50)
+);
 drop table BitTag
 
 create table Vehicle(
@@ -77,11 +83,4 @@ Emp_CNIC bigint,
 Pin int,
 Designation nvarchar(50),
 PhoneNum bigint
-);
-
-
-create table BitTagUser(
-userid_fk nvarchar(50),
-vehid_fk nvarchar(50),
-bittagcode nvarchar(50)
 );
