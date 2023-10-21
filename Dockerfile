@@ -52,6 +52,8 @@ COPY . .
 
 # Publish the application using the project file
 RUN dotnet publish -c Debug -o out ./BitTagAPI/BitTagAPI.csproj
+RUN dotnet publish -c Debug -o out ./BitTagUser/BitTagUser.csproj
+RUN dotnet publish -c Debug -o out ./BitTagWebAPP/BitTagWebAPP.csproj
 
 # Build the runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS runtime
