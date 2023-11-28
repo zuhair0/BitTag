@@ -21,7 +21,7 @@
     <input type="text" @bind-value="orgEmpModel.PhoneNum" /><br />
     <button type="submit">Save</button>
 </EditForm> *@
-<EditForm Model="orgEmpModel" OnValidSubmit="SaveOrgEmp">
+@* <EditForm Model="orgEmpModel" OnValidSubmit="SaveOrgEmp">
     <div class="container-fluid">
         <div class="row">
             <InputText class="col-4" @bind-Value="orgEmpModel.Emp_firstName" placeholder="First Name" required/>
@@ -62,6 +62,97 @@
 
     }
 </table>
+ *@
+
+<div class="container container-fluid mt-5">
+    <div class="card bg-light">
+        <article class="card-body mx-auto" style="max-width: 400px;">
+            <h4>Organization Employee</h4>
+            <EditForm Model="orgEmpModel" OnValidSubmit="SaveOrgEmp">
+                <div class="form-group input-group mb-1 mt-4">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="oi oi-account-login"></i> </span>
+                    </div>
+                    <input class="form-control" placeholder="First Name" type="text" @bind-value="orgEmpModel.Emp_firstName" required>
+                </div> <!-- form-group// -->
+                <div class="form-group input-group mb-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="oi oi-account-login"></i> </span>
+                    </div>
+                    <input class="form-control" placeholder="Last Name" type="text" @bind-value="orgEmpModel.Emp_lastName" required>
+                </div> <!-- form-group// -->
+                <div class="form-group input-group mb-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="oi oi-dashboard"></i> </span>
+                    </div>
+                    <input class="form-control" placeholder="C-NIC" @bind-value="orgEmpModel.Emp_CNIC" type="text" required>
+                </div>
+                <div class="form-group input-group mb-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="oi oi-dashboard"></i> </span>
+                    </div>
+                    <input class="form-control" placeholder="PIN" type="number" @bind-value="orgEmpModel.Pin" required>
+                </div>
+                <div class="form-group input-group mb-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="oi oi-dashboard"></i> </span>
+                    </div>
+                    <input class="form-control" placeholder="Designation" type="text" @bind-value="orgEmpModel.Designation" required>
+                </div>
+                <div class="form-group input-group mb-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="oi oi-dashboard"></i> </span>
+                    </div>
+                    <input class="form-control" placeholder="Phone" type="number" @bind-value="orgEmpModel.PhoneNum" required>
+                </div>
+
+                <div class="form-group" style="display:flex; justify-content:center;">
+                    <button type="submit" class="btn btn-primary btn-block"> Register  </button>
+                </div> <!-- form-group// -->
+            </EditForm>
+        </article>
+    </div> <!-- card.// -->
+
+</div>
+
+<section class="intro">
+    <div class="gradient-custom-1 h-100">
+        <div class="mask d-flex align-items-center h-100">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <div class="table-responsive bg-white">
+                            <table class="table mb-0">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">FIRST NAME</th>
+                                        <th scope="col">LAST NAME</th>
+                                        <th scope="col">CNIC</th>
+                                        <th scope="col">DESIGNATION</th>
+                                        <th scope="col">PHONE</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in orgEmpList)
+                                    {
+                                        <tr>
+                                            <td>@item.Emp_firstName</td>
+                                            <td>@item.Emp_lastName</td>
+                                            <td>@item.Emp_CNIC</td>
+                                            <td>@item.Designation</td>
+                                            <td>@item.PhoneNum</td>
+                                           
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 @code {
     [Parameter]

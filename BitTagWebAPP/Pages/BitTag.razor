@@ -5,15 +5,19 @@
 @using BitTagUser.CutomerServices;
 @using Syncfusion.Blazor.BarcodeGenerator
 <h3>BitTag</h3>
-<EditForm Model="bitTagDetails" OnSubmit="Save">
-	@* <label>Generate</label>
-	<input type="text" @bind-value="bitTagDetails.QRcode"/>  *@
-	<button type="submit">generate</button>
-</EditForm>
-@if (bitTagDetails.QRcode != null && bitTagDetails.QRcode.Trim()!="")
-{
-	<SfQRCodeGenerator Width="500px" Height="500px" Value="@bitTagDetails.QRcode"></SfQRCodeGenerator>
-}
+
+<div style="display:flex;justify-content:center; flex-direction:column; background:lightblue; padding-left:30%;">
+	
+	@if (bitTagDetails.QRcode != null && bitTagDetails.QRcode.Trim() != "")
+	{
+		<SfQRCodeGenerator Width="500px" Height="500px" Value="@bitTagDetails.QRcode"></SfQRCodeGenerator>
+	}
+	<EditForm Model="bitTagDetails" OnSubmit="Save">
+		@* <label>Generate</label>
+		<input type="text" @bind-value="bitTagDetails.QRcode"/>  *@
+		<button type="submit" class="btn btn-primary" style="margin-left:23%; margin-top:5%; margin-bottom: 2%;">Generate a BitTag</button>
+	</EditForm>
+</div>
 <script src="_content/Syncfusion.Blazor/scripts/syncfusion-blazor.min.js" type="text/javascript"></script>
 @code {
 	BitTagDetailsModel bitTagDetails=new BitTagDetailsModel();
