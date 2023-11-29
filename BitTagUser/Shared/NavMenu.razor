@@ -1,38 +1,41 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">BitTagUser</a>
-        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+﻿
+
+<div class="bg-primary">
+    <div class="top-row ps-3 navbar navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href=""><img src="BitTag-small-logo.png" width="120px" style="margin-left: 40px;"/></a>
+            <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </div>
+
+    <div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
+        <nav class="flex-column">
+
+            <div class="nav-item px-3">
+                <NavLink class="nav-link text-black fw-bolder" href="customer">
+                    <span class="oi oi-person" aria-hidden="true"></span> Basic Information
+                </NavLink>
+            </div>
+            <div class="nav-item px-3">
+                <NavLink class="nav-link text-black fw-bold" href="vehicle">
+                    <span class="oi oi-book" aria-hidden="true"></span> Vehicle Information
+                </NavLink>
+            </div>
+            <div class="nav-item px-3">
+                <NavLink class="nav-link text-black fw-bolder" href="custWorkInfo">
+                    <span class="oi oi-briefcase" aria-hidden="true"></span> Work Profile
+                </NavLink>
+            </div>
+            <div class="nav-item px-3">
+                <NavLink class="nav-link text-black fw-bolder" href="bittaguser">
+                    <span class="oi oi-plus" aria-hidden="true"></span> BitTag
+                </NavLink>
+            </div>
+        </nav>
     </div>
 </div>
-
-<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
-    <nav class="flex-column">
-        
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="customer">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Customer
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="vehicle">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Add vehicle
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="custWorkInfo">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Add Work info
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="bittaguser">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> bittag
-            </NavLink>
-        </div>
-    </nav>
-</div>
-
 @code {
     private bool collapseNavMenu = true;
 

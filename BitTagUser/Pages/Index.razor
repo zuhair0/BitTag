@@ -1,9 +1,38 @@
 ﻿@page "/"
 
-<PageTitle>Index</PageTitle>
+<PageTitle>User Panel</PageTitle>
 
-<h1>Hello, world!</h1>
+<style>
+    .hero{
+        background-color:blue;
+        width: 650px;
+        height: 450px;
+        margin: 0 auto;
+        margin-top: 8%;
+        border-radius: 12px;
+    }
 
-Welcome to your new app.
+    .hero h1{
+        text-align: center;
+        font-size: 38px;
+        color: white;
+        font-weight: bold;
+    }
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+    .hero p{
+        text-align: center;
+        font-size: 22px;
+        color:white;
+    }
+
+    .main-pic{
+        margin-left: 38%;
+        margin-top: 10%;
+    }
+</style>
+
+<div class="hero">
+    <img src="/favicon.png" width="150px" class="main-pic"/>
+    <h1>Welcome User! <span class="oi oi-person" aria-label="true"></span> </h1>
+    <p>Please complete your profile</p>
+</div>
