@@ -3,12 +3,12 @@
 @using BitTagModels
 @using BitTagUser.CutomerServices;
 @inject IVehicle veh
-<h3>CutomerVehicle</h3>
 
-<EditForm Model="vehicle" OnSubmit="SaveVehicle">
+
+@* <EditForm Model="vehicle" OnSubmit="SaveVehicle">
     <label >Make</label>
     @*<input type="text" @bind-value="vehicle.vehicleMake" /><br />*@
-    <select @bind="@selected">
+   @* <select @bind="@selected">
         @foreach(var item in make)
         {
             <option value="@item">@item</option>
@@ -46,10 +46,101 @@
             </td>
             @*<td>
                 <button><a href="vehicle/@item.custID.ToString()">Add Vehicle</a></button>
-            </td>*@
+            </td>
         </tr>
     }
-</table>
+</table> *@
+
+<div class="container container-fluid mt-5">
+    <div class="card bg-white">
+        <article class="card-body mx-auto" style="max-width: 400px;">
+            <h4 class="text-center fw-bold">Basic Information</h4>
+            <EditForm Model="vehicle" OnSubmit="SaveVehicle">
+                <div class="form-group input-group mb-1 mt-4">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="oi oi-person"></i> </span>
+                    </div>
+                    <input class="form-control" @bind-value="vehicle.vehicleMake" required>
+                    <select @bind="@selected">
+                        @foreach (var item in make)
+                        {
+                            <option value="@item">@item</option>
+                        }
+                    </select>
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="oi oi-person"></i> </span>
+                    </div>
+                    <input class="form-control" placeholder="Model" type="text" @bind-value="vehicle.vehicleModel" required>
+                </div> <!-- form-group// -->
+                <div class="form-group input-group mb-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="oi oi-book"></i> </span>
+                    </div>
+                    <input class="form-control" placeholder="Plate" type="text" @bind-value="vehicle.vehiclePlate" required>
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="oi oi-book"></i> </span>
+                    </div>
+                    <input class="form-control" placeholder="Type" type="text" @bind-value="vehicle.vehicleType" required>
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="oi oi-book"></i> </span>
+                    </div>
+                    <input class="form-control" placeholder="Color" type="text" @bind-value="vehicle.vehicleColor" required>
+                </div> <!-- form-group// -->
+                
+                <div class="form-group" style="display:flex; justify-content:center;">
+                    <button type="submit" class="btn btn-primary btn-block"> Register  </button>
+                </div> <!-- form-group// -->
+            </EditForm>
+        </article>
+    </div> <!-- card.// -->
+
+</div>
+
+@if (vehicle != null)
+{
+    @foreach (var item in vehicleList)
+    {
+        <div class="container container-fluid mt-5">
+            <div class="card bg-white">
+                <article class="card-body mx-auto" style="max-width: 400px;">
+                    <h4 class="text-center fw-bold">Vehicle Information</h4>
+
+                    <div class="form-group input-group mb-1 mt-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="oi oi-person"></i> </span>
+                        </div>
+                        <input class="form-control" @bind-value="item.vehicleMake" readonly>
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="oi oi-person"></i> </span>
+                        </div>
+                        <input class="form-control" type="text" @bind-value="item.vehicleModel" readonly>
+                    </div> <!-- form-group// -->
+                    <div class="form-group input-group mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="oi oi-book"></i> </span>
+                        </div>
+                        <input class="form-control" @bind-value="item.vehiclePlate" readonly>
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="oi oi-book"></i> </span>
+                        </div>
+                        <input class="form-control" @bind-value="item.vehicleType" readonly>
+                    </div> <!-- form-group// -->
+                    <div class="form-group input-group mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="oi oi-box"></i> </span>
+                        </div>
+                        <input class="form-control" @bind-value="item.vehicleColor" readonly>
+                    </div>
+                    
+                </article>
+            </div> <!-- card.// -->
+
+        </div>
+    }
+
+}
+
+
 @code {
     //[Parameter]
     //public string custID_FK { get; set; }
@@ -60,7 +151,7 @@
     private string? selected{ get; set; }
     List<string> make = new List<string>
     {
-        "Suzuki","Honda","Toyota","Hyundia"
+        "Suzuki","Honda","Toyota","Hyundai"
     };
 
     string userid = "3fa85f64-5717-4562-b3fc-2c963f66afad";
