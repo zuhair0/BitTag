@@ -4,6 +4,7 @@
 @using BitTagUser.CutomerServices;
 @inject ICustomerWorkInfo custWorkinfo
 @inject IOrgs org
+@inject IBitTagUsers bittaguser
 <h3>CustomerWorkInfo</h3>
 
 <EditForm Model="customerWorkInfo" OnSubmit="SaveCustWorkInfo">
@@ -32,11 +33,21 @@
     Guid orgId { get; set; }
 
     string userid = "3fa85f64-5717-4562-b3fc-2c963f66afad";
+
+    //generate bittag
+    private BitTagUserModel bitTagUser = new BitTagUserModel();
+    //string userid = "3fa85f64-5717-4562-b3fc-2c963f66afad";
+    string vehid = "9F2E2662-4924-4C2B-A7B3-EA0EE31E3374";
     private async void SaveCustWorkInfo()
     {
         customerWorkInfo.userID_FK = Guid.Parse(userid);
         customerWorkInfo.org_FK = orgId;
+        bitTagUser.userid_fk = Guid.Parse(userid);
+        bitTagUser.vehid_fk = Guid.Parse(vehid);
+        bitTagUser.bittagcode = "123456";
         await custWorkinfo.SaveCustomerWorkInfo(customerWorkInfo);
+        await bittaguser.SaveBitTagUser(bitTagUser);
+
     }
     //private async Task LoadData()
     //{
