@@ -4,12 +4,12 @@
 @using BitTagUser.CutomerServices;
 @inject ICustomerWorkInfo custWorkinfo
 @inject IOrgs org
-<h3>CustomerWorkInfo</h3>
 
-<EditForm Model="customerWorkInfo" OnSubmit="SaveCustWorkInfo">
+
+@*<EditForm Model="customerWorkInfo" OnSubmit="SaveCustWorkInfo">
     <label>Organization</label>
     @*<input type="text" @bind-value="vehicle.vehicleMake" /><br />*@
-    <select @onchange="SeletedOrgID">
+    @*<select @onchange="SeletedOrgID">
         @foreach (var item in organizations)
         {
             <option value="@item.orgID">@item.orgName</option>
@@ -22,8 +22,48 @@
     <label>Work time</label>
     <input type="text" @bind-value="customerWorkInfo.worktime" />
     <button type="submit">Save</button>
-</EditForm>
+</EditForm>*@
 
+<div class="container container-fluid mt-5">
+    <div class="card bg-white">
+        <article class="card-body mx-auto" style="max-width: 400px;">
+            <h4 class="text-center fw-bold">Work Information</h4>
+            <EditForm Model="customerWorkInfo" OnSubmit="SaveCustWorkInfo">
+                <div class="form-group input-group mb-1 mt-4">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> Organization </span>
+                    </div>
+                    <select @onchange="SeletedOrgID">
+                        @foreach (var item in organizations)
+                        {
+                            <option value="@item.orgID">@item.orgName</option>
+                        }
+                    </select>
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="oi oi-briefcase"></i> </span>
+                    </div>
+                    <input class="form-control" placeholder="Work Type" type="text" @bind-value="customerWorkInfo.WorkType" required>
+                </div> <!-- form-group// -->
+                <div class="form-group input-group mb-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="oi oi-briefcase"></i> </span>
+                    </div>
+                    <input class="form-control" placeholder="Designation" type="text" @bind-value="customerWorkInfo.Desig" required>
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> Work Time </span>
+                    </div>
+                    <input class="form-control"  type="time" @bind-value="customerWorkInfo.worktime" required>
+                </div> <!-- form-group// -->
+                
+
+                <div class="form-group" style="display:flex; justify-content:center;">
+                    <button type="submit" class="btn btn-primary btn-block"> Register  </button>
+                </div> <!-- form-group// -->
+            </EditForm>
+        </article>
+    </div> <!-- card.// -->
+
+</div>
 @code {
     CustomerWorkInfoModel customerWorkInfo = new CustomerWorkInfoModel();
     List<CustomerWorkInfoModel> workinfos = new List<CustomerWorkInfoModel>();
