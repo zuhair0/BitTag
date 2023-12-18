@@ -60,7 +60,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="oi oi-person"></i> </span>
                     </div>
-                    <input class="form-control" style="display:none;" @bind-value="vehicle.vehicleMake" required>
+                    @* <input class="form-control" @bind-value="vehicle.vehicleMake" required> *@
                     <select @bind="@selected">
                         @foreach (var item in make)
                         {
