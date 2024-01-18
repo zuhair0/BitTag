@@ -84,3 +84,8 @@ Pin int,
 Designation nvarchar(50),
 PhoneNum bigint
 );
+
+
+select * from Organization
+
+truncate table WorkInformation
