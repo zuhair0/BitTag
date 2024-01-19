@@ -13,7 +13,7 @@ namespace BitTagWebAPP.Services
         public async Task<List<OrganizationModel>> GetOrganizations()
         {
             List<OrganizationModel> organizations = new List<OrganizationModel>();
-            organizations= await _httpClient.GetFromJsonAsync<List<OrganizationModel>>("api/controller/GetOrganization");
+            organizations= await _httpClient.GetFromJsonAsync<List<OrganizationModel>>("api/controller/GetOrganizations");
             if (organizations != null)
             {
                 return organizations;
@@ -24,10 +24,7 @@ namespace BitTagWebAPP.Services
             }
         }
 
-        public async Task SaveOrganizations(OrganizationModel om)
-        {
-            await _httpClient.PostAsJsonAsync("api/controller/AddOrganization",om);
-        }
+        public async Task SaveOrganizations(OrganizationModel om) => await _httpClient.PostAsJsonAsync("api/controller/AddOrganization", om);
         public async Task DeleteOrganizations(Guid id)
         {
             await _httpClient.DeleteAsync("api/controller/DeleteOrganization/"+id);

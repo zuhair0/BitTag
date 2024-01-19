@@ -51,52 +51,44 @@
     }
 </table> *@
 
-<div class="container container-fluid mt-5">
-    <div class="card bg-white">
-        <article class="card-body mx-auto" style="max-width: 600px;">
-            <h4 class="text-center fw-bold">Basic Information</h4>
-            <EditForm Model="vehicle" OnSubmit="SaveVehicle">
-                <div class="form-group input-group mb-1 mt-4" style="width: 550px;">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="oi oi-person"></i> </span>
-                    </div>
-                    @* <input class="form-control" @bind-value="vehicle.vehicleMake" required> *@
-                    <select @bind="@selected">
-                        @foreach (var item in make)
-                        {
-                            <option value="@item">@item</option>
-                        }
-                    </select>
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="oi oi-person"></i> </span>
-                    </div>
-                    <input class="form-control" placeholder="Model" type="text" @bind-value="vehicle.vehicleModel" required>
-                </div> <!-- form-group// -->
-                <div class="form-group input-group mb-1">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="oi oi-book"></i> </span>
-                    </div>
-                    <input class="form-control" placeholder="Plate" type="text" @bind-value="vehicle.vehiclePlate" required>
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="oi oi-book"></i> </span>
-                    </div>
-                    <input class="form-control" placeholder="Type" type="text" @bind-value="vehicle.vehicleType" required>
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="oi oi-book"></i> </span>
-                    </div>
-                    <input class="form-control" placeholder="Color" type="text" @bind-value="vehicle.vehicleColor" required>
-                </div> <!-- form-group// -->
-                
-                <div class="form-group" style="display:flex; justify-content:center;">
-                    <button type="submit" class="btn btn-primary btn-block"> Register  </button>
-                </div> <!-- form-group// -->
-            </EditForm>
-        </article>
-    </div> <!-- card.// -->
+<form class="max-w-sm mx-auto" style="padding-top: 120px;">
+    <EditForm Model="vehicle" OnSubmit="SaveVehicle">
+        <div class="grid md:grid-cols-2 md:gap-6">
+            <div class="mb-5">
+                <label for="vehicleMake" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Vehicle Make: *</label>
+                <select @bind="@selected" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >
+                    @foreach (var item in make)
+                    {
+                        <option value="@item">@item</option>
+                    }
+                </select>
+            </div>
+            <div class="mb-5">
+                <label for="vehicleModel" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Vehicle Model: *</label>
+                <input type="text" id="vehicleModel" @bind-value="@vehicle.vehicleModel" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Mehran" required>
+            </div>
+        </div>
+        <div class="grid md:grid-cols-2 md:gap-6">
+            <div class="mb-5">
+                <label for="vehiclePlate" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Plate: *</label>
+                <input type="text"  @bind-value="@vehicle.vehiclePlate" id="vehiclePlate" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="RX901" required>
+            </div>
+            <div class="mb-5">
+                <label for="vehicleType" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type: *</label>
+                <input type="text" id="vehicleType" @bind-value="@vehicle.vehicleType" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Automatic/Manual" required>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="mb-5">
+                <label for="vehicleColor" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Color: *</label>
+                <input type="text" id="vehicleColor" @bind-value="@vehicle.vehicleColor" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="White" required>
+            </div>
+        </div>
+        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add Vehicle</button>
+    </EditForm>
+</form>
 
-</div>
-
-@if (vehicle != null)
+@* @if (vehicle != null)
 {
     @foreach (var item in vehicleList)
     {
@@ -138,7 +130,7 @@
         </div>
     }
 
-}
+} *@
 
 
 @code {

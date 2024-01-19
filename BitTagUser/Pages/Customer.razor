@@ -3,6 +3,7 @@
 @using BitTagDAL
 @using BitTagUser.CutomerServices;
 @inject ICustomer cust
+@inject NavigationManager nm;
 
 @* <h3>Customer</h3>
 <EditForm Model="customers" OnSubmit="SaveCustomer">
@@ -49,6 +50,48 @@
 </table>
  *@
 
+
+<form class="max-w-sm mx-auto" style="padding-top: 120px;">
+    <EditForm Model="customers" OnSubmit="SaveCustomer">
+        <div class="grid md:grid-cols-2 md:gap-6">
+            <div class="mb-5">
+                <label for="firstName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First Name: *</label>
+                <input type="text" id="firstName" @bind-value="@customers.firstName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John" required>
+            </div>
+            <div class="mb-5">
+                <label for="lastName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last Name: *</label>
+                <input type="text" id="lastName" @bind-value="@customers.lastName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Doe" required>
+            </div>
+        </div>
+        <div class="grid md:grid-cols-2 md:gap-6">
+            <div class="mb-5">
+                <label for="cnic" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">C-NIC without dashes: *</label>
+                <input type="number" minlength="13" maxlength="13" @bind-value="@customers.custCNIC" id="cnic" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="32101XXXXXXXX" required>
+            </div>
+            <div class="mb-5">
+                <label for="contact" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contact: *</label>
+                <input type="text" id="contact" minlength="11" maxlength="11" @bind-value="@customers.contact" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="03xxxxxxxxx" required>
+            </div>
+        </div>
+        <div class="mb-5">
+            <label for="emailAddress" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email: *</label>
+            <input type="email" id="emailAddress" @bind-value="@customers.custEmail" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="john.doe@gmail.com" required>
+        </div>
+        <div class="grid md:grid-cols-2 md:gap-6">
+            <div class="mb-5">
+                <label for="dateOfBirth" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date of Birth *</label>
+                <input type="date" id="dathOfBirth" @bind-value="@customers.DOB" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required>
+            </div>
+            <div class="mb-5">
+                <label for="customerPIN" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">PIN (5 digit) *</label>
+                <input type="number" id="customerPIN" @bind-value="customers.custPIN" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required>
+            </div>
+        </div>
+        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+    </EditForm>
+</form>
+
+@* 
 <div class="container container-fluid mt-5">
     <div class="card bg-white">
         <article class="card-body mx-auto" style="max-width: 400px;">
@@ -98,60 +141,7 @@
         </article>
     </div> <!-- card.// -->
 
-</div>
-
-@if(customers != null)
-{
-    @foreach(var item in customersList)
-    {
-        <div class="container container-fluid mt-5">
-            <div class="card bg-white">
-                <article class="card-body mx-auto" style="max-width: 400px;">
-                    <h4 class="text-center fw-bold">Basic Information</h4>
-
-                    <div class="form-group input-group mb-1 mt-4">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"> <i class="oi oi-person"></i> </span>
-                        </div>
-                        <input class="form-control" @bind-value="item.firstName" readonly>
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"> <i class="oi oi-person"></i> </span>
-                        </div>
-                        <input class="form-control" type="text" @bind-value="item.lastName" readonly>
-                    </div> <!-- form-group// -->
-                    <div class="form-group input-group mb-1">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"> <i class="oi oi-book"></i> </span>
-                        </div>
-                        <input class="form-control" @bind-value="item.custCNIC" readonly>
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"> <i class="oi oi-book"></i> </span>
-                        </div>
-                        <input class="form-control" @bind-value="item.contact" readonly>
-                    </div> <!-- form-group// -->
-                    <div class="form-group input-group mb-1">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"> <i class="oi oi-box"></i> </span>
-                        </div>
-                        <input class="form-control" @bind-value="item.custEmail" readonly>
-                    </div>
-                    <div class="form-group input-group mb-1">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"> DOB </span>
-                        </div>
-                        <input class="form-control" @bind-value="item.DOB" readonly>
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"> PIN </span>
-                        </div>
-                        <input class="form-control" placeholder="PIN" @bind-value="item.custPIN" readonly>
-                    </div>
-                </article>
-            </div> <!-- card.// -->
-
-        </div>
-    }
-    
-}
+</div> *@
 
 
 @code {
@@ -163,6 +153,7 @@
         customers.custID = id;
         await cust.SaveCustomers(customers);
         await LoadData();
+        nm.NavigateTo("vehicle");
     }
     private async void DeleteCustomer(Guid id)
     {

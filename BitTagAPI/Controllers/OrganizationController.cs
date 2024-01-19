@@ -27,7 +27,7 @@ namespace BitTagAPI.Controllers
         }
 
         [HttpGet]
-        [Route("GetOrganization")]
+        [Route("GetOrganizations")]
         public async Task<JsonResult> GetOrganizations()
         {
 
