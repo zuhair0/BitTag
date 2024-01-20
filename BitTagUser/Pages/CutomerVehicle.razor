@@ -3,7 +3,7 @@
 @using BitTagModels
 @using BitTagUser.CutomerServices;
 @inject IVehicle veh
-
+@inject NavigationManager nm;
 
 @* <EditForm Model="vehicle" OnSubmit="SaveVehicle">
     <label >Make</label>
@@ -155,6 +155,7 @@
         vehicle.vehicleID = Guid.NewGuid();
         vehicle.vehicleMake = selected;
         await veh.SaveVehicle(vehicle);
+        nm.NavigateTo("/custWorkInfo");
     }
     private async Task DeleteVehicle(Guid id)
     {

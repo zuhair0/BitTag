@@ -12,7 +12,7 @@ namespace BitTagUser.CutomerServices
         public async Task<List<OrganizationModel>> Getorgs()
         {
             List<OrganizationModel> organizations = new List<OrganizationModel>();
-            organizations= await _httpClient.GetFromJsonAsync<List<OrganizationModel>>("api/controller/GetOrganization");
+            organizations= await _httpClient.GetFromJsonAsync<List<OrganizationModel>>("api/controller/GetOrganizations");
             if (organizations != null)
             {
                 return organizations;
