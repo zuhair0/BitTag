@@ -4,7 +4,8 @@
 @using BitTagDAL
 @using BitTagUser.CutomerServices
 @inject ICustomer cust;
-@inject IOrgs org
+@inject IOrgs org;
+@inject IVehicle veh;
 
 <PageTitle>User Panel</PageTitle>
 @* @if(customersList != null && workinfos != null && vehicleList != null)
@@ -111,10 +112,6 @@
                         <div class="lg:col-span-2">
                             <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
                                 <div class="md:col-span-5">
-                                    <label for="organization">Organization</label>
-                                    <input type="text" name="organization" id="organization" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="@item.orgName" readonly />
-                                </div>
-                                <div class="md:col-span-5">
                                     <label for="workType">Work Type</label>
                                     <input type="text" name="workType" id="workType" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="@item.WorkType" readonly />
                                 </div>
@@ -152,10 +149,13 @@
     List<CustomersModel> customersList = new List<CustomersModel>();
     List<CustomerWorkInfoModel> workinfos = new List<CustomerWorkInfoModel>();
     List<VehicleModel> vehicleList = new List<VehicleModel>();
+    List<OrganizationModel> organizations = new List<OrganizationModel>();
 
     private async Task LoadData()
     {
         customersList = await cust.GetCustomers();
+        organizations = await org.Getorgs();
+        vehicleList = await veh.GetVehicleModels();
     }
     protected override async Task OnInitializedAsync()
     {
