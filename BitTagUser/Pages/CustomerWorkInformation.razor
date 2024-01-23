@@ -6,8 +6,7 @@
 @inject IOrgs org
 @inject IBitTagUsers bittaguser
 @inject NavigationManager nm;
-
-
+@attribute [Authorize(Roles = "Administrator,User")]
 
 @*<EditForm Model="customerWorkInfo" OnSubmit="SaveCustWorkInfo">
     <label>Organization</label>

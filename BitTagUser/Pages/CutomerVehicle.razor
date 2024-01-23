@@ -4,7 +4,7 @@
 @using BitTagUser.CutomerServices;
 @inject IVehicle veh
 @inject NavigationManager nm;
-
+@attribute [Authorize(Roles = "Administrator,User")]
 @* <EditForm Model="vehicle" OnSubmit="SaveVehicle">
     <label >Make</label>
     @*<input type="text" @bind-value="vehicle.vehicleMake" /><br />*@

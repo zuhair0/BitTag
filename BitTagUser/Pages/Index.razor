@@ -6,10 +6,17 @@
 @inject ICustomer cust;
 @inject IOrgs org;
 @inject IVehicle veh;
+@inject ICustomerWorkInfo custWork;
+@inject IJSRuntime js
+@inject AuthenticationState AuthenticationState
+
 
 <PageTitle>User Panel</PageTitle>
 @* @if(customersList != null && workinfos != null && vehicleList != null)
 { *@
+    <CascadingAuthenticationState>
+    <AuthorizeView>
+    <Authorized>
     <div class="min-h-screen p-6 flex items-center justify-center">
         <div class="container max-w-screen-lg mx-auto">
             <div>
@@ -141,21 +148,36 @@
     <div style="display: flex; justify-content: center; text-align: center; color:white; font-weight: bold; padding-top: 300px;">
         <p><em>Please fill out your profile</em></p>
     </div>
-
+    </Authorized>
+    <NotAuthorized>
+        <h1>Hello Guest</h1>
+    </NotAuthorized>
+</AuthorizeView>
+</CascadingAuthenticationState>
 <!--}-->
 
 
 @code{
+    [CascadingParameter]
+    private Task<AuthenticationState> authenticationState { get; set; }
+    // private async Task DisplayGreetingAlert()
+    // {
+    //     var authState = await authenticationState;
+    //     var message = $"Hello {authState.User.Identity.Name}";
+    //     await js.InvokeVoidAsync("alert", message);
+    // }
     List<CustomersModel> customersList = new List<CustomersModel>();
     List<CustomerWorkInfoModel> workinfos = new List<CustomerWorkInfoModel>();
     List<VehicleModel> vehicleList = new List<VehicleModel>();
     List<OrganizationModel> organizations = new List<OrganizationModel>();
+
 
     private async Task LoadData()
     {
         customersList = await cust.GetCustomers();
         organizations = await org.Getorgs();
         vehicleList = await veh.GetVehicleModels();
+        workinfos = await custWork.GetCustomerWorkInfo();
     }
     protected override async Task OnInitializedAsync()
     {

@@ -1,4 +1,4 @@
-create proc Sp_AddCustomer
+alter proc Sp_AddCustomer
 @custID nvarchar(50),
 @firstName nvarchar(50),
 @lastName nvarchar(50),
@@ -10,6 +10,8 @@ create proc Sp_AddCustomer
 as begin
 insert into Customer([custID],[firstName],[lastName],[custCNIC],[contact],[DOB],[custEmail],[custPIN])
 values(@custID,@firstName,@lastName,@custCNIC,@contact,@DOB,@custEmail,@custPIN)
+insert into Auth([custCNIC],[custPIN])
+values(@custCNIC,@custPIN)
 end
 
 create proc Sp_GetCustomer
