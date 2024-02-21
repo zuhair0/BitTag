@@ -1,4 +1,4 @@
-﻿@page "/index"
+﻿@page "/ind"
 
 @using BitTagModels
 @using BitTagDAL
@@ -8,16 +8,16 @@
 @inject IVehicle veh;
 @inject ICustomerWorkInfo custWork;
 @inject IJSRuntime js;
-@inject AuthenticationState AuthenticationState
-@inject AuthenticationStateProvider AuthenticationStateProvider;
+@* @inject AuthenticationState AuthenticationState
+@inject AuthenticationStateProvider AuthenticationStateProvider; *@
 
 
 <PageTitle>User Panel</PageTitle>
 @* @if(customersList != null && workinfos != null && vehicleList != null)
 { *@
-<CascadingAuthenticationState>
+@* <CascadingAuthenticationState>
 <AuthorizeView>
-    <Authorized>
+    <Authorized> *@
     <div class="min-h-screen p-6 flex items-center justify-center">
         <div class="container max-w-screen-lg mx-auto">
             <div>
@@ -149,18 +149,18 @@
     <div style="display: flex; justify-content: center; text-align: center; color:white; font-weight: bold; padding-top: 300px;">
         <p><em>Please fill out your profile</em></p>
     </div>
-    </Authorized>
+   @*  </Authorized>
     <NotAuthorized>
         <h1>Hello Guest</h1>
     </NotAuthorized>
    </AuthorizeView>
-</CascadingAuthenticationState>
+</CascadingAuthenticationState> *@
 <!--}-->
 
 
 @code{
-    [CascadingParameter]
-    private Task<AuthenticationState> context { get; set; }
+    // [CascadingParameter]
+    // private Task<AuthenticationState> context { get; set; }
     // private async Task DisplayGreetingAlert()
     // {
     //     var authState = await authenticationState;
@@ -182,9 +182,13 @@
     }
     protected override async Task OnInitializedAsync()
     {
-        var authenticationState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        context = Task.FromResult(authenticationState);
-        // authenticationState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         await LoadData();
-    }   
+    }
+    // protected override async Task OnInitializedAsync()
+    // {
+    //     var authenticationState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+    //     context = Task.FromResult(authenticationState);
+    //     // authenticationState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+    //     await LoadData();
+    // }   
 }
