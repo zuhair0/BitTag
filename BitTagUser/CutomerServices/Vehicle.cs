@@ -22,6 +22,19 @@ namespace BitTagUser.CutomerServices
                 return new List<VehicleModel>();
             }
         }
+        public async Task<List<VehicleModel>> GetVehicleModelByID(string id)
+        {
+            List<VehicleModel> models = new List<VehicleModel>();
+            models = await _httpclient.GetFromJsonAsync<List<VehicleModel>>("api/controller/GetVehicleByID/" + id);
+            if (models != null)
+            {
+                return models;
+            }
+            else
+            {
+                return new List<VehicleModel>();
+            }
+        }
         public async Task SaveVehicle(VehicleModel vm)
         {
             await _httpclient.PostAsJsonAsync("api/controller/AddVehicle", vm);

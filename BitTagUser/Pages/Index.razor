@@ -179,7 +179,7 @@
     {
         customersList = await cust.GetCustomerByID(custCNIC);
         organizations = await org.Getorgs();
-        vehicleList = await veh.GetVehicleModels();
+        vehicleList = await veh.GetVehicleModelByID(custCNIC);
         workinfos = await custWork.GetCustomerWorkInfo();
     }
     protected override async Task OnInitializedAsync()

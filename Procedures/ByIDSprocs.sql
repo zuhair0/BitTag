@@ -8,13 +8,21 @@ end
 
 Sp_GetAuth
 
-select * from Customer
-select * from Vehicle
 select * from BitTagUser
 select * from WorkInformation
+select * from Customer
+select * from Vehicle
 
-create proc Sp_getVehByID
-@custID_FK varchar(100)
+SELECT v.*
+FROM Customer c
+JOIN Vehicle v ON c.custID = v.custID_FK
+WHERE c.custCNIC = @custCNIC;
+
+alter proc Sp_getVehByID
+@custCNIC varchar(100)
 as begin
-select * from Vehicle where custID_FK=@custID_FK
+SELECT v.*
+FROM Customer c
+JOIN Vehicle v ON c.custID = v.custID_FK
+WHERE c.custCNIC = @custCNIC;
 end

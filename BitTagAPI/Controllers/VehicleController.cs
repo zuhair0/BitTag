@@ -35,6 +35,15 @@ namespace BitTagAPI.Controllers
             return new JsonResult(vehiclesList);
             
         }
+        [HttpGet]
+        [Route("GetVehicleByID/{id}")]
+        public async Task<JsonResult> GetVehiclesByID(string id)
+        {
+            List<VehicleModel> vehiclesList = new List<VehicleModel>();
+            vehiclesList = await VehiclesDAL.GetVehiclebyID(id);
+            return new JsonResult(vehiclesList);
+
+        }
         [HttpDelete]
         [Route("DeleteVehicle/{id}")]
         public async void DeleteVehicle(Guid id)
