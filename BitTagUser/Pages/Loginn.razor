@@ -1,4 +1,4 @@
-﻿@page "/loginn"
+﻿@page "/logined"
 @using BitTagUser.Authentication;
 @using Microsoft.AspNetCore.Components.Authorization;
 @using Microsoft.JSInterop;
@@ -14,14 +14,21 @@
         </div>
         <div class="mb-3">
             <label>User Name</label>
-            <input @bind="model.UserName" class="form-control" placeholder="User Name" />
+            <input @bind="model.Cnic" class="form-control" placeholder="User Name" />
         </div>
         <div class="mb-3">
             <label>Password</label>
-            <input type="password" @bind="model.Password" class="form-control" placeholder="Password" />
+            <input type="password" @bind="model.Pin" class="form-control" placeholder="Password" />
         </div>
         <div class="mb-3 d-grid gap-2">
             <button @onclick="Authenticate" class="btn btn-primary">Login</button>
+        </div>
+        <div class="mb-3 d-grid gap-2">
+            <button class="btn btn-primary">
+                <a href="/customer">
+                    Register
+                </a>
+            </button>
         </div>
     </div>
 </div>
@@ -29,7 +36,7 @@
 @code {
     private class Model
     {
-        public string Cnic { get; set; }
+        public string? Cnic { get; set; }
         public int Pin { get; set; }
     }
     private Model model = new Model();
@@ -50,4 +57,5 @@
             });
         navManager.NavigateTo("/", true);
     }
+
 }

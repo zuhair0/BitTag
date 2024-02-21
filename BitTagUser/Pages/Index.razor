@@ -1,4 +1,4 @@
-﻿@page "/"
+﻿@page "/index"
 
 @using BitTagModels
 @using BitTagDAL
@@ -7,15 +7,16 @@
 @inject IOrgs org;
 @inject IVehicle veh;
 @inject ICustomerWorkInfo custWork;
-@inject IJSRuntime js
+@inject IJSRuntime js;
 @inject AuthenticationState AuthenticationState
+@inject AuthenticationStateProvider AuthenticationStateProvider;
 
 
 <PageTitle>User Panel</PageTitle>
 @* @if(customersList != null && workinfos != null && vehicleList != null)
 { *@
-    <CascadingAuthenticationState>
-    <AuthorizeView>
+<CascadingAuthenticationState>
+<AuthorizeView>
     <Authorized>
     <div class="min-h-screen p-6 flex items-center justify-center">
         <div class="container max-w-screen-lg mx-auto">
@@ -152,14 +153,14 @@
     <NotAuthorized>
         <h1>Hello Guest</h1>
     </NotAuthorized>
-</AuthorizeView>
+   </AuthorizeView>
 </CascadingAuthenticationState>
 <!--}-->
 
 
 @code{
     [CascadingParameter]
-    private Task<AuthenticationState> authenticationState { get; set; }
+    private Task<AuthenticationState> context { get; set; }
     // private async Task DisplayGreetingAlert()
     // {
     //     var authState = await authenticationState;
@@ -181,6 +182,9 @@
     }
     protected override async Task OnInitializedAsync()
     {
+        var authenticationState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        context = Task.FromResult(authenticationState);
+        // authenticationState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         await LoadData();
-    }
+    }   
 }
