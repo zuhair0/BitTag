@@ -1,4 +1,4 @@
-﻿@page "/ind"
+﻿@page "/ind/{custCNIC}"
 
 @using BitTagModels
 @using BitTagDAL
@@ -159,6 +159,8 @@
 
 
 @code{
+    [Parameter]
+    public string? custCNIC { get; set; }
     // [CascadingParameter]
     // private Task<AuthenticationState> context { get; set; }
     // private async Task DisplayGreetingAlert()
@@ -175,7 +177,7 @@
 
     private async Task LoadData()
     {
-        customersList = await cust.GetCustomers();
+        customersList = await cust.GetCustomerByID(custCNIC);
         organizations = await org.Getorgs();
         vehicleList = await veh.GetVehicleModels();
         workinfos = await custWork.GetCustomerWorkInfo();

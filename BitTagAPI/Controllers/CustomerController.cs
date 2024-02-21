@@ -36,6 +36,15 @@ namespace BitTagAPI.Controllers
             return new JsonResult(customersModels);
             
         }
+        [HttpGet]
+        [Route("GetCustomerByID/{cnic}")]
+        public async Task<JsonResult> GetCustomerByID(string cnic)
+        {
+            List<CustomersModel> customersModels = new List<CustomersModel>();
+            customersModels = await Customers.GetCustomerByID(cnic);
+            return new JsonResult(customersModels);
+
+        }
         [HttpDelete]
         [Route("DeleteCustomer/{id}")]
         public async void DeleteCustomer(Guid id)

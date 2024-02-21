@@ -23,6 +23,19 @@ namespace BitTagUser.CutomerServices
                 return new List<CustomersModel>();
             }
         }
+        public async Task<List<CustomersModel>> GetCustomerByID(string cnic)
+        {
+            List<CustomersModel> customers = new List<CustomersModel>();
+            customers = await _httpClient.GetFromJsonAsync<List<CustomersModel>>("api/controller/GetCustomerByID/" + cnic);
+            if (customers != null)
+            {
+                return customers;
+            }
+            else
+            {
+                return new List<CustomersModel>();
+            }
+        }
         public async Task SaveCustomers(CustomersModel cm)
         {
             await _httpClient.PostAsJsonAsync("api/controller/AddCustomer",cm);

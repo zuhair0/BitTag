@@ -1,4 +1,4 @@
-﻿@page "/vehicle"
+﻿@page "/vehicle/{custID_FK}"
 @using BitTagDAL
 @using BitTagModels
 @using BitTagUser.CutomerServices;
@@ -134,8 +134,8 @@
 
 
 @code {
-    //[Parameter]
-    //public string custID_FK { get; set; }
+    [Parameter]
+    public string custID_FK { get; set; }
     VehicleModel vehicle = new VehicleModel();
     List<VehicleModel> vehicleList = new List<VehicleModel>();
 
@@ -146,16 +146,16 @@
         "Suzuki","Honda","Toyota","Hyundai"
     };
 
-    string userid = "3fa85f64-5717-4562-b3fc-2c963f66afad";
+    //string userid = "3fa85f64-5717-4562-b3fc-2c963f66afad";
     private async void SaveVehicle()
     {
         Guid id = Guid.NewGuid();
         vehicle.tagID = id;
-        vehicle.custID_FK = Guid.Parse(userid);
+        vehicle.custID_FK = Guid.Parse(custID_FK);
         vehicle.vehicleID = Guid.NewGuid();
         vehicle.vehicleMake = selected;
         await veh.SaveVehicle(vehicle);
-        nm.NavigateTo("/custWorkInfo");
+        nm.NavigateTo("/custWorkInfo/"+custID_FK+"/"+vehicle.vehicleID);
     }
     private async Task DeleteVehicle(Guid id)
     {

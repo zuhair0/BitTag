@@ -34,5 +34,30 @@ namespace BitTagDAL
             await con.CloseAsync();
             return customers;
         }
+        public static async Task<List<CustomersModel>> GetCustomerByID(string cnic)
+        {
+            SqlConnection con = DBhelper.GetConnection();
+            await con.OpenAsync();
+            SqlCommand cmd = new SqlCommand("Sp_getCustByID", con);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@custCNIC", cnic);
+            SqlDataReader reader = await cmd.ExecuteReaderAsync();
+            List<CustomersModel> customers = new List<CustomersModel>();
+            while (await reader.ReadAsync())
+            {
+                CustomersModel customersModel = new CustomersModel();
+                customersModel.custID = Guid.Parse(reader["custID"].ToString());
+                customersModel.firstName = reader["firstName"].ToString();
+                customersModel.lastName = reader["lastName"].ToString();
+                customersModel.custCNIC = reader["custCNIC"].ToString();
+                customersModel.custEmail = reader["custEmail"].ToString();
+                customersModel.contact = reader["contact"].ToString();
+                customersModel.DOB = DateTime.Parse(reader["DOB"].ToString());
+                customersModel.custPIN = int.Parse(reader["custPIN"].ToString());
+                customers.Add(customersModel);
+            }
+            await con.CloseAsync();
+            return customers;
+        }
     }
 }
