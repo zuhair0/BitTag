@@ -31,6 +31,14 @@ namespace BitTagAPI.Controllers
             workInfos = await CustomerWorkInfoDAL.GetCustomerWorkInfos();
             return new JsonResult(workInfos);
         }
+        [HttpGet]
+        [Route("GetCustWorkInfoByID/{id}")]
+        public async Task<JsonResult> GetCustWorkInfoByID(string id)
+        {
+            List<CustomerWorkInfoModel> workInfos = new List<CustomerWorkInfoModel>();
+            workInfos = await CustomerWorkInfoDAL.GetCustomerWorkInfoByID(id);
+            return new JsonResult(workInfos);
+        }
         [HttpDelete]
         [Route("DeleteWorkInfo/{id}")]
         public async void DeleteCustWorkInfo(Guid id)

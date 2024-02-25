@@ -13,6 +13,10 @@ namespace BitTagUser.CutomerServices
         {
             return await _httpClient.GetFromJsonAsync<List<CustomerWorkInfoModel>>("api/controller/GetCustWorkInfo");
         }
+        public async Task<List<CustomerWorkInfoModel>> GetCustomerWorkInfoByID(string id)
+        {
+            return await _httpClient.GetFromJsonAsync<List<CustomerWorkInfoModel>>("api/controller/GetCustWorkInfoByID/"+id);
+        }
         public async Task SaveCustomerWorkInfo(CustomerWorkInfoModel cwi)
         {
             await _httpClient.PostAsJsonAsync("api/controller/AddWorkInfo", cwi);
