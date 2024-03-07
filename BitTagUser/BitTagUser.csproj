@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Pages\Empty.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BitTagDAL\BitTagDAL.csproj" />
     <ProjectReference Include="..\BitTagModels\BitTagModels.csproj" />
   </ItemGroup>
@@ -14,6 +18,18 @@
   <ItemGroup>
     <PackageReference Include="BarCode" Version="2023.8.4" />
     <PackageReference Include="Syncfusion.Blazor" Version="22.2.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\Empty.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\Empty.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Pages\Empty.razor" />
   </ItemGroup>
 
 </Project>

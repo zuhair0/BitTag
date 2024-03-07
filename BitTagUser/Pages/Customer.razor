@@ -157,7 +157,7 @@
         customers.custID = id;
         await cust.SaveCustomers(customers);
         await LoadData();
-        nm.NavigateTo("vehicle/"+customers.custID);
+        nm.NavigateTo("logined");
     }
     private async void DeleteCustomer(Guid id)
     {
