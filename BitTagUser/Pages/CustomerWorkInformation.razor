@@ -79,7 +79,7 @@
         customerWorkInfo.org_FK = orgId;
         bitTagUser.userid_fk = Guid.Parse(custID_FK);
         bitTagUser.vehid_fk = Guid.Parse(vehicleID);
-        bitTagUser.bittagcode = "123456";
+        bitTagUser.bittagcode = "null";
         await bittaguser.SaveBitTagUser(bitTagUser);
         await custWorkinfo.SaveCustomerWorkInfo(customerWorkInfo);
         //nm.NavigateTo("/index/"+custID_FK);

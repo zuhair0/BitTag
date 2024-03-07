@@ -30,7 +30,15 @@ namespace BitTagAPI.Controllers
             bitTagDetails = await BitTagDetailsDAL.BitTagDetails();
             return new JsonResult(bitTagDetails);
         }
-        [HttpDelete]
+		[HttpGet]
+		[Route("GetBitTagDetailsById/{qr}")]
+		public async Task<JsonResult> GetBitTagDetailsById(string qr)
+		{
+			List<BitTagDetailsModel> bitTagDetails = new List<BitTagDetailsModel>();
+			bitTagDetails = await BitTagDetailsDAL.BitTagDetailsById(qr);
+			return new JsonResult(bitTagDetails);
+		}
+		[HttpDelete]
         [Route("DeleteBitTagDetails/{id}")]
         public async void DeleteBitTagDetails(Guid id)
         {

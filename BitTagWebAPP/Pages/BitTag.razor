@@ -10,7 +10,9 @@
 	
 	@if (bitTagDetails.QRcode != null && bitTagDetails.QRcode.Trim() != "")
 	{
-		<SfQRCodeGenerator Width="500px" Height="500px" Value="@bitTagDetails.QRcode"></SfQRCodeGenerator>
+		<SfQRCodeGenerator Width="500px" Height="500px" Value="@items">
+			<QRCodeGeneratorDisplayText Visibility="false"></QRCodeGeneratorDisplayText>
+		</SfQRCodeGenerator>
 	}
 	<EditForm Model="bitTagDetails" OnSubmit="Save">
 		@* <label>Generate</label>
@@ -21,18 +23,27 @@
 <script src="_content/Syncfusion.Blazor/scripts/syncfusion-blazor.min.js" type="text/javascript"></script>
 @code {
 	BitTagDetailsModel bitTagDetails=new BitTagDetailsModel();
+	List<BitTagDetailsModel> bittags = new List<BitTagDetailsModel>();
+	string items;
 	Random rnd = new Random();
 	int serialCounter = 0;
 	string userid = "3fa85f64-5717-4562-b3fc-2c963f66afad";
+	//24372788
 	private async void Save()
 	{
 		serialCounter++;
 		bitTagDetails.orgId = Guid.Parse(userid);
+		//bitTagDetails.QRcode = $"{bitTagDetails.orgId} - {bitTagDetails.QRcode} - {bitTagDetails.tagID}"; // Concatenate desired properties
+		items = $"{bittags[0].vehiclePlate}-{bittags[0].vehicleMake}-{bittags[0].vehicleModel}-{bittags[0].vehicleColor}-{bittags[0].vehicleType}";
 		bitTagDetails.QRcode = rnd.Next(10000000,99999999).ToString();
 		//bitTagDetails.QRcode = "https://ironsoftware.com/csharp/barcode/tutorials/csharp-qr-code-generator/";
 		bitTagDetails.tagID = Guid.NewGuid();
 		//bitTagDetails.tagSerial = serialCounter.ToString();
 		await bittag.SaveBitTags(bitTagDetails);
+	}
+	protected override async Task OnInitializedAsync()
+	{
+		bittags = await bittag.GetBitTByID("24372788");
 	}
 	protected void GenerateClick()
 	{
