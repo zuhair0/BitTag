@@ -18,7 +18,7 @@ FROM Customer c
 JOIN Vehicle v ON c.custID = v.custID_FK
 WHERE c.custCNIC = @custCNIC;
 
-alter proc Sp_getVehByID
+create proc Sp_getVehByID
 @custCNIC varchar(100)
 as begin
 SELECT v.*

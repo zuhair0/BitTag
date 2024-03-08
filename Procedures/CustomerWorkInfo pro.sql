@@ -9,7 +9,7 @@ insert into WorkInformation([org_FK],[userID_FK],[WorkType],[Desig],[worktime])
 values(@org_FK,@userID_FK,@WorkType,@Desig,@worktime)
 end
 
-alter proc Sp_GetWorkInfo
+CREATE proc Sp_GetWorkInfo
 as begin
 select * from WorkInformation
 end

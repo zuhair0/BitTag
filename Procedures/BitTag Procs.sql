@@ -1,4 +1,4 @@
-alter proc Sp_BitTagDetils
+create proc Sp_BitTagDetils
 @tagID nvarchar(50),
 @QRcode nvarchar(50),
 @orgId nvarchar(50)

@@ -1,4 +1,4 @@
-alter proc Sp_AddCustomer
+create proc Sp_AddCustomer
 @custID nvarchar(50),
 @firstName nvarchar(50),
 @lastName nvarchar(50),

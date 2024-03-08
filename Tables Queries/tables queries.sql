@@ -6,6 +6,11 @@ Desig nvarchar(50),
 worktime datetime
 );
 
+CREATE TABLE Auth(
+	CustCNIC NVARCHAR(13),
+	CustPIN INT
+)
+
 create table Customer(
 custID nvarchar(50),
 firstName nvarchar(50),
