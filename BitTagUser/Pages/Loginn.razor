@@ -1,13 +1,17 @@
-﻿@page "/logined"
+﻿@page "/loggedin"
+@using BitTagModels
 @using BitTagUser.Authentication;
+@using BitTagUser.CutomerServices
 @using Microsoft.AspNetCore.Components.Authorization;
 @using Microsoft.JSInterop;
+@inject ICustomer cust
+@attribute [Authorize(Roles = "Administrator,User")]
 @inject UserAccountService userAccountService
 @inject IJSRuntime js
 @inject AuthenticationStateProvider authStateProvider
 @inject NavigationManager navManager
 
-<div class="row">
+@* <div class="row">
     <div class="col-lg-4 offset-lg-4 pt-4 pb-4 border">
         <div class="mb-3 text-center">
             <h3>Login</h3>
@@ -31,7 +35,70 @@
             </button>
         </div>
     </div>
+</div> *@
+
+<!-- component -->
+<div class="min-h-screen flex items-center justify-center w-full dark:bg-gray-950" style="padding-top: 80px; padding-bottom: 80px;">
+
+
+    <div class="bg-white dark:bg-gray-900 shadow-md rounded-lg px-8 py-6 max-w-md">
+        <h1 class="text-2xl font-bold text-center mb-4 dark:text-gray-200">Get Started with <br />your BitTag</h1>
+        <form action="#">
+            <EditForm Model="customers" OnSubmit="SaveCustomer">
+                <div class="mb-4">
+                    <label for="fname" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">First Name</label>
+                    <input type="text" @bind-value="customers.firstName" id="fname" class="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="John" required>
+                </div>
+                <div class="mb-4">
+                    <label for="lname" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Last Name</label>
+                    <input type="text" @bind-value="customers.lastName" id="lname" class="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="Doe" required>
+                </div>
+                <div class="mb-4">
+                    <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email Address</label>
+                    <input type="text" id="email" @bind-value="customers.custEmail" class="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="john.doe@gmail.com" required>
+                </div>
+                <div class="mb-4">
+                    <label for="contact" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Contact </label>
+                    <input type="number" id="contact" @bind-value="customers.contact" class="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="03XXXXXXXXX" required>
+                </div>
+                <div class="mb-4">
+                    <label for="cnic" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">CNIC</label>
+                    <input type="number" id="cnic" @bind-value="customers.custCNIC" class="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="61101XXXXXXXX" required>
+                </div>
+                <div class="mb-4">
+                    <label for="dob" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Date-of-Birth</label>
+                    <input type="date" id="dob" @bind-value="customers.DOB" class="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required>
+                </div>
+                <div class="mb-4">
+                    <label for="pin" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">PIN</label>
+                    <input type="number" id="pin" class="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required>
+                </div>
+                <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Register</button>
+            </EditForm>
+        </form>
+        <hr class="mt-5" />
+        <div class="bg-white dark:bg-gray-900 shadow-md rounded-lg px-8 py-6 max-w-md">
+            <h1 class="text-2xl font-bold text-center mb-4 dark:text-gray-200">Already have an account? Log in!</h1>
+            <form action="#">
+                <div class="mb-4">
+                    <label for="cnic" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">C-NIC</label>
+                    <input @bind="model.Cnic" type="number" id="cnic" class="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="61101XXXXXXX" required>
+                </div>
+                <div class="mb-4">
+                    <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Passcode</label>
+                    <input type="password" @bind="model.Pin" id="password" class="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required>
+                </div>
+                <button @onclick="Authenticate" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Login</button>
+            </form>
+        </div>
+    </div> 
 </div>
+
+
+
+
+
+
 
 @code {
     private class Model
@@ -40,14 +107,51 @@
         public int Pin { get; set; }
     }
     private Model model = new Model();
+    private bool popup = false;
+    private bool showSuccess = false;
+    private void showLogin()
+    {
+        popup = true;
+    }
+
+    CustomersModel customers = new CustomersModel();
+    List<CustomersModel> customersList = new List<CustomersModel>();
+    private async void SaveCustomer()
+    {
+        Guid id = Guid.NewGuid();
+        customers.custID = id;
+        await cust.SaveCustomers(customers);
+        await LoadData();
+        showSuccess = true;
+        await Task.Delay(3000);
+        showSuccess = false;
+        StateHasChanged();
+        customers = new CustomersModel();
+    }
+    private async void DeleteCustomer(Guid id)
+    {
+        await cust.DeleteCustomer(id);
+    }
+    private async Task LoadData()
+    {
+        customersList = await cust.GetCustomers();
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadData();
+    }
+
+
 
     private async Task Authenticate()
     {
         var userAccount = userAccountService.GetByUserName(model.Cnic);
-        if (userAccount == null || userAccount.Pin != model.Pin)
+        if (userAccount != null && userAccount.Pin == model.Pin)
         {
-            await js.InvokeVoidAsync("Invalid Username or Password");
-            return;
+
+        }
+        else {
+            await js.InvokeVoidAsync("Error");
         }
         var customAuthStateProvider = (CustomAuthenticationStateProvider)authStateProvider;
         await customAuthStateProvider.UpdateAuthenticationState(new UserSession
@@ -55,7 +159,7 @@
                 UserName = userAccount.Cnic,
                 Role = userAccount.Role
             });
-        navManager.NavigateTo("/empty", true);
+        navManager.NavigateTo("/logged", true);
     }
 
 }

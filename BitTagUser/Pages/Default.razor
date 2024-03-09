@@ -1,0 +1,207 @@
+﻿@page "/index/{custCNIC}"
+
+@using BitTagModels
+@using BitTagDAL
+@using BitTagUser.CutomerServices
+@inject ICustomer cust;
+@inject IOrgs org;
+@inject IVehicle veh;
+@inject ICustomerWorkInfo custWork;
+@inject IJSRuntime js;
+@using BitTagUser.Authentication
+@using BitTagUser.Pages
+@inject AuthenticationStateProvider authStateProvider
+@inject NavigationManager navManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@* @inject AuthenticationState AuthenticationState
+@inject AuthenticationStateProvider AuthenticationStateProvider; *@
+
+<CascadingAuthenticationState>
+    <AuthorizeView>
+        <Authorized>
+            <PageTitle>User Panel</PageTitle>
+            <div class="min-h-screen p-6 flex items-center justify-center">
+                <div class="container max-w-screen-lg mx-auto">
+                    <div>
+                        <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6" style="background-color:#68B0AB;">
+                            <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
+                                <div>
+                                    <p class="font-medium text-lg text-white">Personal Details</p>
+                                </div>
+                                <!--Customer Information-->
+                                @foreach (var item in customersList)
+                                {
+                                    <div class="lg:col-span-2">
+                                        <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+                                            <div class="md:col-span-3">
+                                                <label for="first_name">First Name</label>
+                                                <input type="text" name="first_name" id="first_name" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="@item.firstName" readonly />
+                                            </div>
+                                            <div class="md:col-span-2">
+                                                <label for="last_name">Last Name</label>
+                                                <input type="text" name="last_name" id="last_name" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="@item.lastName" readonly />
+                                            </div>
+                                            <div class="md:col-span-3">
+                                                <label for="cnic">CNIC</label>
+                                                <input type="text" name="cnic" id="cnic" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="@item.custCNIC" readonly />
+                                            </div>
+
+                                            <div class="md:col-span-2">
+                                                <label for="contact">Contact</label>
+                                                <input type="text" name="contact" id="contact" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="@item.contact" readonly />
+                                            </div>
+
+                                            <div class="md:col-span-3">
+                                                <label for="email">Email</label>
+                                                <input type="text" name="email" id="email" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="@item.custEmail" readonly />
+                                            </div>
+
+                                            <div class="md:col-span-2">
+                                                <label for="dob">DOB</label>
+                                                <input name="dob" id="dob" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="@item.DOB" readonly />
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6" style="background-color:#68B0AB;">
+                            <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
+                                <div>
+                                    <p class="font-medium text-lg text-white">Vehicle Details</p>
+                                </div>
+                                <!--Vehicle Information-->
+                                @foreach (var item in vehicleList)
+                                {
+                                    <div class="lg:col-span-2">
+                                        <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+                                            <div class="md:col-span-2">
+                                                <label for="make">Make</label>
+                                                <input type="text" name="make" id="make" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="@item.vehicleMake" readonly />
+                                            </div>
+                                            <div class="md:col-span-2">
+                                                <label for="model">Model</label>
+                                                <input type="text" name="model" id="model" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="@item.vehicleModel" readonly />
+                                            </div>
+                                            <div class="md:col-span-1">
+                                                <label for="plate">Plate</label>
+                                                <input type="text" name="plate" id="plate" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="@item.vehiclePlate" readonly />
+                                            </div>
+
+                                            <div class="md:col-span-3">
+                                                <label for="type">Type</label>
+                                                <input type="text" name="type" id="type" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="@item.vehicleType" readonly />
+                                            </div>
+
+                                            <div class="md:col-span-2">
+                                                <label for="color">Color</label>
+                                                <input type="text" name="color" id="color" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="@item.vehicleColor" readonly />
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6" style="background-color:#68B0AB;">
+                            <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
+                                <div>
+                                    <p class="font-medium text-lg text-white">Work Details</p>
+                                </div>
+                                <!--Work Information-->
+                                @foreach (var item in workinfos)
+                                {
+                                    <div class="lg:col-span-2">
+                                        <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+                                            <div class="md:col-span-5">
+                                                <label for="workType">Work Type</label>
+                                                <input type="text" name="workType" id="workType" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="@item.WorkType" readonly />
+                                            </div>
+                                            <div class="md:col-span-3">
+                                                <label for="desig">Designation</label>
+                                                <input type="text" name="desig" id="desig" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="@item.Desig" readonly />
+                                            </div>
+
+                                            <div class="md:col-span-2">
+                                                <label for="chkinTime">Check-in Time</label>
+                                                <input type="text" name="chkinTime" id="chkinTime" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="@item.worktime" readonly />
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </Authorized>
+    </AuthorizeView>
+</CascadingAuthenticationState>
+
+
+@* @if(customersList != null && workinfos != null && vehicleList != null)
+{ *@
+@* <CascadingAuthenticationState>
+<AuthorizeView>
+    <Authorized> *@
+
+@* } *@
+
+@* else
+{ *@
+<div style="display: flex; justify-content: center; text-align: center; color:white; font-weight: bold; padding-top: 300px;">
+    <p><em>Please fill out your profile</em></p>
+</div>
+@*  </Authorized>
+    <NotAuthorized>
+        <h1>Hello Guest</h1>
+    </NotAuthorized>
+   </AuthorizeView>
+</CascadingAuthenticationState> *@
+<!--}-->
+@code {
+    [Parameter]
+    public string? custCNIC { get; set; }
+    // [CascadingParameter]
+    // private Task<AuthenticationState> context { get; set; }
+    // private async Task DisplayGreetingAlert()
+    // {
+    //     var authState = await authenticationState;
+    //     var message = $"Hello {authState.User.Identity.Name}";
+    //     await js.InvokeVoidAsync("alert", message);
+    // }
+    List<CustomersModel> customersList = new List<CustomersModel>();
+    List<CustomerWorkInfoModel> workinfos = new List<CustomerWorkInfoModel>();
+    List<VehicleModel> vehicleList = new List<VehicleModel>();
+    List<OrganizationModel> organizations = new List<OrganizationModel>();
+
+
+    private async Task LoadData()
+    {
+        customersList = await cust.GetCustomerByID(custCNIC);
+        organizations = await org.Getorgs();
+        vehicleList = await veh.GetVehicleModelByID(custCNIC);
+        workinfos = await custWork.GetCustomerWorkInfoByID(custCNIC);
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadData();
+    }
+    // protected override async Task OnInitializedAsync()
+    // {
+    //     var authenticationState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+    //     context = Task.FromResult(authenticationState);
+    //     // authenticationState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+    //     await LoadData();
+    // }
+}

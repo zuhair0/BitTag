@@ -1,197 +1,130 @@
-﻿@page "/index/{custCNIC}"
+﻿@page "/"
+<PageTitle>Test</PageTitle>
 
-@using BitTagModels
-@using BitTagDAL
-@using BitTagUser.CutomerServices
-@inject ICustomer cust;
-@inject IOrgs org;
-@inject IVehicle veh;
-@inject ICustomerWorkInfo custWork;
-@inject IJSRuntime js;
-@* @inject AuthenticationState AuthenticationState
-@inject AuthenticationStateProvider AuthenticationStateProvider; *@
+<div style="margin-top: 45px;">
+	<section class="bg-gray-800 text-gray-100">
+		<div class="container mx-auto flex flex-col items-center px-4 py-16 text-center md:py-32 md:px-10 lg:px-32 xl:max-w-3xl">
+			<h1 class="text-4xl font-bold leadi sm:text-5xl">
+				BitTag<br />
+				<span class="dark:text-sky-400 text-3xl">Removing your hassle of manual vehicle tagging</span> 
+			</h1>
+			<p class="px-8 mt-8 mb-12 text-lg">We are providing cutting edge QR technology to store, and manage your vehicle data making it secure, fast and hassle-free.</p>
+			<div class="flex flex-wrap justify-center">
+				<button class="px-8 py-3 m-2 text-lg font-semibold rounded dark:bg-sky-400 dark:text-gray-900">Get started</button>
+				<button class="px-8 py-3 m-2 text-lg border rounded dark:text-gray-50 dark:border-gray-700">Learn more</button>
+			</div>
+		</div>
+	</section>
+</div>
 
+<section class="bg-gray-100 text-gray-900">
+	<div class="container max-w-xl p-6 py-12 mx-auto space-y-24 lg:px-8 lg:max-w-7xl">
+		<div>
+			<h2 class="text-3xl font-bold tracki text-center sm:text-5xl text-gray-900">Features</h2>
+			<p class="max-w-3xl mx-auto mt-4 text-xl text-center text-gray-800">Quando cetero his ne, eum admodum sapientem ut.</p>
+		</div>
+		<div class="grid lg:gap-8 lg:grid-cols-2 lg:items-center">
+			<div>
+				<h3 class="text-2xl font-bold tracki sm:text-3xl text-gray-900">Security</h3>
+				<p class="mt-3 text-lg text-gray-800">Ne dicta praesent ocurreret has, diam theophrastus at pro. Eos etiam regione ut, persius eripuit quo id. Sit te euismod tacimates.</p>
+				<div class="mt-12 space-y-12">
+					<div class="flex">
+						<div class="flex-shrink-0">
+							<div class="flex items-center justify-center w-12 h-12 rounded-md bg-sky-400 text-gray-900">
+								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-7 h-7">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+								</svg>
+							</div>
+						</div>
+						<div class="ml-4">
+							<h4 class="text-lg font-medium leadi text-gray-900">Per ei quaeque sensibus</h4>
+							<p class="mt-2 text-gray-800">Ex usu illum iudico molestie. Pro ne agam facete mediocritatem, ridens labore facete mea ei. Pro id apeirian dignissim.</p>
+						</div>
+					</div>
+					<div class="flex">
+						<div class="flex-shrink-0">
+							<div class="flex items-center justify-center w-12 h-12 rounded-md bg-sky-400 text-gray-900">
+								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-7 h-7">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+								</svg>
+							</div>
+						</div>
+						<div class="ml-4">
+							<h4 class="text-lg font-medium leadi text-gray-900">Cu imperdiet posidonium sed</h4>
+							<p class="mt-2 text-gray-800">Amet utinam aliquando ut mea, malis admodum ocurreret nec et, elit tibique cu nec. Nec ex maluisset inciderint, ex quis.</p>
+						</div>
+					</div>
+					<div class="flex">
+						<div class="flex-shrink-0">
+							<div class="flex items-center justify-center w-12 h-12 rounded-md bg-sky-400 text-gray-900">
+								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-7 h-7">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+								</svg>
+							</div>
+						</div>
+						<div class="ml-4">
+							<h4 class="text-lg font-medium leadi text-gray-900">Nulla omittam sadipscing mel ne</h4>
+							<p class="mt-2 text-gray-800">At sed possim oporteat probatus, justo graece ne nec, minim commodo legimus ut vix. Ut eos iudico quando soleat, nam modus.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div aria-hidden="true" class="mt-10 lg:mt-0">
+				<img src="https://source.unsplash.com/random/360x480" alt="" class="mx-auto rounded-lg shadow-lg bg-gray-800">
+			</div>
+		</div>
+		<div>
+			<div class="grid lg:gap-8 lg:grid-cols-2 lg:items-center">
+				<div class="lg:col-start-2">
+					<h3 class="text-2xl font-bold tracki sm:text-3xl text-gray-900">Eam nibh gloriatur ex</h3>
+					<p class="mt-3 text-lg text-gray-900">Per odio fabellas consulatu cu. Utroque detracto mel ea, quo te latine theophrastus. Ea his tale nibh dissentias, mei exerci tamquam euripidis cu.</p>
+					<div class="mt-12 space-y-12">
+						<div class="flex">
+							<div class="flex-shrink-0">
+								<div class="flex items-center justify-center w-12 h-12 rounded-md dark:bg-sky-400 text-gray-900">
+									<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-7 h-7">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+									</svg>
+								</div>
+							</div>
+							<div class="ml-4">
+								<h4 class="text-lg font-medium leadi dark:text-gray-900">Cibo augue offendit has ad</h4>
+								<p class="mt-2 dark:text-gray-800">An per velit appellantur, ut utinam minimum nominavi sit, odio nostro habemus ne nec. Ne sonet regione contentiones est.</p>
+							</div>
+						</div>
+						<div class="flex">
+							<div class="flex-shrink-0">
+								<div class="flex items-center justify-center w-12 h-12 rounded-md bg-sky-400 text-gray-900">
+									<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-7 h-7">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+									</svg>
+								</div>
+							</div>
+							<div class="ml-4">
+								<h4 class="text-lg font-medium leadi text-gray-900">At eum ferri luptatum lobortis</h4>
+								<p class="mt-2 text-gray-800">Te per quidam maiorum ocurreret, etiam delicatissimi usu ad. Ne has quod periculis. Te sit primis iisque efficiantur.</p>
+							</div>
+						</div>
+						<div class="flex">
+							<div class="flex-shrink-0">
+								<div class="flex items-center justify-center w-12 h-12 rounded-md bg-sky-400 text-gray-900">
+									<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-7 h-7">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+									</svg>
+								</div>
+							</div>
+							<div class="ml-4">
+								<h4 class="text-lg font-medium leadi text-gray-900">Dicunt verterem evertitur eu sea</h4>
+								<p class="mt-2 text-gray-800">Audire principes rationibus eam an, autem nominavi luptatum per te. Sumo fabulas vim eu, sonet saperet eleifend ut vix.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="mt-10 lg:mt-0 lg:col-start-1 lg:row-start-1">
+					<img src="https://source.unsplash.com/random/361x481" alt="" class="mx-auto rounded-lg shadow-lg bg-gray-500">
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
 
-<PageTitle>User Panel</PageTitle>
-
-@* @if(customersList != null && workinfos != null && vehicleList != null)
-{ *@
-@* <CascadingAuthenticationState>
-<AuthorizeView>
-    <Authorized> *@
-    <div class="min-h-screen p-6 flex items-center justify-center">
-        <div class="container max-w-screen-lg mx-auto">
-            <div>
-                <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6" style="background-color:#68B0AB;">
-                    <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
-                        <div>
-                            <p class="font-medium text-lg text-white">Personal Details</p>
-                        </div>
-                        <!--Customer Information-->
-                    @foreach(var item in customersList)
-                    {
-                        <div class="lg:col-span-2">
-                            <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
-                                <div class="md:col-span-3">
-                                    <label for="first_name">First Name</label>
-                                    <input type="text" name="first_name" id="first_name" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="@item.firstName" readonly/>
-                                </div>
-                                <div class="md:col-span-2">
-                                    <label for="last_name">Last Name</label>
-                                    <input type="text" name="last_name" id="last_name" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="@item.lastName" readonly />
-                                </div>
-                                <div class="md:col-span-3">
-                                    <label for="cnic">CNIC</label>
-                                    <input type="text" name="cnic" id="cnic" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="@item.custCNIC" readonly />
-                                </div>
-
-                                <div class="md:col-span-2">
-                                    <label for="contact">Contact</label>
-                                    <input type="text" name="contact" id="contact" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="@item.contact" readonly />
-                                </div>
-
-                                <div class="md:col-span-3">
-                                    <label for="email">Email</label>
-                                    <input type="text" name="email" id="email" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="@item.custEmail" readonly />
-                                </div>
-
-                                <div class="md:col-span-2">
-                                    <label for="dob">DOB</label>
-                                    <input name="dob" id="dob" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="@item.DOB" readonly />
-                                </div>
-                            </div>
-                        </div>
-                    }
-
-                    </div>
-                </div>
-            </div>
-
-        <div>
-            <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6" style="background-color:#68B0AB;">
-                <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
-                    <div>
-                        <p class="font-medium text-lg text-white">Vehicle Details</p>
-                    </div>
-                    <!--Vehicle Information-->
-                    @foreach (var item in vehicleList)
-                    {
-                        <div class="lg:col-span-2">
-                            <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
-                                <div class="md:col-span-2">
-                                    <label for="make">Make</label>
-                                    <input type="text" name="make" id="make" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="@item.vehicleMake" readonly />
-                                </div>
-                                <div class="md:col-span-2">
-                                    <label for="model">Model</label>
-                                    <input type="text" name="model" id="model" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="@item.vehicleModel" readonly />
-                                </div>
-                                <div class="md:col-span-1">
-                                    <label for="plate">Plate</label>
-                                    <input type="text" name="plate" id="plate" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="@item.vehiclePlate" readonly />
-                                </div>
-
-                                <div class="md:col-span-3">
-                                    <label for="type">Type</label>
-                                    <input type="text" name="type" id="type" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="@item.vehicleType" readonly />
-                                </div>
-
-                                <div class="md:col-span-2">
-                                    <label for="color">Color</label>
-                                    <input type="text" name="color" id="color" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="@item.vehicleColor" readonly />
-                                </div>
-
-                            </div>
-                        </div>
-                    }
-
-                </div>
-            </div>
-        </div>
-
-        <div>
-            <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6" style="background-color:#68B0AB;">
-                <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
-                    <div>
-                        <p class="font-medium text-lg text-white">Work Details</p>
-                    </div>
-                    <!--Work Information-->
-                    @foreach (var item in workinfos)
-                    {
-                        <div class="lg:col-span-2">
-                            <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
-                                <div class="md:col-span-5">
-                                    <label for="workType">Work Type</label>
-                                    <input type="text" name="workType" id="workType" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="@item.WorkType" readonly />
-                                </div>
-                                <div class="md:col-span-3">
-                                    <label for="desig">Designation</label>
-                                    <input type="text" name="desig" id="desig" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="@item.Desig" readonly />
-                                </div>
-
-                                <div class="md:col-span-2">
-                                    <label for="chkinTime">Check-in Time</label>
-                                    <input type="text" name="chkinTime" id="chkinTime" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="@item.worktime" readonly />
-                                </div>
-
-                            </div>
-                        </div>
-                    }
-
-                </div>
-            </div>
-        </div>
-        </div>
-    </div>
-@* } *@
-
-@* else
-{ *@
-    <div style="display: flex; justify-content: center; text-align: center; color:white; font-weight: bold; padding-top: 300px;">
-        <p><em>Please fill out your profile</em></p>
-    </div>
-   @*  </Authorized>
-    <NotAuthorized>
-        <h1>Hello Guest</h1>
-    </NotAuthorized>
-   </AuthorizeView>
-</CascadingAuthenticationState> *@
-<!--}-->
-
-
-@code{
-    [Parameter]
-    public string? custCNIC { get; set; }
-    // [CascadingParameter]
-    // private Task<AuthenticationState> context { get; set; }
-    // private async Task DisplayGreetingAlert()
-    // {
-    //     var authState = await authenticationState;
-    //     var message = $"Hello {authState.User.Identity.Name}";
-    //     await js.InvokeVoidAsync("alert", message);
-    // }
-    List<CustomersModel> customersList = new List<CustomersModel>();
-    List<CustomerWorkInfoModel> workinfos = new List<CustomerWorkInfoModel>();
-    List<VehicleModel> vehicleList = new List<VehicleModel>();
-    List<OrganizationModel> organizations = new List<OrganizationModel>();
-
-
-    private async Task LoadData()
-    {
-        customersList = await cust.GetCustomerByID(custCNIC);
-        organizations = await org.Getorgs();
-        vehicleList = await veh.GetVehicleModelByID(custCNIC);
-        workinfos = await custWork.GetCustomerWorkInfoByID(custCNIC);
-    }
-    protected override async Task OnInitializedAsync()
-    {
-        await LoadData();
-    }
-    // protected override async Task OnInitializedAsync()
-    // {
-    //     var authenticationState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-    //     context = Task.FromResult(authenticationState);
-    //     // authenticationState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-    //     await LoadData();
-    // }   
-}

@@ -1,16 +1,16 @@
 ﻿@inherits LayoutComponentBase
 @using BitTagUser.Authentication
+@using BitTagUser.Pages
 @inject AuthenticationStateProvider authStateProvider
 @inject NavigationManager navManager
 <PageTitle>BitTagUser</PageTitle>
 
 
-<div>
+@* <div>
     <div>
         <NavMenu />
     </div>
-    <div class="top-row px-4">
-        <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+    <div>
         <CascadingAuthenticationState>
         <AuthorizeView>
             <Authorized>
@@ -22,16 +22,26 @@
         </AuthorizeView>
         </CascadingAuthenticationState>
     </div>
-    <div class="sm:ml-64" style="background:linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),url(https://iili.io/JadvEqg.md.png); background-attachment:fixed; background-size:cover; width: 81%; height:100vh;">
+    <div>
         @Body
     </div>
-</div>
+</div> *@
+
+
+<CascadingAuthenticationState>
+    <AuthorizeView>
+        <Authorized>
+            <DashboardNav/>
+            @Body
+        </Authorized>
+        <NotAuthorized>
+            <NavMenu/>
+            @Body
+        </NotAuthorized>
+    </AuthorizeView>
+</CascadingAuthenticationState>
+
 
 @code {
-    private async Task Logout()
-    {
-        var customAuthStateProvider = (CustomAuthenticationStateProvider)authStateProvider;
-        await customAuthStateProvider.UpdateAuthenticationState(null);
-        navManager.NavigateTo("/", true);
-    }
+
 }
