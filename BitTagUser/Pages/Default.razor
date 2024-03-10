@@ -18,12 +18,11 @@
 
 <CascadingAuthenticationState>
     <AuthorizeView>
-        <Authorized>
-            <PageTitle>User Panel</PageTitle>
-            <div class="min-h-screen p-6 flex items-center justify-center">
+        <div class="p-4 sm:ml-64">
+            <div class="p-1 rounded-lg dark:border-gray-700">
                 <div class="container max-w-screen-lg mx-auto">
                     <div>
-                        <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6" style="background-color:#68B0AB;">
+                        <div class="main-color rounded shadow-lg p-4 px-4 md:p-8 mb-6" style="color: black;">
                             <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
                                 <div>
                                     <p class="font-medium text-lg text-white">Personal Details</p>
@@ -69,7 +68,7 @@
                     </div>
 
                     <div>
-                        <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6" style="background-color:#68B0AB;">
+                        <div class="rounded shadow-lg p-4 px-4 md:p-8 mb-6 main-color" style="color: black;">
                             <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
                                 <div>
                                     <p class="font-medium text-lg text-white">Vehicle Details</p>
@@ -111,7 +110,7 @@
                     </div>
 
                     <div>
-                        <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6" style="background-color:#68B0AB;">
+                        <div class="rounded shadow-lg p-4 px-4 md:p-8 mb-6 main-color" style="color: black;">
                             <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
                                 <div>
                                     <p class="font-medium text-lg text-white">Work Details</p>
@@ -144,10 +143,9 @@
                     </div>
                 </div>
             </div>
-        </Authorized>
+        </div>
     </AuthorizeView>
 </CascadingAuthenticationState>
-
 
 @* @if(customersList != null && workinfos != null && vehicleList != null)
 { *@
