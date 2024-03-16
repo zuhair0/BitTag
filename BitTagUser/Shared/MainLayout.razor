@@ -27,21 +27,40 @@
     </div>
 </div> *@
 
+@if (preloader)
+{
 
-<CascadingAuthenticationState>
-    <AuthorizeView>
-        <Authorized>
-            <DashboardNav/>
-            @Body
-        </Authorized>
-        <NotAuthorized>
-            <NavMenu/>
-            @Body
-        </NotAuthorized>
-    </AuthorizeView>
-</CascadingAuthenticationState>
 
+
+    <div class="flex items-center justify-center space-x-2 mt-20">
+        <div class="w-4 h-4 rounded-full animate-pulse dark:bg-sky-400"></div>
+        <div class="w-4 h-4 rounded-full animate-pulse dark:bg-sky-400"></div>
+        <div class="w-4 h-4 rounded-full animate-pulse dark:bg-sky-400"></div>
+    </div>
+
+}
+else
+{
+    <CascadingAuthenticationState>
+        <AuthorizeView>
+            <Authorized>
+                <DashboardNav />
+                @Body
+            </Authorized>
+            <NotAuthorized>
+                <NavMenu />
+                @Body
+            </NotAuthorized>
+        </AuthorizeView>
+    </CascadingAuthenticationState>
+}
 
 @code {
+    private bool preloader = true;
 
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(7000); // Delay for 7 seconds
+        preloader = false; // Set preloader to false after delay
+    }
 }

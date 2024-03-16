@@ -1,7 +1,14 @@
 {
   "dependencies": {
-    "apis1": {
-      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.ApiManagement/service/BitTagAPIapi/apis/BitTagAPI",
+    "mssql1": {
+      "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('resourceGroupName')]/providers/Microsoft.Web/sites/BitTagAPI/providers/Microsoft.ServiceLinker/linkers/con_A7A0D6DF6C",
+      "secretStore": null,
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/bittagfyp/databases/BitTagFYP",
+      "type": "mssql.azure",
+      "connectionId": "con"
+    },
+    "apis2": {
+      "ignored": "true",
       "type": "apis.azure"
     }
   }
