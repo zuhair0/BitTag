@@ -1,0 +1,165 @@
+﻿@page "/register"
+@using BitTagModels
+@using BitTagUser.Authentication;
+@using BitTagUser.CutomerServices
+@using Microsoft.AspNetCore.Components.Authorization;
+@using Microsoft.JSInterop;
+@inject ICustomer cust
+@attribute [Authorize(Roles = "Administrator,User")]
+@inject UserAccountService userAccountService
+@inject IJSRuntime js
+@inject AuthenticationStateProvider authStateProvider
+@inject NavigationManager nm
+
+<PageTitle>Register Yourself</PageTitle>
+<section class="grid place-items-center bg-blue-200" style="padding-bottom: 200px; padding-top: 100px;">
+    <div class="w-full max-w-md p-8 space-y-3 rounded-xl bg-gray-900 text-gray-100 pb-30">
+        <h1 class="text-2xl font-bold text-center">Register</h1>
+        @if(status == true)
+        {
+            <div class="flex justify-center items-center space-x-1 text-sm text-gray-700">
+
+                <svg fill='none' class="w-6 h-6 animate-spin" viewBox="0 0 32 32" xmlns='http://www.w3.org/2000/svg'>
+                    <path clip-rule='evenodd'
+                          d='M15.165 8.53a.5.5 0 01-.404.58A7 7 0 1023 16a.5.5 0 011 0 8 8 0 11-9.416-7.874.5.5 0 01.58.404z'
+                          fill='currentColor' fill-rule='evenodd' />
+                </svg>
+
+
+                <div>Loading ...</div>
+            </div>
+        }
+        else
+        {
+            <form novalidate="" action="" class="space-y-6">
+                <EditForm Model="customers" OnSubmit="SaveCustomer">
+                    <div class="space-y-1 text-sm mb-2">
+                        <label for="fname" class="block text-gray-400">First Name</label>
+                        <input type="text"
+                               name="fname" id="fname"
+                               placeholder="Ali"
+                               @bind-value="customers.firstName"
+                               class="w-full px-4 py-3 rounded-md border-gray-700 bg-gray-100 text-gray-900 focus:border-sky-400 required">
+                    </div>
+                    <div class="space-y-1 text-sm mb-2">
+                        <label for="lname" class="block text-gray-400">Last Name</label>
+                        <input type="text"
+                               name="lname" id="lname"
+                               placeholder="Khan"
+                               @bind-value="customers.lastName"
+                               class="w-full px-4 py-3 rounded-md border-gray-700 bg-gray-100 text-gray-900 focus:border-sky-400 required">
+                    </div>
+                    <div class="space-y-1 text-sm mb-2">
+                        <label for="email" class="block text-gray-400">Email Address</label>
+                        <input type="email"
+                               name="email" id="email"
+                               placeholder="ali.khan@gmail.com"
+                               @bind-value="customers.custEmail"
+                               class="w-full px-4 py-3 rounded-md border-gray-700 bg-gray-100 text-gray-900 focus:border-sky-400 required">
+                    </div>
+                    <div class="space-y-1 text-sm mb-2">
+                        <label for="contact" class="block text-gray-400">Contact</label>
+                        <input type="tel"
+                               name="contact" id="contact"
+                               placeholder="03xxxxxxxxx"
+                               @bind-value="customers.contact"
+                               class="w-full px-4 py-3 rounded-md border-gray-700 bg-gray-100 text-gray-900 focus:border-sky-400 required">
+                    </div>
+                    <div class="space-y-1 text-sm mb-2">
+                        <label for="dob" class="block text-gray-400">Date of Birth</label>
+                        <input type="date"
+                               name="dob"
+                               id="dob"
+                               @bind-value="customers.DOB"
+                               class="w-full px-4 py-3 rounded-md border-gray-700 bg-gray-100 text-gray-900 focus:border-sky-400 required">
+                    </div>
+                    <div class="space-y-1 text-sm mb-2">
+                        <label for="cnic" class="block text-gray-400">CNIC</label>
+                        <input type="number" name="cnic" id="cnic" placeholder="61101xxxxxxxx"
+                               @bind-value="customers.custCNIC"
+                               class="w-full px-4 py-3 rounded-md border-gray-700 bg-gray-100 text-gray-900 focus:border-sky-400 required">
+                    </div>
+                    <div class="space-y-1 text-sm mb-2">
+                        <label for="pin" class="block text-gray-400">5 digit PIN</label>
+                        <input type="password" name="pin" id="pin"
+                               @bind-value="customers.custPIN"
+                               class="w-full px-4 py-3 rounded-md border-gray-700 bg-gray-100 text-gray-900 focus:border-sky-400 required">
+                    </div>
+                    <button class="block w-full p-3 text-center rounded text-gray-900 bg-blue-400 hover:bg-blue-200 delay-2 mt-3 text-bold">Register</button>
+                </EditForm>
+            </form>
+
+            <p class="text-xs text-center sm:px-6 text-gray-400">
+                Already have an account?
+                <a rel="noopener noreferrer" href="loggedin" class="underline text-gray-100">Sign in</a><br />
+            <p class="text-red-200 text-lg">@msg</p>
+            </p>
+        }
+
+    </div>
+</section>
+
+
+@code {
+    private class Model
+    {
+        public string? Cnic { get; set; }
+        public int Pin { get; set; }
+    }
+    private Model model = new Model();
+    private bool status = false;
+    private string msg { get; set; }
+
+
+
+    CustomersModel customers = new CustomersModel();
+    List<CustomersModel> customersList = new List<CustomersModel>();
+    private async void SaveCustomer()
+    {
+        Guid id = Guid.NewGuid();
+        customers.custID = id;
+        await cust.SaveCustomers(customers);
+        await LoadData();
+        status = true;
+        msg = "Registration done successfully!";
+        Task.Delay(4000);
+        status = false;
+        StateHasChanged();
+        customers = new CustomersModel();
+    }
+    private async void DeleteCustomer(Guid id)
+    {
+        await cust.DeleteCustomer(id);
+    }
+    private async Task LoadData()
+    {
+        customersList = await cust.GetCustomers();
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadData();
+    }
+
+
+
+    private async Task Authenticate()
+    {
+        var userAccount = userAccountService.GetByUserName(model.Cnic);
+        if (userAccount != null && userAccount.Pin == model.Pin)
+        {
+
+        }
+        else
+        {
+            await js.InvokeVoidAsync("Error");
+        }
+        var customAuthStateProvider = (CustomAuthenticationStateProvider)authStateProvider;
+        await customAuthStateProvider.UpdateAuthenticationState(new UserSession
+            {
+                UserName = userAccount.Cnic,
+                Role = userAccount.Role
+            });
+        nm.NavigateTo("/logged", true);
+    }
+
+}
