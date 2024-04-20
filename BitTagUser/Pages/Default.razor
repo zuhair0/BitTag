@@ -103,6 +103,7 @@
 
                                         </div>
                                     </div>
+                                    <button type="button" class="bg-red-950 text-gray-50" @onclick="()=>DeleteVehicle(item.vehicleID)">Delete Work</button>
                                 }
 
                             </div>
@@ -121,6 +122,14 @@
                                     <div class="lg:col-span-2">
                                         <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
                                             <div class="md:col-span-5">
+                                                @foreach (var item2 in organizations)
+                                                {
+                                                    <label for="org">Organization</label>
+                                                    <input type="text" name="org" id="org" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="@item2.orgName" readonly />
+                                                }
+                                                
+                                            </div>
+                                            <div class="md:col-span-5">
                                                 <label for="workType">Work Type</label>
                                                 <input type="text" name="workType" id="workType" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="@item.WorkType" readonly />
                                             </div>
@@ -136,6 +145,7 @@
 
                                         </div>
                                     </div>
+                                    <button type="button" class="bg-red-950 text-gray-50" @onclick="()=>DeleteWorkProfile(item.org_FK)">Delete Work</button>
                                 }
 
                             </div>
@@ -183,6 +193,17 @@
     List<VehicleModel> vehicleList = new List<VehicleModel>();
     List<OrganizationModel> organizations = new List<OrganizationModel>();
 
+    private async void DeleteVehicle(Guid id)
+    {
+        await veh.DeleteVehicle(id);
+        await LoadData();
+    }
+
+    private async void DeleteWorkProfile(Guid id)
+    {
+        await custWork.DeleteCustomerWorkInfo(id);
+        await LoadData();
+    }
 
     private async Task LoadData()
     {
