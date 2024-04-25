@@ -5,128 +5,6 @@
 @using BitTagModels
 
 
-@* <EditForm Model="OrgModel" OnSubmit="SaveOrganization">
-    @*<label class="col-1">OrgID</label>
-    <input class="col-2" type="text" @bind-value="OrgModel.orgID" /><br />*@
-  @*  <label class="col-1">OrgName</label>
-    <input class="col-2" type="text" @bind-value="OrgModel.orgName" /><br />
-    <label class="col-1">OrgType</label>
-    <input class="col-1" type="text" @bind-value="OrgModel.orgType" /><br />
-    <label>OrgAddress</label>
-    <input type="text" @bind-value="OrgModel.orgAddress" /><br />
-    <label>Capacity</label>
-    <input type="text" @bind-value="OrgModel.orgCapacity" /><br />
-    <button type="submit">Save</button>
-</EditForm>
-
-<table class="tble table">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Capacity</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    @foreach (var item in organizationList)
-    {
-        <tr>
-            <td>@item.orgName</td>
-            <td>@item.orgType</td>
-            <td>@item.orgCapacity</td>
-            <td>
-                <button @onclick="(()=>DeleteOrganization(item.orgID))">Delete</button>
-            </td>
-            <td>
-                <button><a href="orgEmployees/@item.orgID.ToString()">Add Employee</a></button>
-            </td>
-        </tr>
-    }
-</table> *@
-
-@* <div class="container container-fluid mt-5">
-    <div class="card bg-light">
-        <article class="card-body mx-auto" style="max-width: 400px;">
-            <h4>Register your Organization</h4>
-            <EditForm Model="OrgModel" OnSubmit="SaveOrganization">
-                <div class="form-group input-group mb-1 mt-4">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="oi oi-account-login"></i> </span>
-                    </div>
-                    <input class="form-control" placeholder="Organization Name" type="text" @bind-value="OrgModel.orgName" required>
-                </div> <!-- form-group// -->
-                <div class="form-group input-group mb-1">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="oi oi-account-login"></i> </span>
-                    </div>
-                    <input class="form-control" placeholder="Organization's Type" type="text" @bind-value="OrgModel.orgType" required>
-                </div> <!-- form-group// -->
-                <div class="form-group input-group mb-1">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="oi oi-dashboard"></i> </span>
-                    </div>
-                    <input class="form-control" placeholder="Organization's Address" @bind-value="OrgModel.orgAddress" type="text" required>
-                </div>
-                <div class="form-group input-group mb-1">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="oi oi-dashboard"></i> </span>
-                    </div>
-                    <input class="form-control" placeholder="Organization's Capacity" type="number" @bind-value="OrgModel.orgCapacity" required>
-                </div>
-
-                <div class="form-group" style="display:flex; justify-content:center;">
-                    <button type="submit" class="btn btn-primary btn-block"> Register  </button>
-                </div> <!-- form-group// -->
-            </EditForm>
-        </article>
-    </div> <!-- card.// -->
-
-</div>
-
-<section class="intro">
-    <div class="gradient-custom-1 h-100">
-        <div class="mask d-flex align-items-center h-100">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-12">
-                        <div class="table-responsive bg-white">
-                            <table class="table mb-0">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">ORGANIZATION</th>
-                                        <th scope="col">TYPE</th>
-                                        <th scope="col">ADDRESS</th>
-                                        <th scope="col">QTY</th>
-                                        <th scope="col">ACTION</th>
-                                        <th scope="col">MORE</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var item in organizationList)
-                                    {
-                                        <tr>
-                                            <td>@item.orgName</td>
-                                            <td>@item.orgType</td>
-                                            <td>@item.orgAddress</td>
-                                            <td>@item.orgCapacity</td>
-                                            <td>
-                                                <button @onclick="(()=>DeleteOrganization(item.orgID))">Delete</button>
-                                            </td>
-                                            <td>
-                                                <button><a href="orgEmployees/@item.orgID.ToString()">Add Employee</a></button>
-                                            </td>
-                                        </tr>
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section> *@
-
 @while (preload == true)
 {
     <Loading />
@@ -134,13 +12,31 @@
 
 <form class="max-w-sm mx-auto" style="padding-top: 120px;">
         <EditForm Model="OrgModel" OnSubmit="SaveOrganization">
-        <div class="mb-5">
+@*         <div class="mb-5">
             <label for="organizationName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Organization Name: *</label>
             <input type="text" @bind-value="OrgModel.orgName" id="organizationName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Air University" required>
-        </div>
+        </div> *@
         <div class="mb-5">
+            <label for="orgName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Organization Name: *</label>
+            <select @bind="@selected" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                @foreach (var item in orgs)
+                {
+                    <option value="@item">@item</option>
+                }
+            </select>
+        </div>
+@*         <div class="mb-5">
             <label for="organizationType" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Organization's Type: *</label>
             <input type="text" @bind-value="OrgModel.orgType" id="organizationType" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Educational" required>
+        </div> *@
+        <div class="mb-5">
+            <label for="orgType" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Organization Type: *</label>
+            <select @bind="@selected2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                @foreach (var item2 in orgsType)
+                {
+                    <option value="@item2">@item2</option>
+                }
+            </select>
         </div>
         <div class="mb-5">
             <label for="organizationAddress" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Organization's Address: *</label>
@@ -150,8 +46,8 @@
             <label for="qtyRequired" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Quantity (of BitTags) required: *</label>
             <input type="text" @bind-value="OrgModel.orgCapacity" id="qtyRequired" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="500" required>
         </div>
-        <button type="submit" @onclick="saveOrg" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
-
+        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+        <p class="text-red-200">@msg</p>
     </EditForm>
 
 
@@ -247,8 +143,72 @@ else
     private bool showorg = false;
     private bool successful = false;
     private bool preload = false;
+    private string? selected { get; set; }
+    private string? selected2 { get; set; }
+    private string msg { get; set; }
+    List<string> orgsType = new List<string>
+{
+    "University",
+    "Research Institute",
+    "Government Office",
+    "Regulatory Body",
+    "Chamber of Commerce",
+    "Stock Exchange"
+};
 
-    private void saveOrg()
+    List<string> orgs = new List<string>
+{
+    "Air University Islamabad",
+    "Bahria University Islamabad",
+    "Quaid-i-Azam University",
+    "National University of Sciences and Technology (NUST)",
+    "Pakistan Institute of Development Economics (PIDE)",
+    "International Islamic University Islamabad (IIUI)",
+    "Allama Iqbal Open University",
+    "Pakistan Institute of Engineering and Applied Sciences (PIEAS)",
+    "COMSATS University Islamabad",
+    "Federal Urdu University of Arts, Science and Technology",
+    "Institute of Space Technology (IST)",
+    "National Defence University, Islamabad",
+    "Pakistan Institute of Medical Sciences (PIMS)",
+    "Pakistan Institute of Ophthalmology",
+    "Pakistan Institute of Rehabilitation Sciences (PIRS)",
+    "Federal Board of Revenue (FBR)",
+    "National Institute of Health (NIH)",
+    "Pakistan Meteorological Department (PMD)",
+    "Pakistan Agricultural Research Council (PARC)",
+    "National Accountability Bureau (NAB)",
+    "National Institute of Banking and Finance (NIBAF)",
+    "Pakistan National Accreditation Council (PNAC)",
+    "Pakistan Atomic Energy Commission (PAEC)",
+    "Federal Investigation Agency (FIA)",
+    "National Database and Registration Authority (NADRA)",
+    "Pakistan Bureau of Statistics (PBS)",
+    "National Vocational and Technical Training Commission (NAVTTC)",
+    "Pakistan Environmental Protection Agency (EPA)",
+    "Islamabad Police",
+    "Federal Directorate of Education (FDE)",
+    "National Institute of Science and Technical Education (NISTE)",
+    "National Institute of Electronics (NIE)",
+    "Pakistan National Council of the Arts (PNCA)",
+    "Pakistan Science Foundation (PSF)",
+    "National Book Foundation (NBF)",
+    "National Institute of Folk and Traditional Heritage (Lok Virsa)",
+    "Pakistan Academy of Letters",
+    "National Institute of Oceanography (NIO)",
+    "Pakistan Agricultural Research Council (PARC)",
+    "Pakistan Engineering Council (PEC)",
+    "Pakistan Council of Scientific and Industrial Research (PCSIR)",
+    "Pakistan Council of Architects and Town Planners (PCATP)",
+    "Pakistan Council of Renewable Energy Technologies (PCRET)",
+    "Pakistan Council of Research in Water Resources (PCRWR)",
+    "Pakistan Industrial Technical Assistance Centre (PITAC)",
+    "National Electric Power Regulatory Authority (NEPRA)",
+    "Islamabad Chamber of Commerce and Industry (ICCI)",
+    "Islamabad Stock Exchange (ISE)"
+};
+
+    private async void saveOrg()
     {
         successful = true;
         preload = true;
@@ -271,18 +231,23 @@ else
 
         Guid id = Guid.NewGuid();
         OrgModel.orgID = id;
+        OrgModel.orgName = selected;
+        OrgModel.orgType = selected2;
         await Orgs.SaveOrganizations(OrgModel);
+        saveOrg();
         await LoadData();
+        msg = "Organization Added";
 
     }
 
     protected override async Task OnInitializedAsync()
     {
-       await LoadData();
+        await LoadData();
     }
     private async void DeleteOrganization(Guid id)
     {
         await Orgs.DeleteOrganizations(id);
+        await LoadData();
     }
 
     private async Task LoadData()

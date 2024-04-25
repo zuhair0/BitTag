@@ -211,32 +211,26 @@
 }
 </style>
 
-@* <div>
-    <div>
-        <NavMenu />
-    </div>
+@if (!preloader)
+{
     <div>
         <CascadingAuthenticationState>
-        <AuthorizeView>
-            <Authorized>
-                <a @onclick="Logout" href="javascript:void(0)">Logout</a>
-            </Authorized>
-            <NotAuthorized>
-                <a href="/logined">Login</a>
-            </NotAuthorized>
-        </AuthorizeView>
+            <AuthorizeView>
+                <Authorized>
+                    <DashboardNav />
+                    @Body
+                </Authorized>
+                <NotAuthorized>
+                    <NavMenu />
+                    @Body
+                </NotAuthorized>
+            </AuthorizeView>
         </CascadingAuthenticationState>
     </div>
-    <div>
-        @Body
-    </div>
-</div> *@
+}
 
 @if (preloader)
 {
-
-
-
     <div class="flex items-center justify-center space-x-2 mt-20">
         <svg class="pl" width="240" height="240" viewBox="0 0 240 240">
             <circle class="pl__ring pl__ring--a" cx="120" cy="120" r="105" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 660" stroke-dashoffset="-330" stroke-linecap="round"></circle>
@@ -245,27 +239,10 @@
             <circle class="pl__ring pl__ring--d" cx="155" cy="120" r="70" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 440" stroke-linecap="round"></circle>
         </svg>
     </div>
-
-}
-else
-{
-    <CascadingAuthenticationState>
-        <AuthorizeView>
-            <Authorized>
-                <DashboardNav />
-                @Body
-            </Authorized>
-            <NotAuthorized>
-                <NavMenu />
-                @Body
-            </NotAuthorized>
-        </AuthorizeView>
-    </CascadingAuthenticationState>
 }
 
 @code {
     private bool preloader = true;
-
     protected override async Task OnInitializedAsync()
     {
         await Task.Delay(7000); // Delay for 7 seconds
