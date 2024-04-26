@@ -1,129 +1,334 @@
 ﻿@page "/"
-<PageTitle>Test</PageTitle>
+<PageTitle>BitTag</PageTitle>
 
 <div style="margin-top: 45px;">
-	<section class="bg-gray-800 text-gray-100" style="background: url(data:image/jpeg;base64,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); background-size: cover;">
-		<div class="container mx-auto flex flex-col items-center px-4 py-16 text-center md:py-32 md:px-10 lg:px-32 xl:max-w-3xl">
-			<h1 class="text-4xl font-bold leadi sm:text-5xl">
-				BitTag<br />
-				<span class="dark:text-sky-400 text-3xl">Removing your hassle of manual vehicle tagging</span> 
-			</h1>
-			<p class="px-8 mt-8 mb-12 text-lg">We are providing cutting edge QR technology to store, and manage your vehicle data making it secure, fast and hassle-free.</p>
-			<div class="flex flex-wrap justify-center">
-				<button class="px-8 py-3 m-2 text-lg font-semibold rounded dark:bg-sky-400 dark:text-gray-900">Get started</button>
-				<button class="px-8 py-3 m-2 text-lg border rounded dark:text-gray-50 dark:border-gray-700">Learn more</button>
+	<section class="relative bg-[url(https://iili.io/JadvEqg.md.png)] bg-cover bg-center bg-no-repeat">
+		<div class="absolute inset-0 bg-white/75 sm:bg-transparent sm:from-white/95 sm:to-white/25 ltr:sm:bg-gradient-to-r rtl:sm:bg-gradient-to-l"></div>
+
+		<div class="relative mx-auto max-w-screen-xl px-4 py-32 sm:px-6 lg:flex lg:h-screen lg:items-center lg:px-8">
+			<div class="max-w-xl text-left ltr:sm:text-left rtl:sm:text-right">
+				<h1 class="text-3xl font-extrabold sm:text-5xl text-gray-900">
+					Say goodbye to your
+
+					<strong class="block font-extrabold text-blue-900 mt-3"> manual vehicle tagging hustle  </strong>
+				</h1>
+
+				<p class="mt-4 max-w-lg sm:text-xl/relaxed">
+					Revolutionizing access management with QR code technology. Seamlessly secure, effortlessly efficient.
+				</p>
+
+				<div class="mt-8 flex flex-wrap gap-4 text-center">
+					<a href="register"
+					   class="block w-full rounded bg-blue-700 duration-75 px-12 py-3 text-sm font-medium text-white shadow hover:bg-blue-400 focus:outline-none focus:ring active:bg-rose-500 sm:w-auto">
+						Get Started
+					</a>
+
+					<a href="#"
+					   class="block w-full rounded bg-white px-12 py-3 text-sm font-medium text-blue-900 shadow focus:outline-none focus:ring active:text-blue-500 sm:w-auto">
+						Learn More
+					</a>
+				</div>
 			</div>
 		</div>
 	</section>
 </div>
 
-<section class="bg-gray-100 text-gray-900">
-	<div class="container max-w-xl p-6 py-12 mx-auto space-y-24 lg:px-8 lg:max-w-7xl">
-		<div>
-			<h2 class="text-3xl font-bold tracki text-center sm:text-5xl text-gray-900">Features</h2>
-			<p class="max-w-3xl mx-auto mt-4 text-xl text-center text-gray-800">Quando cetero his ne, eum admodum sapientem ut.</p>
-		</div>
-		<div class="grid lg:gap-8 lg:grid-cols-2 lg:items-center">
-			<div>
-				<h3 class="text-2xl font-bold tracki sm:text-3xl text-gray-900">Security</h3>
-				<p class="mt-3 text-lg text-gray-800">Ne dicta praesent ocurreret has, diam theophrastus at pro. Eos etiam regione ut, persius eripuit quo id. Sit te euismod tacimates.</p>
-				<div class="mt-12 space-y-12">
-					<div class="flex">
-						<div class="flex-shrink-0">
-							<div class="flex items-center justify-center w-12 h-12 rounded-md bg-sky-400 text-gray-900">
-								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-7 h-7">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-								</svg>
-							</div>
-						</div>
-						<div class="ml-4">
-							<h4 class="text-lg font-medium leadi text-gray-900">Per ei quaeque sensibus</h4>
-							<p class="mt-2 text-gray-800">Ex usu illum iudico molestie. Pro ne agam facete mediocritatem, ridens labore facete mea ei. Pro id apeirian dignissim.</p>
-						</div>
-					</div>
-					<div class="flex">
-						<div class="flex-shrink-0">
-							<div class="flex items-center justify-center w-12 h-12 rounded-md bg-sky-400 text-gray-900">
-								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-7 h-7">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-								</svg>
-							</div>
-						</div>
-						<div class="ml-4">
-							<h4 class="text-lg font-medium leadi text-gray-900">Cu imperdiet posidonium sed</h4>
-							<p class="mt-2 text-gray-800">Amet utinam aliquando ut mea, malis admodum ocurreret nec et, elit tibique cu nec. Nec ex maluisset inciderint, ex quis.</p>
-						</div>
-					</div>
-					<div class="flex">
-						<div class="flex-shrink-0">
-							<div class="flex items-center justify-center w-12 h-12 rounded-md bg-sky-400 text-gray-900">
-								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-7 h-7">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-								</svg>
-							</div>
-						</div>
-						<div class="ml-4">
-							<h4 class="text-lg font-medium leadi text-gray-900">Nulla omittam sadipscing mel ne</h4>
-							<p class="mt-2 text-gray-800">At sed possim oporteat probatus, justo graece ne nec, minim commodo legimus ut vix. Ut eos iudico quando soleat, nam modus.</p>
-						</div>
-					</div>
+<section>
+	<div class="mx-auto max-w-screen-2xl px-4 py-16 sm:px-6 lg:px-8">
+		<div class="grid grid-cols-1 lg:h-screen lg:grid-cols-2">
+			<div class="relative z-10 lg:py-16">
+				<div class="relative h-64 sm:h-80 lg:h-full">
+					<img alt=""
+						 src="https://images.pexels.com/photos/3370332/pexels-photo-3370332.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+						 class="absolute inset-0 h-full w-full object-cover" />
 				</div>
 			</div>
-			<div aria-hidden="true" class="mt-10 lg:mt-0">
-				<img src="https://source.unsplash.com/random/360x480" alt="" class="mx-auto rounded-lg shadow-lg bg-gray-800">
-			</div>
-		</div>
-		<div>
-			<div class="grid lg:gap-8 lg:grid-cols-2 lg:items-center">
-				<div class="lg:col-start-2">
-					<h3 class="text-2xl font-bold tracki sm:text-3xl text-gray-900">Eam nibh gloriatur ex</h3>
-					<p class="mt-3 text-lg text-gray-900">Per odio fabellas consulatu cu. Utroque detracto mel ea, quo te latine theophrastus. Ea his tale nibh dissentias, mei exerci tamquam euripidis cu.</p>
-					<div class="mt-12 space-y-12">
-						<div class="flex">
-							<div class="flex-shrink-0">
-								<div class="flex items-center justify-center w-12 h-12 rounded-md dark:bg-sky-400 text-gray-900">
-									<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-7 h-7">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-									</svg>
-								</div>
-							</div>
-							<div class="ml-4">
-								<h4 class="text-lg font-medium leadi dark:text-gray-900">Cibo augue offendit has ad</h4>
-								<p class="mt-2 dark:text-gray-800">An per velit appellantur, ut utinam minimum nominavi sit, odio nostro habemus ne nec. Ne sonet regione contentiones est.</p>
-							</div>
-						</div>
-						<div class="flex">
-							<div class="flex-shrink-0">
-								<div class="flex items-center justify-center w-12 h-12 rounded-md bg-sky-400 text-gray-900">
-									<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-7 h-7">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-									</svg>
-								</div>
-							</div>
-							<div class="ml-4">
-								<h4 class="text-lg font-medium leadi text-gray-900">At eum ferri luptatum lobortis</h4>
-								<p class="mt-2 text-gray-800">Te per quidam maiorum ocurreret, etiam delicatissimi usu ad. Ne has quod periculis. Te sit primis iisque efficiantur.</p>
-							</div>
-						</div>
-						<div class="flex">
-							<div class="flex-shrink-0">
-								<div class="flex items-center justify-center w-12 h-12 rounded-md bg-sky-400 text-gray-900">
-									<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-7 h-7">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-									</svg>
-								</div>
-							</div>
-							<div class="ml-4">
-								<h4 class="text-lg font-medium leadi text-gray-900">Dicunt verterem evertitur eu sea</h4>
-								<p class="mt-2 text-gray-800">Audire principes rationibus eam an, autem nominavi luptatum per te. Sumo fabulas vim eu, sonet saperet eleifend ut vix.</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="mt-10 lg:mt-0 lg:col-start-1 lg:row-start-1">
-					<img src="https://source.unsplash.com/random/361x481" alt="" class="mx-auto rounded-lg shadow-lg bg-gray-500">
+
+			<div class="relative flex items-center bg-gray-100">
+				<span class="hidden lg:absolute lg:inset-y-0 lg:-start-16 lg:block lg:w-16 lg:bg-gray-100"></span>
+
+				<div class="p-8 sm:p-16 lg:p-24">
+					<h2 class="text-2xl font-bold sm:text-3xl">
+						What is BitTag?
+					</h2>
+
+					<p class="mt-4 text-gray-600">
+						At BitTag, we're dedicated to reshaping access management with cutting-edge technology. 
+						Our innovative automatic vehicle tagging system, powered by QR code technology, streamlines entry processes 
+						while enhancing security measures. With a focus on confidentiality, efficiency, and user satisfaction, 
+						BitTag sets new standards in access management solutions. Trust BitTag for seamless integration, robust security, 
+						and unparalleled convenience in access management.
+					</p>
+
+					<a href="#"
+					   class="mt-8 inline-block rounded border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500">
+						Get in Touch
+					</a>
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
+
+<!--
+  Heads up! 👋
+
+  This component comes with some `rtl` classes. Please remove them if they are not needed in your project.
+-->
+
+<section class="bg-blue-100">
+    <div class="max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
+        <div class="grid grid-cols-1 gap-y-8 lg:grid-cols-2 lg:items-center lg:gap-x-16">
+            <div class="mx-auto max-w-lg text-left lg:mx-0 ltr:lg:text-left rtl:lg:text-right">
+                <h2 class="text-3xl font-bold sm:text-4xl">Features</h2>
+
+                <p class="mt-4 text-gray-600">
+                    The BitTag project boasts a myriad of features designed to revolutionize access management. 
+                    At its core, BitTag prioritizes efficiency, streamlining entry processes and enhancing security 
+                    measures with its automatic vehicle tagging system. Robust security measures ensure the safeguarding 
+                    of sensitive data, while scalability allows for seamless adaptation to organizational growth and technological advancements. 
+                    The user-centric design ensures a seamless user experience, with intuitive interfaces and customizable security options. 
+                    BitTag seamlessly integrates with existing infrastructure, including CCTV systems and backend databases, further enhancing 
+                    its utility and compatibility.
+                </p>
+
+                <a href="register"
+                   class="mt-8 inline-block rounded bg-indigo-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-yellow-400">
+                    Get Started Today
+                </a>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 sm:grid-cols-3">
+                <div class="block rounded-xl border border-gray-100 p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
+                   >
+                    <span class="inline-block rounded-lg bg-gray-50 p-3">
+                        <svg fill="#000000" height="40px" width="40px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                             viewBox="0 0 512 512" xml:space="preserve">
+<g>
+                        <g>
+                        <path d="M256,0C162.59,0,86.867,75.724,86.867,169.133c0,34.924,10.587,67.376,28.725,94.321
+			c33.928,50.4,52.205,109.86,52.205,170.614v0.037c0,15.408,12.491,27.899,27.899,27.899h10.308
+			C206.004,489.616,228.388,512,256,512c27.612,0,49.996-22.384,49.996-49.996h10.308c15.408,0,27.9-12.491,27.9-27.899v-0.037
+			c0-61.042,18.116-119.977,52.205-170.614c18.139-26.945,28.725-59.396,28.725-94.321C425.133,75.724,349.409,0,256,0z
+			 M316.872,203.271l-83.631,114.35c-1.903,2.602-5.362,3.527-8.309,2.222c-2.948-1.304-4.589-4.487-3.943-7.644l17.387-85.006
+			h-42.888c-4.141,0-7.93-2.327-9.804-6.019c-1.874-3.692-1.515-8.125,0.93-11.467l83.631-114.35
+			c1.903-2.602,5.362-3.527,8.309-2.222c2.948,1.304,4.589,4.486,3.943,7.644l-17.387,85.006h42.888c4.141,0,7.93,2.327,9.804,6.019
+			C319.676,195.496,319.318,199.929,316.872,203.271z" />
+    </g>
+</g>
+</svg>
+                    </span>
+
+                    <h2 class="mt-2 font-bold">Efficiency</h2>
+
+                    <p class="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
+                        Streamlines entry processes and enhances security measures.
+                    </p>
+                </div>
+
+                <div class="block rounded-xl border border-gray-100 p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
+                   >
+                    <span class="inline-block rounded-lg bg-gray-50 p-3">
+                        <svg width="40px" height="40px" viewBox="0 0 24 24" fill="black" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18.3281 5.67L6.58813 17.41C6.14813 17.85 5.40813 17.79 5.04813 17.27C3.80813 15.46 3.07812 13.32 3.07812 11.12V6.73C3.07812 5.91 3.69813 4.98 4.45813 4.67L10.0281 2.39C11.2881 1.87 12.6881 1.87 13.9481 2.39L17.9981 4.04C18.6581 4.31 18.8281 5.17 18.3281 5.67Z" fill="#292D32" />
+                            <path d="M19.27 7.04159C19.92 6.49159 20.91 6.96159 20.91 7.81159V11.1216C20.91 16.0116 17.36 20.5916 12.51 21.9316C12.18 22.0216 11.82 22.0216 11.48 21.9316C10.06 21.5316 8.74001 20.8616 7.61001 19.9816C7.13001 19.6116 7.08001 18.9116 7.50001 18.4816C9.68001 16.2516 16.06 9.75159 19.27 7.04159Z" fill="#292D32" />
+                        </svg>
+                    </span>
+
+                    <h2 class="mt-2 font-bold">Security</h2>
+
+                    <p class="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
+                        Implements robust measures to safeguard sensitive data and prevent unauthorized access.
+                    </p>
+                </div>
+
+                <div class="block rounded-xl border border-gray-100 p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
+                   >
+                    <span class="inline-block rounded-lg bg-gray-50 p-3">
+                        <svg fill="#000000" width="40px" height="40px" viewBox="0 -0.08 20 20" 
+                        data-name="Capa 1" id="Capa_1" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18,11.49a3.72,3.72,0,0,0-3-3.12,4.18,4.18,0,0,0-.88-2,4,4,0,0,0-3.62-1.44A4.48,4.48,0,0,0,8,6.27a3.41,3.41,0,0,0-3.84,2.4A3,3,0,0,0,2,11.62,3,3,0,0,0,5,15h9.82a3.65,3.65,0,0,0,2.41-1.18A2.91,2.91,0,0,0,18,11.49Zm-1.24,1.86a3,3,0,0,1-1.89,1H5c-.1,0-2.27,0-2.27-2.68A2.48,2.48,0,0,1,5,9.13l.17,0a.36.36,0,0,0,.22-.44A.35.35,0,0,0,5,8.42H5A2.57,2.57,0,0,1,6.06,7.26,3.08,3.08,0,0,1,8.73,7.2.34.34,0,0,0,9.18,7,.35.35,0,0,0,9,6.54l-.21-.07a3.71,3.71,0,0,1,1.79-.89,3.24,3.24,0,0,1,3,1.19,4,4,0,0,1,.82,2.64.35.35,0,0,0,.35.35A.35.35,0,0,0,15,9.41c0-.11,0-.2,0-.31a3,3,0,0,1,2.27,2.48A2.21,2.21,0,0,1,16.71,13.35Z" /><path d="M12.13,8a.14.14,0,0,0,0-.09.35.35,0,0,0-.41-.28,15.09,15.09,0,0,1-1.52.25.35.35,0,0,0,0,.69h0l.72-.1L10,9.76a.34.34,0,0,0,.27.57.36.36,0,0,0,.27-.12l1-1.27.06.51a.35.35,0,1,0,.69-.08c-.08-.74-.16-1.32-.16-1.32Z" /><path d="M9.59,12.18l-.7.17.89-1.26a.34.34,0,0,0-.08-.49.35.35,0,0,0-.49.08L8.31,12c0-.15-.07-.32-.11-.5a.34.34,0,0,0-.41-.26.35.35,0,0,0-.27.41c.16.71.24,1.26.24,1.28a.33.33,0,0,0,0,.14.36.36,0,0,0,.34.25h.1S9,13,9.74,12.86a.35.35,0,0,0-.15-.68Z" /></svg>
+                    </span>
+
+                    <h2 class="mt-2 font-bold">Scalability</h2>
+
+                    <p class="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
+                        Designed to accommodate future growth and technological advancements seamlessly.
+                    </p>
+                </div>
+
+                <div class="block rounded-xl border border-gray-100 p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
+                   >
+                    <span class="inline-block rounded-lg bg-gray-50 p-3">
+                        <svg width="40px" height="40px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 21C4 17.4735 6.60771 14.5561 10 14.0709M16.4976 16.2119C15.7978 15.4328 14.6309 15.2232 13.7541 15.9367C12.8774 16.6501 12.7539 17.843 13.4425 18.6868C13.8312 19.1632 14.7548 19.9983 15.4854 20.6353C15.8319 20.9374 16.0051 21.0885 16.2147 21.1503C16.3934 21.203 16.6018 21.203 16.7805 21.1503C16.9901 21.0885 17.1633 20.9374 17.5098 20.6353C18.2404 19.9983 19.164 19.1632 19.5527 18.6868C20.2413 17.843 20.1329 16.6426 19.2411 15.9367C18.3492 15.2307 17.1974 15.4328 16.4976 16.2119ZM15 7C15 9.20914 13.2091 11 11 11C8.79086 11 7 9.20914 7 7C7 4.79086 8.79086 3 11 3C13.2091 3 15 4.79086 15 7Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </span>
+
+                    <h2 class="mt-2 font-bold">User-centric</h2>
+
+                    <p class="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
+                        Prioritizes user experience with intuitive interfaces and customizable security options.
+                    </p>
+                </div>
+
+                <div class="block rounded-xl border border-gray-100 p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
+                   >
+                    <span class="inline-block rounded-lg bg-gray-50 p-3">
+                        <svg fill="#000000" width="40px" height="40px" viewBox="0 0 52 52" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"><path d="M44.5,21a5.5,5.5,0,1,1-4.9,8h-.91c-5.39.06-7.29,1.7-10.31,7.34l-.17.33-.2.38c-1.8,3.37-2.82,4.9-4.66,6.52C20.76,45.84,17.42,47,13,47h-.6a5.5,5.5,0,1,1,0-5h.91c5.49-.06,7.36-1.76,10.48-7.67h0L24,34a27.18,27.18,0,0,1,3.11-5H12.4a5.5,5.5,0,1,1,0-5H39.6a5.53,5.53,0,0,1,4.68-3Zm0-19a5.5,5.5,0,1,1-4.9,8H12.4a5.5,5.5,0,1,1,0-5H39.6A5.5,5.5,0,0,1,44.5,2Z" /></svg>
+                    </span>
+
+                    <h2 class="mt-2 font-bold">Integration</h2>
+
+                    <p class="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
+                        Seamlessly integrates with existing infrastructure, including CCTV systems and backend databases.
+                    </p>
+                </div>
+
+                <div class="block rounded-xl border border-gray-100 p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
+                   >
+                    <span class="inline-block rounded-lg bg-gray-50 p-3">
+                        <svg fill="#000000" height="40px" width="40px" version="1.1" id="XMLID_138_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                             viewBox="0 0 24 24" xml:space="preserve">
+<g id="compliance">
+                        <g>
+                        <path d="M22,24H2V2h5V0h10v2h5V24z M4,22h16V4h-3v3H7V4H4V22z M9,5h6V2H9V5z M11,18.4l-3.7-3.7l1.4-1.4l2.3,2.3l5.3-5.3l1.4,1.4
+			L11,18.4z" />
+    </g>
+</g>
+</svg>
+                    </span>
+
+                    <h2 class="mt-2 font-bold">Compliance</h2>
+
+                    <p class="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
+                        Ensures adherence to data protection regulations and industry standards.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--
+  Heads up! 👋
+
+  Plugins:
+    - @tailwindcss/forms
+-->
+
+<section class="bg-gray-50">
+    <h1 align="center" class="pt-20 text-4xl text-blue-800 font-bold">Need BitTag for your Organization? Reach out!</h1>
+    <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-5">
+            <div class="lg:col-span-2 lg:py-12">
+                <p class="max-w-xl text-lg">
+                    Whether you're interested in implementing BitTag for your organization or require assistance with retrieving BitTags, 
+                    we're committed to offering transparent pricing and efficient solutions tailored to your needs. 
+                    Contact us today to request a price quote and explore how BitTag can revolutionize your access management processes.
+                </p>
+            </div>
+
+            <div class="rounded-lg bg-white p-8 shadow-lg lg:col-span-3 lg:p-12">
+                <form action="#" class="space-y-4">
+                    <div>
+                        <label class="sr-only" for="name">Organization Name</label>
+                        <input class="w-full rounded-lg border-gray-200 p-3 text-sm border"
+                               placeholder="Name"
+                               type="text"
+                               id="name" required/>
+                    </div>
+
+                    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                        <div>
+                            <label class="sr-only" for="email">Email</label>
+                            <input class="w-full rounded-lg border-gray-200 p-3 text-sm border"
+                                   placeholder="Email address"
+                                   type="email"
+                                   id="email" required/>
+                        </div>
+
+                        <div>
+                            <label class="sr-only" for="phone">Phone</label>
+                            <input class="w-full rounded-lg border-gray-200 p-3 text-sm border"
+                                   placeholder="Phone Number"
+                                   type="tel"
+                                   id="phone" />
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 gap-4 text-center sm:grid-cols-3">
+                        <div>
+                            <label for="Option1"
+                                   class="block w-full cursor-pointer rounded-lg border border-blue-200 p-3 text-blue-600 hover:border-black has-[:checked]:border-blue-900 has-[:checked]:bg-blue-900 has-[:checked]:text-blue-50"
+                                   tabindex="0">
+                                <input class="sr-only" id="Option1" type="radio" tabindex="-1" name="option" />
+
+                                <span class="text-sm"> Order BitTags </span>
+                            </label>
+                        </div>
+
+                        <div>
+                            <label for="Option2"
+                                   class="block w-full cursor-pointer rounded-lg border border-blue-200 p-3 text-blue-600 hover:border-black has-[:checked]:border-blue-900 has-[:checked]:bg-blue-900 has-[:checked]:text-blue-50"
+                                   tabindex="0">
+                                <input class="sr-only" id="Option2" type="radio" tabindex="-1" name="option" />
+
+                                <span class="text-sm"> Assistance </span>
+                            </label>
+                        </div>
+
+                        <div>
+                            <label for="Option3"
+                                   class="block w-full cursor-pointer rounded-lg border border-blue-200 p-3 text-blue-600 hover:border-black has-[:checked]:border-blue-900 has-[:checked]:bg-blue-900 has-[:checked]:text-blue-50"
+                                   tabindex="0">
+                                <input class="sr-only" id="Option3" type="radio" tabindex="-1" name="option" />
+
+                                <span class="text-sm"> Others </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="sr-only" for="message">Message</label>
+
+                        <textarea class="w-full rounded-lg border-gray-200 p-3 text-sm border"
+                                  placeholder="Message"
+                                  rows="8"
+                                  id="message"></textarea>
+                    </div>
+
+                    <div class="mt-4">
+                        <button type="submit"
+                                class="inline-block w-full rounded-lg bg-blue-900 px-5 py-3 font-medium text-white sm:w-auto">
+                            Send 
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="bg-blue-100">
+    <div class="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
+        <div class="flex justify-center text-teal-600">
+            <img src="BitTag-small-logo.png" width="200"/>
+        </div>
+
+        <p class="mx-auto mt-6 max-w-md text-center leading-relaxed text-gray-950">
+            Automatic Vehicle Tagging System using QR Technology
+        </p>
+
+        <div class="mt-16 border-t pt-8">
+            <p class="text-center text-xs/relaxed text-lg text-gray-700">
+                © Air University Islamabad. All rights reserved.
+
+                <br />
+                <b>FINAL YEAR PROJECT</b><br />
+                <b>Team Members:</b> Sameer Ahmed Siddiqui, Ayesha Dastagir & Zuhair Saleem<br />
+                <b>Supervisor:</b> Mr. Asim Ali Fayyaz
+            </p>
+        </div>
+    </div>
+</footer>

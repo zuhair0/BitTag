@@ -6,52 +6,6 @@
 @inject ICustomer cust
 @inject NavigationManager nm;
 
-@* <h3>Customer</h3>
-<EditForm Model="customers" OnSubmit="SaveCustomer">
-    <label >FirstName</label>
-    <input type="text" @bind-value="customers.firstName" /><br />
-    <label>LastName</label>
-    <input type="text" @bind-value="customers.lastName" /><br />
-    <label>CNIC</label>
-    <input type="text" @bind-value="customers.custCNIC" /><br />
-    <label>Email</label>
-    <input type="text" @bind-value="customers.custEmail" /><br />
-    <label>Contact</label>
-    <input type="text" @bind-value="customers.contact" /><br />
-    <label>Date of Birth</label>
-    <input type="text" @bind-value="customers.DOB" /><br />
-    <label>Pin</label>
-    <input type="text" @bind-value="customers.custPIN" /><br />
-    <button type="submit">Save</button>
-</EditForm>
-
-<table class="tble table">
-    <thead>
-        <tr>
-            <th>FirstName</th>
-            <th>LastName</th>
-            <th>Contact</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    @foreach (var item in customersList)
-    {
-        <tr>
-            <td>@item.firstName</td>
-            <td>@item.lastName</td>
-            <td>@item.contact</td>
-            <td>
-                <button @onclick="(()=>DeleteCustomer(item.custID))">Delete</button>
-            </td>
-           @* <td>
-                <button><a href="vehicle/@item.custID.ToString()">Add Vehicle</a></button>
-            </td>*@
-        @*</tr>
-    }
-</table>
- *@
-
-
 <form class="max-w-sm mx-auto" style="padding-top: 120px;">
     <EditForm Model="customers" OnSubmit="SaveCustomer">
         <div class="grid md:grid-cols-2 md:gap-6">
@@ -85,7 +39,7 @@
             </div>
             <div class="mb-5">
                 <label for="customerPIN" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">PIN (5 digit) *</label>
-                <input type="password" id="customerPIN" maxlength="5" minlength="5" @bind-value="@customers.custPIN" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required>
+                <input type="password" oninput="this.value = (this.value == '0') ? '' : this.value;" id="customerPIN" maxlength="5" minlength="5" @bind-value="@customers.custPIN" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required>
             </div>
         </div>
         <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
@@ -95,57 +49,7 @@
 
 
 
-@* 
-<div class="container container-fluid mt-5">
-    <div class="card bg-white">
-        <article class="card-body mx-auto" style="max-width: 400px;">
-            <h4 class="text-center fw-bold">Basic Information</h4>
-            <EditForm Model="customers" OnSubmit="SaveCustomer">
-                <div class="form-group input-group mb-1 mt-4">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="oi oi-person"></i> </span>
-                    </div>
-                    <input class="form-control" placeholder="First Name" type="text" @bind-value="customers.firstName" required>
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="oi oi-person"></i> </span>
-                    </div>
-                    <input class="form-control" placeholder="Last Name" type="text" @bind-value="customers.lastName" required>
-                </div> <!-- form-group// -->
-                <div class="form-group input-group mb-1">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="oi oi-book"></i> </span>
-                    </div>
-                    <input class="form-control" placeholder="C-NIC" type="text" @bind-value="customers.custCNIC" required>
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="oi oi-book"></i> </span>
-                    </div>
-                    <input class="form-control" placeholder="Contact" type="text" @bind-value="customers.contact" required>
-                </div> <!-- form-group// -->
-                <div class="form-group input-group mb-1">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="oi oi-box"></i> </span>
-                    </div>
-                    <input class="form-control" placeholder="Email Address" type="text" @bind-value="customers.custEmail" required>
-                </div>
-                <div class="form-group input-group mb-1">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> DOB </span>
-                    </div>
-                    <input class="form-control" placeholder="DOB" @bind-value="customers.DOB" type="date" required>
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> PIN </span>
-                    </div>
-                    <input class="form-control" placeholder="PIN" @bind-value="customers.custPIN" type="number" min="0000" max="9999" required>
-                </div>
 
-                <div class="form-group" style="display:flex; justify-content:center;">
-                    <button type="submit" class="btn btn-primary btn-block"> Register  </button>
-                </div> <!-- form-group// -->
-            </EditForm>
-        </article>
-    </div> <!-- card.// -->
-
-</div> *@
 
 
 @code {
@@ -171,4 +75,6 @@
     {
         await LoadData();
     }
+    private string custPIN = "";
+
 }
