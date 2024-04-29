@@ -8,6 +8,8 @@
     <DockerfileContext>.</DockerfileContext>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
   <ItemGroup>
     <PackageReference Include="BarCode" Version="2023.8.4" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.12" />
