@@ -6,53 +6,8 @@
 @inject NavigationManager nm;
 @attribute [Authorize(Roles = "Administrator,User")]
 
-@* <EditForm Model="vehicle" OnSubmit="SaveVehicle">
-    <label >Make</label>
-    @*<input type="text" @bind-value="vehicle.vehicleMake" /><br />*@
-   @* <select @bind="@selected">
-        @foreach(var item in make)
-        {
-            <option value="@item">@item</option>
-        }
-    </select>
-
-    <label>Model</label>
-    <input type="text" @bind-value="vehicle.vehicleModel" /><br />
-    <label>Plate</label>
-    <input type="text" @bind-value="vehicle.vehiclePlate" /><br />
-    <label>type</label>
-    <input type="text" @bind-value="vehicle.vehicleType" /><br />
-    <label>color</label>
-    <input type="text" @bind-value="vehicle.vehicleColor" /><br />
-    <button type="submit">Save</button>
-</EditForm>
-
-<table class="tble table">
-    <thead>
-        <tr>
-            <th>Make</th>
-            <th>Model</th>
-            <th>Plate</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    @foreach (var item in vehicleList)
-    {
-        <tr>
-            <td>@item.vehicleMake</td>
-            <td>@item.vehicleModel</td>
-            <td>@item.vehiclePlate</td>
-            <td>
-                <button @onclick="(()=>DeleteVehicle(item.vehicleID))">Delete</button>
-            </td>
-            @*<td>
-                <button><a href="vehicle/@item.custID.ToString()">Add Vehicle</a></button>
-            </td>
-        </tr>
-    }
-</table> *@
 <div class="p-4 sm:ml-64">
-    <div class="p-1 rounded-lg main-color" style="width: 100%; height: 95vh">
+@*     <div class="p-1 rounded-lg main-color" style="width: 100%; height: 95vh">
         <h1>Add Vehicle</h1>
         <form class="max-w-sm mx-auto">
             <EditForm Model="vehicle" OnSubmit="SaveVehicle">
@@ -68,7 +23,12 @@
                     </div>
                     <div class="mb-5">
                         <label for="vehicleModel" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Vehicle Model: *</label>
-                        <input type="text" id="vehicleModel" @bind-value="@vehicle.vehicleModel" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Mehran" required>
+                        <select @bind="@modelSelect" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            @foreach (var item in model)
+                            {
+                                <option value="@item">@item</option>
+                            }
+                        </select>
                     </div>
                 </div>
                 <div class="grid md:grid-cols-2 md:gap-6">
@@ -77,66 +37,110 @@
                         <input type="text" @bind-value="@vehicle.vehiclePlate" id="vehiclePlate" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="RX901" required>
                     </div>
                     <div class="mb-5">
-                        <label for="vehicleType" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type: *</label>
-                        <input type="text" id="vehicleType" @bind-value="@vehicle.vehicleType" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Automatic/Manual" required>
+                        <label for="vehicleTransmission" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Transmission: *</label>
+                        <select @bind="@transmissionSelect" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            @foreach (var item in trm)
+                            {
+                                <option value="@item">@item</option>
+                            }
+                        </select>
                     </div>
                 </div>
                 <div class="grid">
+
                     <div class="mb-5">
-                        <label for="vehicleColor" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Color: *</label>
-                        <input type="text" id="vehicleColor" @bind-value="@vehicle.vehicleColor" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="White" required>
+                        <label for="vehColor" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Color: *</label>
+                        <select @bind="@colorSelect" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            @foreach (var item in clr)
+                            {
+                                <option value="@item">@item</option>
+                            }
+                        </select>
                     </div>
                 </div>
                 <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add Vehicle</button>
             </EditForm>
         </form>
+    </div> *@
+
+    <div class="flex justify-center py-12 bg-[#014040] min-h-screen">
+        <div class="w-full max-w-4xl px-8 py-10 bg-[#036666] rounded-lg shadow-lg">
+            <h2 class="text-3xl font-bold text-white mb-6">Add Vehicle</h2>
+            <EditForm Model="vehicle" OnSubmit="SaveVehicle" class="grid grid-cols-2 gap-x-8 gap-y-6">
+                <div>
+                    <label for="vehicle-make" class="block mb-2 text-sm font-medium text-gray-300">
+                        Vehicle Make: *
+                    </label>
+                    <select required class="flex h-10 w-full rounded-md border border-input px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 bg-gray-800 text-white border-none"
+                            id="vehicle-make" @bind="selected">
+                        @foreach (var item in make)
+                        {
+                            <option value="@item">@item</option>
+                        }
+                    </select>
+                </div>
+                <div>
+                    <label for="vehicle-model" class="block mb-2 text-sm font-medium text-gray-300">
+                        Vehicle Model: *
+                    </label>
+                    <select required class="flex h-10 w-full rounded-md border border-input px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 bg-gray-800 text-white border-none"
+                            id="vehicle-model" @bind="modelSelect">
+                        @foreach (var item in model)
+                        {
+                            <option value="@item">@item</option>
+                        }
+                    </select>
+
+                </div>
+                <div>
+                    <label for="plate" class="block mb-2 text-sm font-medium text-gray-300">
+                        Plate: *
+                    </label>
+                    <input required class="flex h-10 w-full rounded-md border border-input px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 bg-gray-800 text-white border-none"
+                           id="plate"
+                           placeholder="RX901" 
+                           @bind-value="vehicle.vehiclePlate"/>
+                </div>
+                <div>
+                    <label for="transmission" class="block mb-2 text-sm font-medium text-gray-300">
+                        Transmission: *
+                    </label>
+                    <select required class="flex h-10 w-full rounded-md border border-input px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 bg-gray-800 text-white border-none"
+                            id="transmission"
+                    @bind="transmissionSelect">
+                        @foreach (var item in trm)
+                        {
+                            <option value="@item">@item</option>
+                        }
+                    </select>
+                </div>
+                <div>
+                    <label for="color" class="block mb-2 text-sm font-medium text-gray-300">
+                        Color: *
+                    </label>
+                    <select required class="flex h-10 w-full rounded-md border border-input px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 bg-gray-800 text-white border-none"
+                            id="color" @bind="colorSelect">
+                        @foreach (var item in clr)
+                        {
+                            <option value="@item">@item</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-span-2">
+                    <button type="submit" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 w-full bg-[#028282] text-white">
+                        Add Vehicle
+                    </button>
+
+                </div>
+                <p>@msg</p>
+            </EditForm>
+        </div>
     </div>
+
 </div>
 
 
-@* @if (vehicle != null)
-{
-    @foreach (var item in vehicleList)
-    {
-        <div class="container container-fluid mt-5">
-            <div class="card bg-white">
-                <article class="card-body mx-auto" style="max-width: 400px;">
-                    <h4 class="text-center fw-bold">Vehicle Information</h4>
 
-                    <div class="form-group input-group mb-1 mt-4">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"> <i class="oi oi-person"></i> </span>
-                        </div>
-                        <input class="form-control" @bind-value="item.vehicleMake" readonly>
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"> <i class="oi oi-person"></i> </span>
-                        </div>
-                        <input class="form-control" type="text" @bind-value="item.vehicleModel" readonly>
-                    </div> <!-- form-group// -->
-                    <div class="form-group input-group mb-1">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"> <i class="oi oi-book"></i> </span>
-                        </div>
-                        <input class="form-control" @bind-value="item.vehiclePlate" readonly>
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"> <i class="oi oi-book"></i> </span>
-                        </div>
-                        <input class="form-control" @bind-value="item.vehicleType" readonly>
-                    </div> <!-- form-group// -->
-                    <div class="form-group input-group mb-1">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"> <i class="oi oi-box"></i> </span>
-                        </div>
-                        <input class="form-control" @bind-value="item.vehicleColor" readonly>
-                    </div>
-                    
-                </article>
-            </div> <!-- card.// -->
-
-        </div>
-    }
-
-} *@
 
 
 @code {
@@ -144,13 +148,36 @@
     public string custID_FK { get; set; }
     VehicleModel vehicle = new VehicleModel();
     List<VehicleModel> vehicleList = new List<VehicleModel>();
+    private string msg;
+    private int modelSelect { get; set; }
+    List<int> model = new List<int>
+{
+    1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999,
+    2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009,
+    2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019,
+    2020, 2021, 2022, 2023, 2024
+};
 
 
-    private string? selected{ get; set; }
+    private string selected{ get; set; }
     List<string> make = new List<string>
     {
-        "Suzuki","Honda","Toyota","Hyundai"
+        "Suzuki","Honda","Toyota","Hyundai","Tesla","Daihatsu","Mitsubishi","Lamborghini","Porsche","MG","Others"
     };
+
+    private string transmissionSelect { get; set; }
+    List<string> trm = new List<string>
+    {
+        "Automatic","Manual"
+    };
+    private string colorSelect { get; set; }
+    List<string> clr = new List<string>
+{
+    "White", "Black", "Silver", "Red", "Blue", "Gray", "Green", "Brown", "Yellow",
+    "Orange", "Beige", "Gold", "Purple", "Pink", "Turquoise", "Maroon", "Magenta",
+    "Teal", "Charcoal", "Coral Blue"
+};
+
 
     //string userid = "3fa85f64-5717-4562-b3fc-2c963f66afad";
     private async void SaveVehicle()
@@ -160,7 +187,11 @@
         vehicle.custID_FK = Guid.Parse(custID_FK);
         vehicle.vehicleID = Guid.NewGuid();
         vehicle.vehicleMake = selected;
+        vehicle.vehicleModel = modelSelect;
+        vehicle.vehicleType = transmissionSelect;
+        vehicle.vehicleColor = colorSelect;
         await veh.SaveVehicle(vehicle);
+        msg = "Data Added Successfully";
         nm.NavigateTo("/custWorkInfo/"+custID_FK+"/"+vehicle.vehicleID);
     }
     private async Task DeleteVehicle(Guid id)
