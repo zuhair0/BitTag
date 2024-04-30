@@ -1,4 +1,4 @@
-﻿@page "/vehicle/{custID_FK}"
+﻿@page "/vehicle/{custID_FK}/{custCNIC}"
 @using BitTagDAL
 @using BitTagModels
 @using BitTagUser.CutomerServices;
@@ -63,6 +63,62 @@
         </form>
     </div> *@
 
+<div class="p-4 sm:ml-64">
+    <div class="p-1 rounded-lg dark:border-gray-700">
+        <div class="container max-w-screen-lg mx-auto">
+            <div>
+                <div class="rounded shadow-lg p-4 px-4 md:p-8 mb-6 main-color" style="color: black;">
+                    <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
+                        <div>
+                            <p class="font-medium text-lg text-white">Vehicle Details</p>
+                        </div>
+                        <!--Vehicle Information-->
+                        @foreach (var item in vehicleList)
+                        {
+                            <div class="lg:col-span-2">
+                                <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+                                    <div class="md:col-span-2">
+                                        <label for="make">Make</label>
+                                        <input type="text" name="make" id="make" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="@item.vehicleMake" readonly />
+                                    </div>
+                                    <div class="md:col-span-2">
+                                        <label for="model">Model</label>
+                                        <input type="text" name="model" id="model" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="@item.vehicleModel" readonly />
+                                    </div>
+                                    <div class="md:col-span-1">
+                                        <label for="plate">Plate</label>
+                                        <input type="text" name="plate" id="plate" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="@item.vehiclePlate" readonly />
+                                    </div>
+
+                                    <div class="md:col-span-3">
+                                        <label for="type">Type</label>
+                                        <input type="text" name="type" id="type" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="@item.vehicleType" readonly />
+                                    </div>
+
+                                    <div class="md:col-span-2">
+                                        <label for="color">Color</label>
+                                        <input type="text" name="color" id="color" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="@item.vehicleColor" readonly />
+                                    </div>
+
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* @if (vehicle != null)
+    {
+        @foreach (var item in vehicleList)
+        {
+            <div class="container container-fluid mt-5">
+                <div class="card bg-white">
+                    <article class="card-body mx-auto" style="max-width: 400px;">
+                        <h4 class="text-center fw-bold">Vehicle Information</h4>
     <div class="flex justify-center py-12 bg-[#014040] min-h-screen">
         <div class="w-full max-w-4xl px-8 py-10 bg-[#036666] rounded-lg shadow-lg">
             <h2 class="text-3xl font-bold text-white mb-6">Add Vehicle</h2>
@@ -91,6 +147,35 @@
                         }
                     </select>
 
+                        <div class="form-group input-group mb-1 mt-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="oi oi-person"></i> </span>
+                            </div>
+                            <input class="form-control" @bind-value="item.vehicleMake" readonly>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="oi oi-person"></i> </span>
+                            </div>
+                            <input class="form-control" type="text" @bind-value="item.vehicleModel" readonly>
+                        </div> <!-- form-group// -->
+                        <div class="form-group input-group mb-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="oi oi-book"></i> </span>
+                            </div>
+                            <input class="form-control" @bind-value="item.vehiclePlate" readonly>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="oi oi-book"></i> </span>
+                            </div>
+                            <input class="form-control" @bind-value="item.vehicleType" readonly>
+                        </div> <!-- form-group// -->
+                        <div class="form-group input-group mb-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="oi oi-box"></i> </span>
+                            </div>
+                            <input class="form-control" @bind-value="item.vehicleColor" readonly>
+                        </div>
+
+                    </article>
+                </div> <!-- card.// -->
                 </div>
                 <div>
                     <label for="plate" class="block mb-2 text-sm font-medium text-gray-300">
@@ -141,11 +226,14 @@
 
 
 
+    } *@
 
 
 @code {
     [Parameter]
     public string custID_FK { get; set; }
+    [Parameter]
+    public string custCNIC { get; set; }
     VehicleModel vehicle = new VehicleModel();
     List<VehicleModel> vehicleList = new List<VehicleModel>();
     private string msg;
@@ -159,6 +247,7 @@
 };
 
 
+    private string? selected { get; set; }
     private string selected{ get; set; }
     List<string> make = new List<string>
     {
@@ -191,6 +280,7 @@
         vehicle.vehicleType = transmissionSelect;
         vehicle.vehicleColor = colorSelect;
         await veh.SaveVehicle(vehicle);
+        nm.NavigateTo("/custWorkInfo/" + custID_FK + "/" + vehicle.vehicleID);
         msg = "Data Added Successfully";
         nm.NavigateTo("/custWorkInfo/"+custID_FK+"/"+vehicle.vehicleID);
     }
@@ -200,7 +290,7 @@
     }
     private async Task LoadData()
     {
-        vehicleList = await veh.GetVehicleModels();
+        vehicleList = await veh.GetVehicleModelByID(custCNIC);
     }
     protected override async Task OnInitializedAsync()
     {

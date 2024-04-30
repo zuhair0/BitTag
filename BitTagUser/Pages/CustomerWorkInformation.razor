@@ -7,6 +7,23 @@
 @inject IBitTagUsers bittaguser
 @inject NavigationManager nm;
 @attribute [Authorize(Roles = "Administrator,User")]
+@*<EditForm Model="customerWorkInfo" OnSubmit="SaveCustWorkInfo">
+    <label>Organization</label>
+    @*<input type="text" @bind-value="vehicle.vehicleMake" /><br />*@
+@*<select @onchange="SeletedOrgID">
+            @foreach (var item in organizations)
+            {
+                <option value="@item.orgID">@item.orgName</option>
+            }
+        </select>
+        <label>Work Type</label>
+        <input type="text" @bind-value="customerWorkInfo.WorkType" />
+        <label>Designtion</label>
+        <input type="text" @bind-value="customerWorkInfo.Desig" />
+        <label>Work time</label>
+        <input type="text" @bind-value="customerWorkInfo.worktime" />
+        <button type="submit">Save</button>
+    </EditForm>*@
 
 <div class="p-4 sm:ml-64">
     <div class="p-1 rounded-lg main-color" style="width: 100%; height: 95vh">
@@ -46,8 +63,74 @@
 
 </div>
 
+<form class="max-w-sm mx-auto" style="padding-top: 120px;">
+    <EditForm Model="customerWorkInfo" OnSubmit="SaveCustWorkInfo">
+        <div class="grid md:grid-cols-2 md:gap-6">
+            <div class="mb-5">
+                <label for="orgName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Organization: *</label>
+                <select @onchange="SeletedOrgID" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    @foreach (var item in organizations)
+                    {
+                        <option value="@item.orgID">@item.orgName</option>
+                    }
+                </select>
+            </div>
+            <div class="mb-5">
+                <label for="workType" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Work Type: *</label>
+                <input type="text" id="workType" @bind-value="customerWorkInfo.WorkType" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Part-Time/Full-Time" required>
+            </div>
+        </div>
+        <div class="grid md:grid-cols-2 md:gap-6">
+            <div class="mb-5">
+                <label for="desig" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Designation: *</label>
+                <input type="text" @bind-value="@customerWorkInfo.Desig" id="desig" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Student" required>
+            </div>
+            <div class="mb-5">
+                <label for="chkinTime" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Check-in Time: *</label>
+                <input type="time" id="chkinTime" @bind-value="@customerWorkInfo.worktime" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required>
+            </div>
+        </div>
+        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add Work</button>
+    </EditForm>
+</form>
+<div class="p-4 sm:ml-64">
+    <div class="p-1 rounded-lg dark:border-gray-700">
+        <div class="container max-w-screen-lg mx-auto">
+            <div>
+                <div class="rounded shadow-lg p-4 px-4 md:p-8 mb-6 main-color" style="color: black;">
+                    <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
+                        <div>
+                            <p class="font-medium text-lg text-white">Work Details</p>
+                        </div>
+                        <!--Work Information-->
+                        @foreach (var item in workinfos)
+                        {
+                            <div class="lg:col-span-2">
+                                <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+                                    <div class="md:col-span-5">
+                                        <label for="workType">Work Type</label>
+                                        <input type="text" name="workType" id="workType" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="@item.WorkType" readonly />
+                                    </div>
+                                    <div class="md:col-span-3">
+                                        <label for="desig">Designation</label>
+                                        <input type="text" name="desig" id="desig" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="@item.Desig" readonly />
+                                    </div>
 
+                                    <div class="md:col-span-2">
+                                        <label for="chkinTime">Check-in Time</label>
+                                        <input type="text" name="chkinTime" id="chkinTime" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="@item.worktime" readonly />
+                                    </div>
 
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @code {
     [Parameter]
     public string custID_FK { get; set; }
@@ -83,7 +166,7 @@
     }
     protected override async Task OnInitializedAsync()
     {
-
+       // workinfos = await custWork.GetCustomerWorkInfoByID(custCNIC);
         organizations = await org.Getorgs();
     }
 }
