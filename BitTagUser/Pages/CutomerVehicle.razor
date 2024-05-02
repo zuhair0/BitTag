@@ -6,8 +6,8 @@
 @inject NavigationManager nm;
 @attribute [Authorize(Roles = "Administrator,User")]
 
-<div class="p-4 sm:ml-64">
-@*     <div class="p-1 rounded-lg main-color" style="width: 100%; height: 95vh">
+
+    <div class="p-1 rounded-lg main-color" style="width: 100%; height: 95vh">
         <h1>Add Vehicle</h1>
         <form class="max-w-sm mx-auto">
             <EditForm Model="vehicle" OnSubmit="SaveVehicle">
@@ -61,7 +61,7 @@
                 <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add Vehicle</button>
             </EditForm>
         </form>
-    </div> *@
+    </div>
 
 <div class="p-4 sm:ml-64">
     <div class="p-1 rounded-lg dark:border-gray-700">
@@ -247,7 +247,6 @@
 };
 
 
-    private string? selected { get; set; }
     private string selected{ get; set; }
     List<string> make = new List<string>
     {
