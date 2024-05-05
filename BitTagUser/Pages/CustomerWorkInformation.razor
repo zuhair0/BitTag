@@ -62,46 +62,6 @@
 
 
 </div>
-
-
-<div class="p-4 sm:ml-64">
-    <div class="p-1 rounded-lg dark:border-gray-700">
-        <div class="container max-w-screen-lg mx-auto">
-            <div>
-                <div class="rounded shadow-lg p-4 px-4 md:p-8 mb-6 main-color" style="color: black;">
-                    <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
-                        <div>
-                            <p class="font-medium text-lg text-white">Work Details</p>
-                        </div>
-                        <!--Work Information-->
-                        @foreach (var item in workinfos)
-                        {
-                            <div class="lg:col-span-2">
-                                <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
-                                    <div class="md:col-span-5">
-                                        <label for="workType">Work Type</label>
-                                        <input type="text" name="workType" id="workType" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="@item.WorkType" readonly />
-                                    </div>
-                                    <div class="md:col-span-3">
-                                        <label for="desig">Designation</label>
-                                        <input type="text" name="desig" id="desig" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="@item.Desig" readonly />
-                                    </div>
-
-                                    <div class="md:col-span-2">
-                                        <label for="chkinTime">Check-in Time</label>
-                                        <input type="text" name="chkinTime" id="chkinTime" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="@item.worktime" readonly />
-                                    </div>
-
-                                </div>
-                            </div>
-                        }
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 @code {
     [Parameter]
     public string custID_FK { get; set; }
