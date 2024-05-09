@@ -17,19 +17,19 @@ builder.Services.AddServerSideBlazor();
 builder.Services.AddSyncfusionBlazor();
 
 builder.Services.AddHttpClient<ICustomer, Customer>(
-    c => { c.BaseAddress = new Uri(localhost); }
+    c => { c.BaseAddress = new Uri(deployedURI); }
     );
 builder.Services.AddHttpClient<IVehicle, Vehicle>(
-    c => { c.BaseAddress = new Uri(localhost); }
+    c => { c.BaseAddress = new Uri(deployedURI); }
     );
 builder.Services.AddHttpClient<ICustomerWorkInfo, CustomerWorkInfo>(
-    c => { c.BaseAddress = new Uri(localhost); }
+    c => { c.BaseAddress = new Uri(deployedURI); }
     );
 builder.Services.AddHttpClient<IOrgs, Orgs>(
-    c => { c.BaseAddress = new Uri(localhost); }
+    c => { c.BaseAddress = new Uri(deployedURI); }
     );
 builder.Services.AddHttpClient<IBitTagUsers, BitTaaguser>(
-    c => { c.BaseAddress = new Uri(localhost); }
+    c => { c.BaseAddress = new Uri(deployedURI); }
     );
 //builder.Services.AddHttpClient<IBitTagUser, BitTagsUser>(
 //    c => { c.BaseAddress = new Uri("https://localhost:7195"); }

@@ -13,13 +13,13 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSyncfusionBlazor();
 builder.Services.AddHttpClient<IOrganizations, Organizations>(
-    c =>{c.BaseAddress = new Uri(localhost);}
+    c =>{c.BaseAddress = new Uri(deployedURI);}
     );
 builder.Services.AddHttpClient<IOrgEmployees, OrgEmployees>(
-    c => { c.BaseAddress = new Uri(localhost); }
+    c => { c.BaseAddress = new Uri(deployedURI); }
     );
 builder.Services.AddHttpClient<IBitTag, BitTags>(
-    c => { c.BaseAddress = new Uri(localhost); }
+    c => { c.BaseAddress = new Uri(deployedURI); }
     );
 var app = builder.Build();
 
