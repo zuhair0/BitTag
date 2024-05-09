@@ -1,5 +1,7 @@
 ﻿@page "/"
-<PageTitle>BitTag</PageTitle>
+@using System.Net;
+@using System.Net.Mail;
+<PageTitle>Bit Tag</PageTitle>
 
 <div style="margin-top: 45px;">
 	<section class="relative bg-[url(https://iili.io/JadvEqg.md.png)] bg-cover bg-center bg-no-repeat">
@@ -210,105 +212,8 @@
     </div>
 </section>
 
-<!--
-  Heads up! 👋
 
-  Plugins:
-    - @tailwindcss/forms
--->
 
-<section class="bg-gray-50">
-    <h1 align="center" class="pt-20 text-4xl text-blue-800 font-bold">Need BitTag for your Organization? Reach out!</h1>
-    <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-5">
-            <div class="lg:col-span-2 lg:py-12">
-                <p class="max-w-xl text-lg">
-                    Whether you're interested in implementing BitTag for your organization or require assistance with retrieving BitTags, 
-                    we're committed to offering transparent pricing and efficient solutions tailored to your needs. 
-                    Contact us today to request a price quote and explore how BitTag can revolutionize your access management processes.
-                </p>
-            </div>
-
-            <div class="rounded-lg bg-white p-8 shadow-lg lg:col-span-3 lg:p-12">
-                <form action="#" class="space-y-4">
-                    <div>
-                        <label class="sr-only" for="name">Organization Name</label>
-                        <input class="w-full rounded-lg border-gray-200 p-3 text-sm border"
-                               placeholder="Name"
-                               type="text"
-                               id="name" required/>
-                    </div>
-
-                    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                        <div>
-                            <label class="sr-only" for="email">Email</label>
-                            <input class="w-full rounded-lg border-gray-200 p-3 text-sm border"
-                                   placeholder="Email address"
-                                   type="email"
-                                   id="email" required/>
-                        </div>
-
-                        <div>
-                            <label class="sr-only" for="phone">Phone</label>
-                            <input class="w-full rounded-lg border-gray-200 p-3 text-sm border"
-                                   placeholder="Phone Number"
-                                   type="tel"
-                                   id="phone" />
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 gap-4 text-center sm:grid-cols-3">
-                        <div>
-                            <label for="Option1"
-                                   class="block w-full cursor-pointer rounded-lg border border-blue-200 p-3 text-blue-600 hover:border-black has-[:checked]:border-blue-900 has-[:checked]:bg-blue-900 has-[:checked]:text-blue-50"
-                                   tabindex="0">
-                                <input class="sr-only" id="Option1" type="radio" tabindex="-1" name="option" />
-
-                                <span class="text-sm"> Order BitTags </span>
-                            </label>
-                        </div>
-
-                        <div>
-                            <label for="Option2"
-                                   class="block w-full cursor-pointer rounded-lg border border-blue-200 p-3 text-blue-600 hover:border-black has-[:checked]:border-blue-900 has-[:checked]:bg-blue-900 has-[:checked]:text-blue-50"
-                                   tabindex="0">
-                                <input class="sr-only" id="Option2" type="radio" tabindex="-1" name="option" />
-
-                                <span class="text-sm"> Assistance </span>
-                            </label>
-                        </div>
-
-                        <div>
-                            <label for="Option3"
-                                   class="block w-full cursor-pointer rounded-lg border border-blue-200 p-3 text-blue-600 hover:border-black has-[:checked]:border-blue-900 has-[:checked]:bg-blue-900 has-[:checked]:text-blue-50"
-                                   tabindex="0">
-                                <input class="sr-only" id="Option3" type="radio" tabindex="-1" name="option" />
-
-                                <span class="text-sm"> Others </span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="sr-only" for="message">Message</label>
-
-                        <textarea class="w-full rounded-lg border-gray-200 p-3 text-sm border"
-                                  placeholder="Message"
-                                  rows="8"
-                                  id="message"></textarea>
-                    </div>
-
-                    <div class="mt-4">
-                        <button type="submit"
-                                class="inline-block w-full rounded-lg bg-blue-900 px-5 py-3 font-medium text-white sm:w-auto">
-                            Send 
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
 
 <footer class="bg-blue-100">
     <div class="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
@@ -326,9 +231,13 @@
 
                 <br />
                 <b>FINAL YEAR PROJECT</b><br />
-                <b>Team Members:</b> Sameer Ahmed Siddiqui, Ayesha Dastagir & Zuhair Saleem<br />
+                <b>Team Members:</b> <a href="mailto:200597@students.au.edu.pk">Sameer Ahmed Siddiqui</a>, <a href="mailto:200594@students.au.edu.pk">Ayesha Dastagir</a> & <a href="mailto:200614@students.au.edu.pk">Zuhair Saleem</a><br />
                 <b>Supervisor:</b> Mr. Asim Ali Fayyaz
             </p>
         </div>
     </div>
 </footer>
+
+@code{
+
+}

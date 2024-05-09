@@ -7,23 +7,7 @@
 @inject IBitTagUsers bittaguser
 @inject NavigationManager nm;
 @attribute [Authorize(Roles = "Administrator,User")]
-@*<EditForm Model="customerWorkInfo" OnSubmit="SaveCustWorkInfo">
-    <label>Organization</label>
-    @*<input type="text" @bind-value="vehicle.vehicleMake" /><br />*@
-@*<select @onchange="SeletedOrgID">
-            @foreach (var item in organizations)
-            {
-                <option value="@item.orgID">@item.orgName</option>
-            }
-        </select>
-        <label>Work Type</label>
-        <input type="text" @bind-value="customerWorkInfo.WorkType" />
-        <label>Designtion</label>
-        <input type="text" @bind-value="customerWorkInfo.Desig" />
-        <label>Work time</label>
-        <input type="text" @bind-value="customerWorkInfo.worktime" />
-        <button type="submit">Save</button>
-    </EditForm>*@
+<PageTitle>Work Profile</PageTitle>
 
 <div class="p-4 sm:ml-64">
     <div class="p-1 rounded-lg main-color" style="width: 100%; height: 95vh">
@@ -41,9 +25,18 @@
                         </select>
                     </div>
                     <div class="mb-5">
+                        <label for="orgName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Work Type *</label>
+                        <select @bind="SelectedWT" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            @foreach (var item in wt)
+                            {
+                                <option value="@item">@item</option>
+                            }
+                        </select>
+                    </div>
+@*                     <div class="mb-5">
                         <label for="workType" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Work Type: *</label>
                         <input type="text" id="workType" @bind-value="customerWorkInfo.WorkType" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Part-Time/Full-Time" required>
-                    </div>
+                    </div> *@
                 </div>
                 <div class="grid md:grid-cols-2 md:gap-6">
                     <div class="mb-5">
@@ -57,6 +50,7 @@
                 </div>
                 <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add Work</button>
             </EditForm>
+            <p class="text-red-300 text-lg">@msg</p>
         </form>
     </div>
 
@@ -67,6 +61,12 @@
     public string custID_FK { get; set; }
     [Parameter]
     public string vehicleID { get; set; }
+    private string SelectedWT{ get; set; }
+    List<string> wt = new List<string>
+{
+    "Part Time", "Full-Time", "Contractual"
+};
+    private string msg = String.Empty;
     CustomerWorkInfoModel customerWorkInfo = new CustomerWorkInfoModel();
     List<CustomerWorkInfoModel> workinfos = new List<CustomerWorkInfoModel>();
 
@@ -76,15 +76,23 @@
     //string userid = "3fa85f64-5717-4562-b3fc-2c963f66afad";
     //string vehid = "9F2E2662-4924-4C2B-A7B3-EA0EE31E3374";
     //string userid = "3fa85f64-5717-4562-b3fc-2c963f66afad";
+
+    private async Task DisplayMsg()
+    {
+        msg = "Work Information Added Successfully";
+        customerWorkInfo = new CustomerWorkInfoModel();
+    }
     private async void SaveCustWorkInfo()
     {
         customerWorkInfo.userID_FK = Guid.Parse(custID_FK);
         customerWorkInfo.org_FK = orgId;
+        customerWorkInfo.WorkType = SelectedWT;
         bitTagUser.userid_fk = Guid.Parse(custID_FK);
         bitTagUser.vehid_fk = Guid.Parse(vehicleID);
         bitTagUser.bittagcode = "null";
         await bittaguser.SaveBitTagUser(bitTagUser);
         await custWorkinfo.SaveCustomerWorkInfo(customerWorkInfo);
+        await DisplayMsg();
         //nm.NavigateTo("/index/"+custID_FK);
     }
     //private async Task LoadData()
