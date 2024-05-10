@@ -142,7 +142,7 @@ else
     OrganizationModel OrgModel = new OrganizationModel();
     List<OrganizationModel> organizationList = new List<OrganizationModel>();
     private bool showorg = false;
-
+    Guid guidID = Guid.Parse("3403ED3D-CAA5-41E5-974B-6F8862311978");
     private bool successful = false;
     private bool preload = false;
     private string? selected { get; set; }
@@ -254,7 +254,7 @@ else
 
     private async Task LoadData()
     {
-        //organizationList = await Orgs.GetOrganizationsById(Guid.Parse("3403ED3D-CAA5-41E5-974B-6F8862311978"));
-        organizationList = await Orgs.GetOrganizations();
+        organizationList = await Orgs.GetOrganizationsById(guidID);
+        //organizationList = await Orgs.GetOrganizations();
     }
 }
