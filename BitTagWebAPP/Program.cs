@@ -19,7 +19,7 @@ builder.Services.AddHttpClient<IOrgEmployees, OrgEmployees>(
     c => { c.BaseAddress = new Uri(deployedURI); }
     );
 builder.Services.AddHttpClient<IBitTag, BitTags>(
-    c => { c.BaseAddress = new Uri(deployedURI); }
+    c => { c.BaseAddress = new Uri(localhost); }
     );
 var app = builder.Build();
 
