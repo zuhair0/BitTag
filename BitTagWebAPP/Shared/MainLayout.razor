@@ -1,14 +1,15 @@
 ﻿@* @inherits LayoutComponentBase
 
-<PageTitle>BitTagWebAPP</PageTitle>
+    <PageTitle>BitTagWebAPP</PageTitle>
 
 
 
 
- *@
+*@
 
- @inherits LayoutComponentBase
+@inherits LayoutComponentBase
 
+@inject NavigationManager NavigationManager
 
 
 <div>
@@ -52,9 +53,9 @@
     else
     {
         <div>
-            <div>
-                <NavMenu />
-            </div>
+            @*<div>
+                    <NavMenu />
+                </div>*@
             <div class="sm:ml-64" style="background:linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),url(https://iili.io/JadvEqg.md.png); background-attachment:fixed; background-size:cover; width: 81%; height:auto;">
                 @Body
             </div>
@@ -67,6 +68,10 @@
     string staticUsername = "user";
     string staticPassword = "123";
 
+    string staticOrgUname = "Org";
+    string staticOrgPass = "12345";
+
+    string role;
     string usernameInput = "";
     string passwordInput = "";
     bool isLoggedIn = false;
@@ -77,7 +82,15 @@
     {
         if (usernameInput == staticUsername && passwordInput == staticPassword)
         {
+            role = "admin";
             isLoggedIn = true;
+            NavigationManager.NavigateTo("/nav/admin");
+        }
+        if (usernameInput == staticOrgUname && passwordInput == staticOrgPass)
+        {
+            role = "organization";
+            isLoggedIn = true;
+            NavigationManager.NavigateTo("/nav/organization");
         }
         else
         {

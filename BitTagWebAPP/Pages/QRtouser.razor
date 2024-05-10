@@ -1,0 +1,15 @@
+﻿@page "/assignqrtouser"
+<label>QR code</label><br />
+<input placeholder="QR code" type="number" @bind-value="value"/><br />
+<button @onclick="Save">Add</button><br />
+@msg
+@code {
+    string value { get; set; }
+    string msg { get; set; }
+
+    private void Save()
+    {
+        msg = "Added Successfully";
+    }
+}
+

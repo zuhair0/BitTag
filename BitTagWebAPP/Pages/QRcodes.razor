@@ -1,0 +1,73 @@
+﻿@page "/qrcodes"
+
+@inject IBitTag bittag
+@using BitTagUser.CutomerServices
+@using BitTagModels
+
+@if (showqr == true)
+{
+    <button class="px-8 py-3 font-semibold ml-20 mb-10 rounded bg-red-400 text-gray-900 max-w-sm mx-auto" @onclick="closeQR">Close &#x274C;</button>
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <table class="rounded ml-5 mr-5 w-full text-sm text-left rtl:text-right text-gray-500 main-color text-gray-400">
+            <thead class="text-xs uppercase main-color text-gray-50">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        Serial
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Org Name
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        QRcode
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in bitTags)
+                    {
+                    <tr class="soft-color border-b border-gray-700">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            @item.tagSerial
+                        </th>
+                        <td>
+                            @orgname
+                        </td>
+                        <td class="px-6 py-4">
+                            @item.QRcode
+                        </td>
+                    </tr>
+                    }
+
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <button class="px-8 py-3 font-semibold rounded ml-20 mb-20 bg-blue-950 text-gray-100" @onclick="showQR">Show QR</button>
+}
+
+
+@code {
+            List<BitTagDetailsModel> bitTags = new List<BitTagDetailsModel>();
+            string orgname = "Air University";
+    private bool showqr = false;
+
+        private void showQR()
+        {
+            showqr = true;
+        }
+
+        private void closeQR()
+        {
+            showqr = false;
+        }
+        protected override async Task OnInitializedAsync()
+        {
+            await LoadData();
+        }
+        private async Task LoadData()
+        {
+            bitTags = await bittag.GetBitT();
+        }
+    }

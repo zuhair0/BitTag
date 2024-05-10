@@ -1,6 +1,8 @@
 ﻿@page "/organization"
-@using BitTagWebAPP.Services;
 @inject IOrganizations Orgs
+@inject IBitTag bittag
+@using BitTagUser.CutomerServices
+@using BitTagWebAPP.Services;
 @using BitTagDAL
 @using BitTagModels
 
@@ -11,11 +13,11 @@
 }
 
 <form class="max-w-sm mx-auto" style="padding-top: 120px;">
-        <EditForm Model="OrgModel" OnSubmit="SaveOrganization">
-@*         <div class="mb-5">
-            <label for="organizationName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Organization Name: *</label>
-            <input type="text" @bind-value="OrgModel.orgName" id="organizationName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Air University" required>
-        </div> *@
+    <EditForm Model="OrgModel" OnSubmit="SaveOrganization">
+        @*         <div class="mb-5">
+                <label for="organizationName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Organization Name: *</label>
+                <input type="text" @bind-value="OrgModel.orgName" id="organizationName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Air University" required>
+            </div> *@
         <div class="mb-5">
             <label for="orgName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Organization Name: *</label>
             <select @bind="@selected" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -25,10 +27,10 @@
                 }
             </select>
         </div>
-@*         <div class="mb-5">
-            <label for="organizationType" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Organization's Type: *</label>
-            <input type="text" @bind-value="OrgModel.orgType" id="organizationType" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Educational" required>
-        </div> *@
+        @*         <div class="mb-5">
+                <label for="organizationType" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Organization's Type: *</label>
+                <input type="text" @bind-value="OrgModel.orgType" id="organizationType" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Educational" required>
+            </div> *@
         <div class="mb-5">
             <label for="orgType" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Organization Type: *</label>
             <select @bind="@selected2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -128,9 +130,8 @@
 else
 {
     <button class="px-8 py-3 font-semibold rounded ml-20 mb-20 bg-blue-950 text-gray-100" @onclick="showOrg">Show Organizations</button>
+
 }
-
-
 
 
 
@@ -141,6 +142,7 @@ else
     OrganizationModel OrgModel = new OrganizationModel();
     List<OrganizationModel> organizationList = new List<OrganizationModel>();
     private bool showorg = false;
+    
     private bool successful = false;
     private bool preload = false;
     private string? selected { get; set; }
@@ -225,7 +227,7 @@ else
     {
         showorg = false;
     }
-
+    
     private async void SaveOrganization()
     {
 

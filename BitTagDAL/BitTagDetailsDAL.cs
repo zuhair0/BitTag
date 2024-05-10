@@ -23,6 +23,7 @@ namespace BitTagDAL
                 BitTagDetailsModel bitTag = new BitTagDetailsModel();
                 bitTag.tagID = Guid.Parse(reader["tagID"].ToString());
                 bitTag.tagSerial = int.Parse(reader["tagSerial"].ToString());
+				bitTag.QRcode = reader["QRcode"].ToString();
                 //bitTag.custID_FK = Guid.Parse(reader["custID_FK"].ToString());
                 bitTag.orgId = Guid.Parse(reader["orgId"].ToString());
                 bitTagDetails.Add(bitTag);
