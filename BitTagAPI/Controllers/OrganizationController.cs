@@ -11,7 +11,7 @@ namespace BitTagAPI.Controllers
     public class OrganizationController : Controller
     {
         [HttpGet]
-        [Route("GetOrganizationByID/{id}")]
+        [Route("GetOrganizationbyid/{id}")]
         public async Task<JsonResult> GetOrganizationsByID(Guid id)
         {
 

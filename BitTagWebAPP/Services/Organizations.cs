@@ -26,7 +26,7 @@ namespace BitTagWebAPP.Services
         public async Task<List<OrganizationModel>> GetOrganizationsById(Guid id)
         {
             List<OrganizationModel> organizations = new List<OrganizationModel>();
-            organizations = await _httpClient.GetFromJsonAsync<List<OrganizationModel>>("api/controller/GetOrganizationByID/"+id);
+            organizations = await _httpClient.GetFromJsonAsync<List<OrganizationModel>>("api/controller/GetOrganizationbyid/" + id);
             if (organizations != null)
             {
                 return organizations;
