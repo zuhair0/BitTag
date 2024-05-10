@@ -8,7 +8,7 @@
 
 <div style="display:flex;justify-content:center; flex-direction:column; background:lightblue; padding-left:30%;">
 	
-	@if (bitTagDetails.QRcode != null && bitTagDetails.QRcode.Trim() != "")
+	@if (bitTagDetails.qRcode != null && bitTagDetails.qRcode.Trim() != "")
 	{
 		<SfQRCodeGenerator Width="500px" Height="500px" Value="@items">
 			<QRCodeGeneratorDisplayText Visibility="false"></QRCodeGeneratorDisplayText>
@@ -34,7 +34,7 @@
 		bitTagDetails.orgId = Guid.Parse(userid);
 		//bitTagDetails.QRcode = $"{bitTagDetails.orgId} - {bitTagDetails.QRcode} - {bitTagDetails.tagID}"; // Concatenate desired properties
 		items = $"{bittags[0].vehiclePlate}-{bittags[0].vehicleMake}-{bittags[0].vehicleModel}-{bittags[0].vehicleColor}-{bittags[0].vehicleType}";
-		bitTagDetails.QRcode = rnd.Next(10000000,99999999).ToString();
+		bitTagDetails.qRcode = rnd.Next(10000000,99999999).ToString();
 		//bitTagDetails.QRcode = "https://ironsoftware.com/csharp/barcode/tutorials/csharp-qr-code-generator/";
 		bitTagDetails.tagID = Guid.NewGuid();
 		//bitTagDetails.tagSerial = serialCounter.ToString();

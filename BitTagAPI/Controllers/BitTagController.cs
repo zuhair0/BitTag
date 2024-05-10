@@ -17,7 +17,7 @@ namespace BitTagAPI.Controllers
             {
                 new SqlParameter("@tagID",btd.tagID),
                 //new SqlParameter("@tagSerial",btd.tagSerial),
-                new SqlParameter("@QRcode",btd.QRcode),
+                new SqlParameter("@QRcode",btd.qRcode),
                 new SqlParameter("@orgId",btd.orgId)
             };
             await DalCrud.CRUD("Sp_BitTagDetils", parameters);

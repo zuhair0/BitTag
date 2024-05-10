@@ -1,8 +1,8 @@
 ﻿@page "/qrcodes"
 
-@inject IBitTag bittag
 @using BitTagUser.CutomerServices
 @using BitTagModels
+@inject IBitTag bittag
 
 @if (showqr == true)
 {
@@ -25,16 +25,18 @@
             <tbody>
                 @foreach (var item in bitTags)
                     {
+                        Random rnd = new Random();
+                        int randomNumber = rnd.Next(10000000, 99999999);
                     <tr class="soft-color border-b border-gray-700">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             @item.tagSerial
                         </th>
-                        <td>
+                        <th>
                             @orgname
-                        </td>
-                        <td class="px-6 py-4">
-                            @item.QRcode
-                        </td>
+                        </th>
+                        <th class="px-6 py-4">
+                            @randomNumber
+                        </th>
                     </tr>
                     }
 
