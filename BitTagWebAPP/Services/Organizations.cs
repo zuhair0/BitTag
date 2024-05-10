@@ -23,7 +23,20 @@ namespace BitTagWebAPP.Services
                 return new List<OrganizationModel>();
             }
         }
-
+        public async Task<List<OrganizationModel>> GetOrganizationsById(Guid id)
+        {
+            List<OrganizationModel> organizations = new List<OrganizationModel>();
+            organizations = await _httpClient.GetFromJsonAsync<List<OrganizationModel>>("api/controller/GetOrganizationByID/"+id);
+            if (organizations != null)
+            {
+                return organizations;
+            }
+            else
+            {
+                return new List<OrganizationModel>();
+            }
+        }
+        
         public async Task SaveOrganizations(OrganizationModel om) => await _httpClient.PostAsJsonAsync("api/controller/AddOrganization", om);
         public async Task DeleteOrganizations(Guid id)
         {

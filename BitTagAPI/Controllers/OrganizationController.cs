@@ -10,6 +10,16 @@ namespace BitTagAPI.Controllers
     [ApiController]
     public class OrganizationController : Controller
     {
+        [HttpGet]
+        [Route("GetOrganizationByID/{id}")]
+        public async Task<JsonResult> GetOrganizationsByID(Guid id)
+        {
+
+            List<OrganizationModel> organizations = new List<OrganizationModel>();
+            organizations = await Organization.GetOrganizationsByID(id);
+            return new JsonResult(organizations);
+        }
+
         [HttpPost]
         [Route("AddOrganization")]
         public async void AddOrganization(OrganizationModel om)
@@ -35,6 +45,8 @@ namespace BitTagAPI.Controllers
             organizations = await Organization.GetOrganizations();
             return new JsonResult(organizations);
         }
+
+        
         [HttpDelete]
         [Route("DeleteOrganization/{id}")]
         public async void DeleteOrganization(Guid id)
