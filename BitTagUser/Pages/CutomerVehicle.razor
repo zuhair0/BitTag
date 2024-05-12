@@ -6,10 +6,10 @@
 @inject NavigationManager nm;
 @attribute [Authorize(Roles = "Administrator,User")]
 
-
-<div class="p-1 rounded-lg main-color" style="width: 100%; height: 95vh">
-        <h1>Add Vehicle</h1>
-        <form class="max-w-sm mx-auto">
+<div class="p-4 sm:ml-64 h-full">
+    <div class="p-1 rounded-lg main-color" style="width: 100%; height: 100%;">
+        <h1 align="center" class="text-gray-100 text-4xl mt-10 font-bold">Vehicle Information</h1>
+        <form class="max-w-sm mx-auto mt-10">
             <EditForm Model="vehicle" OnSubmit="SaveVehicle">
                 <div class="grid md:grid-cols-2 md:gap-6">
                     <div class="mb-5">
@@ -61,7 +61,42 @@
                 <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add Vehicle</button>
             </EditForm>
         </form>
+
+        <div class="overflow-x-auto rounded-lg border border-gray-200 mt-20">
+            <table class="min-w-full divide-y-2 divide-gray-200 soft-color text-sm">
+                <thead >
+                    <tr>
+                        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Make</th>
+                        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Model</th>
+                        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Transmission</th>
+                        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Plate</th>
+                        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Color</th>
+                    </tr>
+                </thead>
+
+                <tbody class="divide-y divide-gray-200">
+                    @foreach (var item in vehicleList)
+                    {
+                        <tr>
+                            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">@item.vehicleMake</td>
+                            <td class="whitespace-nowrap px-4 py-2 text-gray-700">@item.vehicleModel</td>
+                            <td class="whitespace-nowrap px-4 py-2 text-gray-700">@item.vehicleType</td>
+                            <td class="whitespace-nowrap px-4 py-2 text-gray-700">@item.vehiclePlate</td>
+                            <td class="whitespace-nowrap px-4 py-2 text-gray-700">@item.vehicleColor</td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
     </div>
+
+
+
+
+
+</div>
+
 
 
 

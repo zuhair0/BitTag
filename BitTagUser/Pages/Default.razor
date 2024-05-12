@@ -116,73 +116,42 @@
                             <strong class="font-bold text-gray-900 text-xl">Work Information</strong><hr class="mt-5 mb-5" />
                             @foreach (var item in workinfos)
                             {
-                                
-                                <div class="flow-root rounded-lg border border-gray-100 py-3 shadow-sm mx-5 md:m-0" style="width: 90%; ">
-                                    <dl class="-my-3 divide-y divide-gray-100 text-lg">
-                                        <div class="grid grid-cols-1 gap-1 p-3 even:bg-blue-100 sm:grid-cols-3 sm:gap-4">
-                                            @foreach(var it in organizations)
-                                            {
+                                @foreach(var it in organizations)
+                                {
+                                    <div class="flow-root rounded-lg border border-gray-100 py-3 shadow-sm mx-5 md:m-0" style="width: 90%; ">
+                                        <dl class="-my-3 divide-y divide-gray-100 text-lg">
+                                            <div class="grid grid-cols-1 gap-1 p-3 even:bg-blue-100 sm:grid-cols-3 sm:gap-4">
+
+
                                                 <dt class="font-medium text-gray-900">Organization</dt>
                                                 <dd class="text-gray-700 sm:col-span-2">@it.orgName</dd>
-                                            }
 
-                                        </div>
 
-                                        <div class="grid grid-cols-1 gap-1 p-3 even:bg-blue-100 sm:grid-cols-3 sm:gap-4">
-                                            <dt class="font-medium text-gray-900">WorkType</dt>
-                                            <dd class="text-gray-700 sm:col-span-2">@item.WorkType</dd>
-                                        </div>
+                                            </div>
 
-                                        <div class="grid grid-cols-1 gap-1 p-3 even:bg-blue-100 sm:grid-cols-3 sm:gap-4">
-                                            <dt class="font-medium text-gray-900">Designation</dt>
-                                            <dd class="text-gray-700 sm:col-span-2">@item.Desig</dd>
-                                        </div>
+                                            <div class="grid grid-cols-1 gap-1 p-3 even:bg-blue-100 sm:grid-cols-3 sm:gap-4">
+                                                <dt class="font-medium text-gray-900">WorkType</dt>
+                                                <dd class="text-gray-700 sm:col-span-2">@item.WorkType</dd>
+                                            </div>
 
-                                        <div class="grid grid-cols-1 gap-1 p-3 even:bg-blue-100 sm:grid-cols-3 sm:gap-4">
-                                            <dt class="font-medium text-gray-900">Frequent Check-in Time</dt>
-                                            <dd class="text-gray-700 sm:col-span-2">@item.worktime</dd>
-                                        </div>
+                                            <div class="grid grid-cols-1 gap-1 p-3 even:bg-blue-100 sm:grid-cols-3 sm:gap-4">
+                                                <dt class="font-medium text-gray-900">Designation</dt>
+                                                <dd class="text-gray-700 sm:col-span-2">@item.Desig</dd>
+                                            </div>
 
-                                    </dl>
-                                </div>
-                                <hr class="mt-5 mb-5" />
-                            }
+                                            <div class="grid grid-cols-1 gap-1 p-3 even:bg-blue-100 sm:grid-cols-3 sm:gap-4">
+                                                <dt class="font-medium text-gray-900">Frequent Check-in Time</dt>
+                                                <dd class="text-gray-700 sm:col-span-2">@item.worktime</dd>
+                                            </div>
 
-                        </div>
-                    </li>
-                    <li>
-                        <div class="block h-full rounded-lg border border-gray-700 p-4 hover:main-color">
-                            <strong class="font-bold text-gray-900 text-xl">Work Detail Information</strong><hr class="mt-5 mb-5" />
-                            @foreach (var item in workinfos)
-                            {
+                                        </dl>
 
-                                <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8">
-                                    <div class="h-20 rounded-lg main-color lg:col-span-2 p-4">
-                                        @foreach(var item2 in organizations)
-                                        {
-                                            <h2 class="text-xl">@item2.orgName | @item.WorkType | @item.worktime</h2>  
-                                        }
                                     </div>
-                                    <div class="h-20 rounded-lg main-color flex items-center justify-center">
-                                        <span class="inline-flex overflow-hidden rounded-md border bg-white shadow-sm">
-                                            <button class="inline-block p-3 text-white bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
-                                                    title="Delete Product" @onclick="()=>DeleteWorkProfile(item.org_FK)">
-                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                     fill="none"
-                                                     viewBox="0 0 24 24"
-                                                     stroke-width="1.5"
-                                                     stroke="currentColor"
-                                                     class="h-6 w-6">
-                                                    <path stroke-linecap="round"
-                                                          stroke-linejoin="round"
-                                                          d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-                                                </svg>
-                                            </button>
-                                        </span>
-                                    </div>
+                                    <hr class="mt-5 mb-5" />
+                                }
 
-                                </div>
-                                <hr class="mt-5 mb-5" />
+                                
+
                             }
 
                         </div>
