@@ -4,7 +4,7 @@
 @inject IBitTag bittag
 @using BitTagUser.CutomerServices;
 @using Syncfusion.Blazor.BarcodeGenerator
-<h3>BitTag</h3>
+<PageTitle>Generate a BitTag</PageTitle>
 
 <div style="display:flex;justify-content:center; flex-direction:column; background:lightblue; padding-left:30%;">
 	
@@ -17,7 +17,10 @@
 	<EditForm Model="bitTagDetails" OnSubmit="Save">
 		@* <label>Generate</label>
 		<input type="text" @bind-value="bitTagDetails.QRcode"/>  *@
-		<button type="submit" class="btn btn-primary" style="margin-left:23%; margin-top:5%; margin-bottom: 2%;">Generate a BitTag</button>
+
+		<center class="mt-5 mb-5 mr-36">
+			<button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Generate a BitTag</button>
+		</center>
 	</EditForm>
 </div>
 @code {

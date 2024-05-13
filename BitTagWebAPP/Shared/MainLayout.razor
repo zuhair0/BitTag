@@ -57,8 +57,8 @@
                 <NavMenu role="@role" />
             </div>
             <div class="p-4 sm:ml-64">
-                <div class="rounded-xl border border-gray-700 soft-color text-gray-900 p-4 h-100">
-                    <div>
+                <div class="rounded-xl border border-gray-700 soft-color text-gray-900 p-4">
+                    <div class="h-5/6">
                         @Body
                     </div>
                 </div>
@@ -69,11 +69,11 @@
 
 @code {
     // Define static username and password
-    string staticUsername = "user";
-    string staticPassword = "123";
+    string staticUsername = "admin";
+    string staticPassword = "admin123";
 
     string staticOrgUname = "org";
-    string staticOrgPass = "12345";
+    string staticOrgPass = "org123";
 
     string role;
     string usernameInput = "";

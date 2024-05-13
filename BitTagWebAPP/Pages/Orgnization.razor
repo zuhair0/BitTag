@@ -5,14 +5,15 @@
 @using BitTagWebAPP.Services;
 @using BitTagDAL
 @using BitTagModels
-
+<PageTitle>Organizations Registration</PageTitle>
 
 @while (preload == true)
 {
     <Loading />
 }
 
-<form class="max-w-sm mx-auto" style="padding-top: 120px;">
+<form class="max-w-sm mx-auto" style="padding-top: 20px;">
+    <center style="margin-bottom: 40px; "><h1 class="text-2xl font-bold text-gray-900">Register Organization</h1></center>
     <EditForm Model="OrgModel" OnSubmit="SaveOrganization">
         @*         <div class="mb-5">
                 <label for="organizationName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Organization Name: *</label>
@@ -71,7 +72,9 @@
 
 @if (showorg == true)
 {
-    <button class="px-8 py-3 font-semibold ml-20 mb-10 rounded bg-red-400 text-gray-900 max-w-sm mx-auto" @onclick="closeOrg">Close &#x274C;</button>
+    <center>
+        <button class="px-8 py-3 font-semibold mt-8 mb-10 rounded bg-red-400 text-gray-900 max-w-sm mx-auto" @onclick="closeOrg">Close &#x274C;</button>
+    </center>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table class="rounded ml-5 mr-5 w-full text-sm text-left rtl:text-right text-gray-500 main-color text-gray-400">
             <thead class="text-xs uppercase main-color text-gray-50">
@@ -129,7 +132,9 @@
 
 else
 {
-    <button class="px-8 py-3 font-semibold rounded ml-20 mb-20 bg-blue-950 text-gray-100" @onclick="showOrg">Show Organizations</button>
+    <center>
+        <button class="px-8 py-3 font-semibold rounded mb-20 mt-8 bg-blue-950 text-gray-100" @onclick="showOrg">Show Organizations</button>
+    </center>
 
 }
 

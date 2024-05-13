@@ -3,137 +3,11 @@
 @inject IOrgEmployees orgEmp
 @using BitTagDAL
 @using BitTagModels
+<PageTitle>Employees Registration</PageTitle>
 
-@* <EditForm Model="orgEmpModel" OnSubmit="SaveOrgEmp">
-    <label class="col-1">Emp_firstName</label>
-    <input class="col-2" type="text" @bind-value="orgEmpModel.Emp_firstName" /><br />
-    <label class="col-1">Emp_lastName</label>
-    <input class="col-1" type="text" @bind-value="orgEmpModel.Emp_lastName" /><br />
-    <label>Emp_CNIC</label>
-    <input type="text" @bind-value="orgEmpModel.Emp_CNIC" /><br />
-    <label>Pin</label>
-    <input type="text" @bind-value="orgEmpModel.Pin" /><br />
-    <label>Designation</label>
-    <input type="text" @bind-value="orgEmpModel.Designation" /><br />
-    <label>PhoneNum</label>
-    <input type="text" @bind-value="orgEmpModel.PhoneNum" /><br />
-    <button type="submit">Save</button>
-</EditForm> *@
-@* <EditForm Model="orgEmpModel" OnValidSubmit="SaveOrgEmp">
-    <div class="container-fluid">
-        <div class="row">
-            <InputText class="col-4" @bind-Value="orgEmpModel.Emp_firstName" placeholder="First Name" required/>
-            <InputText class="col-4" @bind-Value="orgEmpModel.Emp_lastName" placeholder="Last Name" required />
-            <InputText class="col-4" @bind-Value="orgEmpModel.Emp_CNIC" placeholder="C-NIC" required/>
-        </div>
-        <div class="row">
-            <InputNumber class="col-2" @bind-Value="orgEmpModel.Pin" placeholder="4-digit PIN" max="5" required />
-            <InputText class="col-4" @bind-Value="orgEmpModel.Designation" placeholder="Designation" required />
-            <InputText class="col-3" @bind-Value="orgEmpModel.PhoneNum" placeholder="Phone" required />
-            <button class="col-2 btn btn-primary" type="submit">Save</button>
-        </div>
-    </div>
-</EditForm>
-@msg
-<table class="tble table">
-    <thead>
-        <tr>
-            <th>FirstName</th>
-            <th>LastName</th>
-            <th>PhoneNum</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    @if (orgEmpList != null)
-    {
-        @foreach (var item in orgEmpList)
-        {
-            <tr>
-                <td>@item.Emp_firstName</td>
-                <td>@item.Emp_lastName</td>
-                <td>@item.PhoneNum</td>
-                <td>
-                    <button @onclick="(()=>DeleteOrgEmployee(item.Emp_ID))">Delete</button>
-                </td>
-            </tr>
-        }
 
-    }
-</table>
- *@
-
-@* <EditForm Model="orgEmpModel" OnSubmit="SaveOrgEmp">
-    <form class="max-w-sm mx-auto" style="padding-top: 120px;">
-        <div class="mb-5">
-            <label for="organizationName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Organization Name: *</label>
-            <input type="text"  id="organizationName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Air University" required>
-        </div>
-        <div class="grid md:grid-cols-2 md:gap-6">
-            <div class="mb-5">
-                <label for="organizationName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Organization Name: *</label>
-                <input type="text"  id="organizationName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Air University" required>
-            </div>
-            <div class="mb-5">
-                <label for="organizationName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Organization Name: *</label>
-                <input type="text"  id="organizationName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Air University" required>
-            </div>
-        </div>
-        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
-    </form>
-</EditForm>
-
-<div class="container container-fluid mt-5">
-    <div class="card bg-light">
-        <article class="card-body mx-auto" style="max-width: 400px;">
-            <h4>Organization Employee</h4>
-            <EditForm Model="orgEmpModel" OnValidSubmit="SaveOrgEmp">
-                <div class="form-group input-group mb-1 mt-4">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="oi oi-account-login"></i> </span>
-                    </div>
-                    <input class="form-control" placeholder="First Name" type="text" @bind-value="orgEmpModel.Emp_firstName" required>
-                </div> <!-- form-group// -->
-                <div class="form-group input-group mb-1">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="oi oi-account-login"></i> </span>
-                    </div>
-                    <input class="form-control" placeholder="Last Name" type="text" @bind-value="orgEmpModel.Emp_lastName" required>
-                </div> <!-- form-group// -->
-                <div class="form-group input-group mb-1">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="oi oi-dashboard"></i> </span>
-                    </div>
-                    <input class="form-control" placeholder="C-NIC" @bind-value="orgEmpModel.Emp_CNIC" type="text" required>
-                </div>
-                <div class="form-group input-group mb-1">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="oi oi-dashboard"></i> </span>
-                    </div>
-                    <input class="form-control" placeholder="PIN" type="number" @bind-value="orgEmpModel.Pin" required>
-                </div>
-                <div class="form-group input-group mb-1">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="oi oi-dashboard"></i> </span>
-                    </div>
-                    <input class="form-control" placeholder="Designation" type="text" @bind-value="orgEmpModel.Designation" required>
-                </div>
-                <div class="form-group input-group mb-1">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="oi oi-dashboard"></i> </span>
-                    </div>
-                    <input class="form-control" placeholder="Phone" type="number" @bind-value="orgEmpModel.PhoneNum" required>
-                </div>
-
-                <div class="form-group" style="display:flex; justify-content:center;">
-                    <button type="submit" class="btn btn-primary btn-block"> Register  </button>
-                </div> <!-- form-group// -->
-            </EditForm>
-        </article>
-    </div> <!-- card.// -->
-
-</div> *@
-
-<form class="max-w-sm mx-auto pt-32">
+<form class="max-w-sm mx-auto pt-8">
+    <center style="margin-bottom: 40px; "><h1 class="text-2xl font-bold text-gray-900">Register Organization</h1></center>
     <EditForm Model="orgEmpModel" OnValidSubmit="SaveOrgEmp">
         <div class="mb-5">
             <label for="organizationName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First Name: *</label>
@@ -169,13 +43,13 @@
 
 
 
-<section>
+<section class="-mt-40">
     <div class="gradient-custom-1 h-screen">
         <div class="flex items-center justify-center h-full">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-12">
-                        <div class="overflow-x-auto bg-white shadow-lg">
+                        <div class="overflow-x-auto bg-blue-100 shadow-lg rounded">
                             <table class="table-auto w-full">
                                 <thead>
                                     <tr>
@@ -185,6 +59,7 @@
                                         <th scope="col" class="px-4 py-2">DESIGNATION</th>
                                         <th scope="col" class="px-4 py-2">PHONE</th>
                                         <th scope="col" class="px-4 py-2">ACTION</th>
+                                        <th scope="col" class="px-4 py-2">MORE</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -200,7 +75,7 @@
                                                 <button class="px-2 py-1 bg-red-500 text-white rounded" @onclick="(()=>DeleteOrgEmployee(item.Emp_ID))">Delete</button>
                                             </td>
                                             <td class="px-4 py-2">
-                                                <button class="px-2 py-1 bg-red-500 text-white rounded"><a href="assignqrtouser/@item.Emp_CNIC">Assign BitTag</a></button>
+                                                <button class="px-2 py-1 bg-blue-800 text-white rounded"><a href="assignqrtouser/@item.Emp_CNIC">Assign BitTag</a></button>
                                             </td>
                                         </tr>
                                     }
