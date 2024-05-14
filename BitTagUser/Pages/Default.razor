@@ -115,8 +115,6 @@
                         <div class="block h-full rounded-lg border border-gray-700 p-4 hover:main-color">
                             <strong class="font-bold text-gray-900 text-xl">Work Information</strong><hr class="mt-5 mb-5" />
                             @foreach (var item in workinfos)
-                            {
-                                @foreach(var it in organizations)
                                 {
                                     <div class="flow-root rounded-lg border border-gray-100 py-3 shadow-sm mx-5 md:m-0" style="width: 90%; ">
                                         <dl class="-my-3 divide-y divide-gray-100 text-lg">
@@ -124,7 +122,7 @@
 
 
                                                 <dt class="font-medium text-gray-900">Organization</dt>
-                                                <dd class="text-gray-700 sm:col-span-2">@it.orgName</dd>
+                                                <dd class="text-gray-700 sm:col-span-2">@organizations[i].orgName</dd>
 
 
                                             </div>
@@ -148,11 +146,11 @@
 
                                     </div>
                                     <hr class="mt-5 mb-5" />
+
+
+                                    i++;
+
                                 }
-
-                                
-
-                            }
 
                         </div>
                     </li>
@@ -194,11 +192,12 @@
     //     var message = $"Hello {authState.User.Identity.Name}";
     //     await js.InvokeVoidAsync("alert", message);
     // }
+
     List<CustomersModel> customersList = new List<CustomersModel>();
     List<CustomerWorkInfoModel> workinfos = new List<CustomerWorkInfoModel>();
     List<VehicleModel> vehicleList = new List<VehicleModel>();
     List<OrganizationModel> organizations = new List<OrganizationModel>();
-
+    int i = 0;
     private async void DeleteVehicle(Guid id)
     {
         await veh.DeleteVehicle(id);
