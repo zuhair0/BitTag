@@ -119,13 +119,13 @@
         Guid id = Guid.NewGuid();
         customers.custID = id;
         await cust.SaveCustomers(customers);
-        await LoadData();
         status = true;
+        customers = new CustomersModel();
         msg = "Registration done successfully!";
+        await LoadData();
         Task.Delay(4000);
         status = false;
         StateHasChanged();
-        customers = new CustomersModel();
     }
     private async void DeleteCustomer(Guid id)
     {
@@ -155,10 +155,10 @@
         }
         var customAuthStateProvider = (CustomAuthenticationStateProvider)authStateProvider;
         await customAuthStateProvider.UpdateAuthenticationState(new UserSession
-            {
-                UserName = userAccount.Cnic,
-                Role = userAccount.Role
-            });
+        {
+            UserName = userAccount.Cnic,
+            Role = userAccount.Role
+        });
         nm.NavigateTo("/logged", true);
     }
 
